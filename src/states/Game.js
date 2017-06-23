@@ -50,12 +50,26 @@ export default class extends Phaser.State {
       y: 300,
       asset: 'obstracle'
     })
+    this.score = 0
+    this.scoreStr = `Score : ${this.score}`
+    this.scoreText = this.game.add.text(10, 10, this.scoreStr)
+    this.scoreText.fill = '#FFFFFF'
+    this.scoreText.align = 'center'
+    this.scoreText.font = '10px Barrio'
+    this.scoreText.stroke = '#000000'
+    this.scoreText.strokeThickness = 2
+    // this.scoreText.anchor.setTo(0.5)
+    this.scoreText.fixedToCamera = true
   }
 
   update () {
     this.game.physics.arcade.collide(this.dino, this.obstracle, this.collistionHandler, null, this)
+    this.updateScore()
   }
-
+  updateScore () {
+    this.score = parseInt(this.game.time.totalElapsedSeconds())
+    this.scoreText.setText('Score : ' + this.score)
+  }
   collistionHandler () {
     this.obstracle.destroy()
   }
