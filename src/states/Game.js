@@ -1,6 +1,6 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
-import Mushroom from '../sprites/Mushroom'
+
 import Dino from '../prefabs/dino'
 import Obstracle from '../prefabs/obstracle'
 
@@ -28,18 +28,16 @@ export default class extends Phaser.State {
     // this.game.add.existing(this.mushroom)
 
     this.dino = new Dino({
-      game:this,
-      x:40,
-      y:40,
-      asset:'dino'
+      game: this,
+      x: 40,
+      y: 40,
+      asset: 'dino'
     })
-
-
     this.obstracle = new Obstracle({
-      game:this,
-      x:200,
-      y:40,
-      asset:'obstracle'
+      game: this,
+      x: 200,
+      y: 40,
+      asset: 'obstracle'
     })
   }
 

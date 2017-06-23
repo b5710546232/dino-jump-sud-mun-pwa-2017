@@ -3890,30 +3890,7 @@ define(String.prototype, "padRight", "".padEnd);
 });
 
 /***/ }),
-/* 121 */
-/* exports provided: default */
-/*!*********************************!*\
-  !*** ./src/sprites/Mushroom.js ***!
-  \*********************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(/*! phaser */ 40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
-
-
-/* unused harmony default export */ var _unused_webpack_default_export = (class extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite {
-  constructor({ game, x, y, asset }) {
-    super(game, x, y, asset);
-    this.anchor.setTo(0.5);
-  }
-
-  update() {
-    this.angle += 1;
-  }
-});
-
-/***/ }),
+/* 121 */,
 /* 122 */
 /* exports provided: default */
 /* exports used: default */
@@ -3984,9 +3961,8 @@ define(String.prototype, "padRight", "".padEnd);
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(/*! phaser */ 40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprites_Mushroom__ = __webpack_require__(/*! ../sprites/Mushroom */ 121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__prefabs_dino__ = __webpack_require__(/*! ../prefabs/dino */ 314);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__prefabs_obstracle__ = __webpack_require__(/*! ../prefabs/obstracle */ 315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prefabs_dino__ = __webpack_require__(/*! ../prefabs/dino */ 314);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__prefabs_obstracle__ = __webpack_require__(/*! ../prefabs/obstracle */ 315);
 /* globals __DEV__ */
 
 
@@ -4016,14 +3992,13 @@ define(String.prototype, "padRight", "".padEnd);
 
     // this.game.add.existing(this.mushroom)
 
-    this.dino = new __WEBPACK_IMPORTED_MODULE_2__prefabs_dino__["a" /* default */]({
+    this.dino = new __WEBPACK_IMPORTED_MODULE_1__prefabs_dino__["a" /* default */]({
       game: this,
       x: 40,
       y: 40,
       asset: 'dino'
     });
-
-    this.obstracle = new __WEBPACK_IMPORTED_MODULE_3__prefabs_obstracle__["a" /* default */]({
+    this.obstracle = new __WEBPACK_IMPORTED_MODULE_2__prefabs_obstracle__["a" /* default */]({
       game: this,
       x: 200,
       y: 40,
