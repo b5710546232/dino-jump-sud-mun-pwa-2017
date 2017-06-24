@@ -6,7 +6,13 @@ const filesToCache = [
   '/dist/bundle.js',
   '/dist/bundle.js.map',
   '/dist/vendor.bundle.js',
-  '/dist/vendor.bundle.js.map'
+  '/dist/vendor.bundle.js.map',
+  '/assets/css/style.css',
+  '/assets/images/loader-bar.png',
+  '/assets/images/loader-bg.png',
+  '/assets/images/mushroom2.png',
+  '/assets/images/obstacle.png',
+  '/assets/sprites/dino_52x58.png'
 ]
 
 self.addEventListener('install', e => {
