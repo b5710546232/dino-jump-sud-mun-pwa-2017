@@ -4237,13 +4237,11 @@ var Obstracle = function (_Phaser$Sprite) {
     key: 'setup',
     value: function setup() {
       this.game.physics.enable(this, _phaser2.default.Physics.ARCADE);
-      // this.body.collideWorldBounds = true
-      // this.body.setCircle(16)
-      // this.body.setSize(30, 40)
       this.body.allowGravity = false;
-      this.scale.x = 1;
-      this.scale.y = 1;
-      this.randomSpriteGenerator();
+      this.anchor.y = 1;
+      // this.scale.x = 1
+      // this.scale.y = 1
+      // this.randomSpriteGenerator()
     }
   }, {
     key: 'randomSpriteGenerator',
@@ -4263,11 +4261,7 @@ var Obstracle = function (_Phaser$Sprite) {
       this.x -= 3;
       if (this.x < -100) {
         this.x = 700 + Math.random() * 600;
-        this.randomSpriteGenerator();
-        // console.log(this.game.height)
       }
-      // console.log(this.x)
-      // this.game.physics.arcade.moveToXY(this, 0, this.game.width, 50)
     }
   }]);
 
@@ -4475,8 +4469,8 @@ var _class = function (_Phaser$State) {
       // this.scoreText.anchor.setTo(0.5)
       this.scoreText.fixedToCamera = true;
       this.obstracles = [];
-      this.initializeObstracle();
       this.clouds = [];
+      this.initializeObstracle();
       this.initializeClouds();
     }
   }, {
@@ -4495,12 +4489,15 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'initializeObstracle',
     value: function initializeObstracle() {
+      var obsracles = ['cactus01', 'cactus02', 'cactus03'];
       for (var i = 0; i < 6; i++) {
+        var random = Math.floor(Math.random() * obsracles.length);
+        console.log('random', random);
         var newObstracle = new _obstracle2.default({
           game: this,
           x: 500 + i * 300 * Math.random() + i * 300,
-          y: 270,
-          asset: 'cactus01'
+          y: 250,
+          asset: obsracles[random]
         });
         this.obstracles.push(newObstracle);
       }
@@ -4509,7 +4506,7 @@ var _class = function (_Phaser$State) {
     key: 'update',
     value: function update() {
       this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this);
-      this.game.physics.arcade.collide(this.dino, this.obstracles, this.collistionHandler, null, this);
+      this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this);
       this.updateScore();
     }
   }, {
