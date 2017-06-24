@@ -21,6 +21,12 @@ export default class extends Phaser.State {
       y: this.game.height - this.game.cache.getImage('ground').height / 2,
       asset: 'ground'
     })
+    this.ground2 = new Ground({
+      game: this.game,
+      x: this.game.width / 2 + this.game.cache.getImage('ground').width,
+      y: this.game.height - this.game.cache.getImage('ground').height / 2,
+      asset: 'ground'
+    })
 
     this.timeStart = 0
     this.game.physics.arcade.gravity.y = 1000
@@ -50,26 +56,34 @@ export default class extends Phaser.State {
     this.respawnButton = this.add.button(this.game.width / 2 - 50, this.game.height / 2 - 90, 'respawn_button', () => { })
     this.respawnButton.onInputDown.add(() => {
       this.score = 0
+      this.firstLanuch = true
       this.game.paused = false
       this.state.start('Game')
     })
     this.closeDeadScene()
     this.game.paused = true
+    this.firstLanuch = true
     this.game.input.onDown.add(() => {
-      if (!this.dino.isDead) {
+      if (!this.dino.isDead && this.firstLanuch) {
+        for (let i in this.clouds) {
+          this.clouds[i].move = true
+        }
         this.game.paused = false
         this.dino.onJump()
+        this.firstLanuch = false
       }
     }, this)
   }
 
   initializeClouds () {
+    let cloudType = [ 'cloud01', 'cloud02', 'cloud03' ]
     for (let i = 0; i < 3; i++) {
+      let random = Math.floor(Math.random() * cloudType.length)
       let newCloud = new Cloud({
         game: this,
         x: 500 + (i * 300),
         y: 50 + (Math.random() * 50),
-        asset: 'cloud01'
+        asset: cloudType[random]
       })
       this.clouds.push(newCloud)
     }
@@ -91,11 +105,8 @@ export default class extends Phaser.State {
   }
 
   update () {
-    if (this.game.input.activePointer.isDown) {
-      this.game.paused = false
-    }
-
     this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this)
+    this.game.physics.arcade.collide(this.dino, this.ground2, this.groundCollisionHandler, null, this)
     this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this)
     this.updateScore()
     if (this.game.input.activePointer.isDown) {
@@ -134,6 +145,7 @@ export default class extends Phaser.State {
       }
       this.game.debug.body(this.dino)
       this.game.debug.body(this.ground)
+      this.game.debug.body(this.ground2)
     }
   }
 }

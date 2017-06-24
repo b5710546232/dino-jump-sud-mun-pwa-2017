@@ -21,9 +21,17 @@ export default class Ground extends Phaser.Sprite {
     this.scale.x = 1
     this.scale.y = 1
     this.smoothed = false
+    this.groundSpeed = 5
+  }
+
+  setGroundSpeed (newSpeed) {
+    this.groundSpeed = newSpeed
   }
 
   update () {
-
+    this.x -= this.groundSpeed
+    if (this.x < -300) {
+      this.x = 900 - this.groundSpeed
+    }
   }
 }

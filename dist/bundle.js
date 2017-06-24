@@ -3965,11 +3965,11 @@ var Cloud = function (_Phaser$Sprite) {
   _createClass(Cloud, [{
     key: 'setup',
     value: function setup() {
+      this.move = false;
       this.game.physics.enable(this, _phaser2.default.Physics.ARCADE);
       this.body.allowGravity = false;
       this.scale.x = 1;
       this.scale.y = 1;
-      this.randomSpriteGenerator();
       this.smoothed = false;
     }
   }, {
@@ -3978,28 +3978,14 @@ var Cloud = function (_Phaser$Sprite) {
       if (this.x < -30) {
         var offset = Math.random() * 300 + 800;
         this.x = offset;
-        this.randomSpriteGenerator();
-      }
-    }
-  }, {
-    key: 'randomSpriteGenerator',
-    value: function randomSpriteGenerator() {
-      var randomNumber = Math.floor(Math.random() * 3) + 1;
-      if (randomNumber > 2) {
-        this.loadTexture('cloud03');
-      } else if (randomNumber > 1) {
-        this.loadTexture('cloud02');
-      } else {
-        this.loadTexture('cloud01');
       }
     }
   }, {
     key: 'update',
     value: function update() {
-      if (!this.game.isStart) {
-        return;
+      if (this.move === true) {
+        this.x -= 2;
       }
-      this.x -= 2;
       this.reposition();
     }
   }]);
@@ -4089,10 +4075,7 @@ var Dino = function (_Phaser$Sprite) {
       if (this.isDead === true) {
         this.play('dead');
       } else if (this.game.input.activePointer.isDown && this.onFloor() && this.game.time.now > this.jumpTimer) {
-        this.play('jump');
-        this.jumpSound.play();
         this.onJump();
-        this.jumpTimer = this.game.time.now + 750;
       } else if (this.onFloor()) {
         this.play('run');
       } else {
@@ -4102,7 +4085,10 @@ var Dino = function (_Phaser$Sprite) {
   }, {
     key: 'onJump',
     value: function onJump() {
+      this.play('jump');
+      this.jumpSound.play();
       this.body.velocity.y = JUMP_VALUE;
+      this.jumpTimer = this.game.time.now + 750;
     }
   }, {
     key: 'onFloor',
@@ -4185,10 +4171,21 @@ var Ground = function (_Phaser$Sprite) {
       this.scale.x = 1;
       this.scale.y = 1;
       this.smoothed = false;
+      this.groundSpeed = 5;
+    }
+  }, {
+    key: 'setGroundSpeed',
+    value: function setGroundSpeed(newSpeed) {
+      this.groundSpeed = newSpeed;
     }
   }, {
     key: 'update',
-    value: function update() {}
+    value: function update() {
+      this.x -= this.groundSpeed;
+      if (this.x < -300) {
+        this.x = 900 - this.groundSpeed;
+      }
+    }
   }]);
 
   return Ground;
@@ -4449,6 +4446,12 @@ var _class = function (_Phaser$State) {
         y: this.game.height - this.game.cache.getImage('ground').height / 2,
         asset: 'ground'
       });
+      this.ground2 = new _ground2.default({
+        game: this.game,
+        x: this.game.width / 2 + this.game.cache.getImage('ground').width,
+        y: this.game.height - this.game.cache.getImage('ground').height / 2,
+        asset: 'ground'
+      });
 
       this.timeStart = 0;
       this.game.physics.arcade.gravity.y = 1000;
@@ -4478,27 +4481,35 @@ var _class = function (_Phaser$State) {
       this.respawnButton = this.add.button(this.game.width / 2 - 50, this.game.height / 2 - 90, 'respawn_button', function () {});
       this.respawnButton.onInputDown.add(function () {
         _this2.score = 0;
+        _this2.firstLanuch = true;
         _this2.game.paused = false;
         _this2.state.start('Game');
       });
       this.closeDeadScene();
       this.game.paused = true;
+      this.firstLanuch = true;
       this.game.input.onDown.add(function () {
-        if (!_this2.dino.isDead) {
+        if (!_this2.dino.isDead && _this2.firstLanuch) {
+          for (var i in _this2.clouds) {
+            _this2.clouds[i].move = true;
+          }
           _this2.game.paused = false;
           _this2.dino.onJump();
+          _this2.firstLanuch = false;
         }
       }, this);
     }
   }, {
     key: 'initializeClouds',
     value: function initializeClouds() {
+      var cloudType = ['cloud01', 'cloud02', 'cloud03'];
       for (var i = 0; i < 3; i++) {
+        var random = Math.floor(Math.random() * cloudType.length);
         var newCloud = new _cloud2.default({
           game: this,
           x: 500 + i * 300,
           y: 50 + Math.random() * 50,
-          asset: 'cloud01'
+          asset: cloudType[random]
         });
         this.clouds.push(newCloud);
       }
@@ -4522,11 +4533,8 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'update',
     value: function update() {
-      if (this.game.input.activePointer.isDown) {
-        this.game.paused = false;
-      }
-
       this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this);
+      this.game.physics.arcade.collide(this.dino, this.ground2, this.groundCollisionHandler, null, this);
       this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this);
       this.updateScore();
       if (this.game.input.activePointer.isDown) {
@@ -4571,11 +4579,15 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'render',
     value: function render() {
-      for (var i in this.obstracles) {
-        this.game.debug.body(this.obstracles[i]);
+      if (true) {
+        // eslint-disable-line
+        for (var i in this.obstracles) {
+          this.game.debug.body(this.obstracles[i]);
+        }
+        this.game.debug.body(this.dino);
+        this.game.debug.body(this.ground);
+        this.game.debug.body(this.ground2);
       }
-      this.game.debug.body(this.dino);
-      this.game.debug.body(this.ground);
     }
   }]);
 
@@ -10447,7 +10459,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */120);
-module.exports = __webpack_require__(/*! /Users/nattapat/Learning/sud-mun-pwa-2017/src/main.js */119);
+module.exports = __webpack_require__(/*! C:\Users\USER\Desktop\Hackatron\sud-mun-pwa-2017\src\main.js */119);
 
 
 /***/ })
