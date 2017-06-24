@@ -4427,7 +4427,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // eslint-disable-line
 
-
 var _class = function (_Phaser$State) {
   _inherits(_class, _Phaser$State);
 
@@ -4596,7 +4595,6 @@ var _class = function (_Phaser$State) {
       this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar');
       (0, _utils.centerGameObjects)([this.loaderBg, this.loaderBar]);
       this.load.spritesheet('dino', 'assets/images/dino_fix_52x58.png', 52, 58);
-
       this.load.setPreloadSprite(this.loaderBar);
 
       // load your assets
