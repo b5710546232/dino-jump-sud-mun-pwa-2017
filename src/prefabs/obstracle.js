@@ -12,20 +12,7 @@ export default class Obstracle extends Phaser.Sprite {
     this.game.physics.enable(this, Phaser.Physics.ARCADE)
     this.body.allowGravity = false
     this.anchor.y = 1
-    // this.scale.x = 1
-    // this.scale.y = 1
-    // this.randomSpriteGenerator()
-  }
-
-  randomSpriteGenerator () {
-    let randomNumber = Math.floor(Math.random() * 3) + 1
-    if (randomNumber > 2) {
-      this.loadTexture('cactus01')
-    } else if (randomNumber > 1) {
-      this.loadTexture('cactus02')
-    } else {
-      this.loadTexture('cactus03')
-    }
+    this.smoothed = false
   }
 
   update () {

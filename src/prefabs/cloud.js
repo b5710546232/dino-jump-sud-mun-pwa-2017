@@ -14,6 +14,7 @@ export default class Cloud extends Phaser.Sprite {
     this.scale.x = 1
     this.scale.y = 1
     this.randomSpriteGenerator()
+    this.smoothed = false
   }
 
   reposition () {

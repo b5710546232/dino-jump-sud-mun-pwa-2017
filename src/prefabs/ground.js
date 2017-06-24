@@ -20,6 +20,7 @@ export default class Ground extends Phaser.Sprite {
     this.body.allowGravity = false
     this.scale.x = 1
     this.scale.y = 1
+    this.smoothed = false
   }
 
   update () {

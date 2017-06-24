@@ -21,10 +21,11 @@ export default class Dino extends Phaser.Sprite {
     this.animations.play('idle')
     this.jumpSound = this.game.add.audio('jump_sfx')
 
-    let width = 32
+    let width = 28
     let height = 58
     let offSetY = 0
-    let offSetX = 8
+    let offSetX = 4
+    this.smoothed = false
     this.body.setSize(width, height, offSetX, offSetY)
     // this.character.animations.add('idle', [0], 10, true)
   }
