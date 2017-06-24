@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 import Phaser from 'phaser'
 export default class Dino extends Phaser.Sprite {
   constructor ({ game, x, y, asset }) {
