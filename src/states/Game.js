@@ -2,12 +2,12 @@
  * globals __DEV__ // eslint-disable-line no-use-before-define
  */
 import Phaser from 'phaser'
-
 import Dino from '../prefabs/dino'
 import Obstracle from '../prefabs/obstracle'
 import Cloud from '../prefabs/cloud'
 import Ground from '../prefabs/ground'
 import Config from '../config'// eslint-disable-line
+
 export default class extends Phaser.State {
   init () {}
   preload () {}
@@ -43,8 +43,8 @@ export default class extends Phaser.State {
     // this.scoreText.anchor.setTo(0.5)
     this.scoreText.fixedToCamera = true
     this.obstracles = []
-    this.initializeObstracle()
     this.clouds = []
+    this.initializeObstracle()
     this.initializeClouds()
     this.respawnButton = this.add.button(this.game.width / 2 - 50, this.game.height / 2 - 90, 'respawn_button', () => { })
     this.respawnButton.onInputDown.add(() => {
@@ -68,12 +68,15 @@ export default class extends Phaser.State {
   }
 
   initializeObstracle () {
+    let obsracles = [ 'cactus01', 'cactus02', 'cactus03' ]
     for (let i = 0; i < 6; i++) {
+      let random = Math.floor(Math.random() * obsracles.length)
+      console.log('random', random)
       let newObstracle = new Obstracle({
         game: this,
         x: 500 + (i * 300 * Math.random()) + (i * 300),
-        y: 270,
-        asset: 'cactus01'
+        y: 250,
+        asset: obsracles[random]
       })
       this.obstracles.push(newObstracle)
     }
@@ -81,7 +84,7 @@ export default class extends Phaser.State {
 
   update () {
     this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this)
-    this.game.physics.arcade.collide(this.dino, this.obstracles, this.collistionHandler, null, this)
+    this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this)
     this.updateScore()
   }
   groundCollisionHandler (dino, ground) {
