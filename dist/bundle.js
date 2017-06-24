@@ -4072,12 +4072,25 @@ var Obstracle = function (_Phaser$Sprite) {
     key: 'setup',
     value: function setup() {
       this.game.physics.enable(this, _phaser2.default.Physics.ARCADE);
-
+      // this.body.collideWorldBounds = true
       // this.body.setCircle(16)
       // this.body.setSize(30, 40)
       this.body.allowGravity = false;
       this.scale.x = 1;
       this.scale.y = 1;
+      this.randomSpriteGenerator();
+    }
+  }, {
+    key: 'randomSpriteGenerator',
+    value: function randomSpriteGenerator() {
+      var randomNumber = Math.floor(Math.random() * 3) + 1;
+      if (randomNumber > 2) {
+        this.loadTexture('cactus01');
+      } else if (randomNumber > 1) {
+        this.loadTexture('cactus02');
+      } else {
+        this.loadTexture('cactus03');
+      }
     }
   }, {
     key: 'update',
@@ -4085,6 +4098,7 @@ var Obstracle = function (_Phaser$Sprite) {
       this.x -= 3;
       if (this.x < -100) {
         this.x = 700 + Math.random() * 600;
+        this.randomSpriteGenerator();
         // console.log(this.game.height)
       }
       // console.log(this.x)
@@ -4223,6 +4237,10 @@ var _obstracle = __webpack_require__(/*! ../prefabs/obstracle */ 122);
 
 var _obstracle2 = _interopRequireDefault(_obstracle);
 
+var _cloud = __webpack_require__(/*! ../prefabs/cloud */ 315);
+
+var _cloud2 = _interopRequireDefault(_cloud);
+
 var _config = __webpack_require__(/*! ../config */ 90);
 
 var _config2 = _interopRequireDefault(_config);
@@ -4266,7 +4284,7 @@ var _class = function (_Phaser$State) {
       banner.fill = '#77BFA3';
       banner.smoothed = false;
       banner.anchor.setTo(0.5);
-      this.game.physics.arcade.gravity.y = 250;
+      this.game.physics.arcade.gravity.y = 300;
       // this.mushroom = new Mushroom({
       //   game: this,
       //   x: this.world.centerX,
@@ -4289,7 +4307,7 @@ var _class = function (_Phaser$State) {
       this.dino = new _dino2.default({
         game: this.game,
         x: 40,
-        y: 40,
+        y: 300,
         asset: 'dino'
       });
       this.score = 0;
@@ -4303,17 +4321,32 @@ var _class = function (_Phaser$State) {
       // this.scoreText.anchor.setTo(0.5)
       this.scoreText.fixedToCamera = true;
       this.obstracles = [];
-      this.initializeObject();
+      this.initializeObstracle();
+      this.clouds = [];
+      this.initializeClouds();
     }
   }, {
-    key: 'initializeObject',
-    value: function initializeObject() {
+    key: 'initializeClouds',
+    value: function initializeClouds() {
+      for (var i = 0; i < 3; i++) {
+        var newCloud = new _cloud2.default({
+          game: this,
+          x: 500 + i * 300,
+          y: 50 + Math.random() * 50,
+          asset: 'cloud01'
+        });
+        this.clouds.push(newCloud);
+      }
+    }
+  }, {
+    key: 'initializeObstracle',
+    value: function initializeObstracle() {
       for (var i = 0; i < 6; i++) {
         var newObstracle = new _obstracle2.default({
           game: this,
           x: 500 + i * 300 * Math.random() + i * 300,
-          y: 300,
-          asset: 'obstracle'
+          y: 270,
+          asset: 'cactus01'
         });
         this.obstracles.push(newObstracle);
       }
@@ -4337,7 +4370,11 @@ var _class = function (_Phaser$State) {
     }
   }, {
     key: 'render',
-    value: function render() {}
+    value: function render() {
+      for (var i in this.obstracles) {
+        this.game.debug.body(this.obstracles[i]);
+      }
+    }
   }]);
 
   return _class;
@@ -4400,6 +4437,12 @@ var _class = function (_Phaser$State) {
 
       // load your assets
       this.load.image('mushroom', 'assets/images/mushroom2.png');
+      this.load.image('cloud01', 'assets/images/cloud01.png');
+      this.load.image('cloud02', 'assets/images/cloud02.png');
+      this.load.image('cloud03', 'assets/images/cloud03.png');
+      this.load.image('cactus01', 'assets/images/cactus01.png');
+      this.load.image('cactus02', 'assets/images/cactus02.png');
+      this.load.image('cactus03', 'assets/images/cactus03.png');
       this.load.image('obstracle', 'assets/images/obstacle.png');
       this.load.audio('jump_sfx', 'assets/sfx/jump.wav');
     }
@@ -10199,8 +10242,101 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 24);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */120);
-module.exports = __webpack_require__(/*! D:\works\pwa\sud-mun-pwa-2017\src\main.js */119);
+module.exports = __webpack_require__(/*! C:\Users\USER\Desktop\Hackatron\sud-mun-pwa-2017\src\main.js */119);
 
+
+/***/ }),
+/* 314 */,
+/* 315 */
+/* no static exports found */
+/* all exports used */
+/*!******************************!*\
+  !*** ./src/prefabs/cloud.js ***!
+  \******************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 31);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cloud = function (_Phaser$Sprite) {
+  _inherits(Cloud, _Phaser$Sprite);
+
+  function Cloud(_ref) {
+    var game = _ref.game,
+        x = _ref.x,
+        y = _ref.y,
+        asset = _ref.asset;
+
+    _classCallCheck(this, Cloud);
+
+    var _this = _possibleConstructorReturn(this, (Cloud.__proto__ || Object.getPrototypeOf(Cloud)).call(this, game, x, y, asset));
+
+    _this.anchor.setTo(0.5);
+    _this.game.add.existing(_this);
+    _this.setup();
+    return _this;
+  }
+
+  _createClass(Cloud, [{
+    key: 'setup',
+    value: function setup() {
+      this.game.physics.enable(this, _phaser2.default.Physics.ARCADE);
+      this.body.allowGravity = false;
+      this.scale.x = 1;
+      this.scale.y = 1;
+      this.randomSpriteGenerator();
+    }
+  }, {
+    key: 'reposition',
+    value: function reposition() {
+      if (this.x < -30) {
+        var offset = Math.random() * 300 + 800;
+        this.x = offset;
+        this.randomSpriteGenerator();
+      }
+    }
+  }, {
+    key: 'randomSpriteGenerator',
+    value: function randomSpriteGenerator() {
+      var randomNumber = Math.floor(Math.random() * 3) + 1;
+      if (randomNumber > 2) {
+        this.loadTexture('cloud03');
+      } else if (randomNumber > 1) {
+        this.loadTexture('cloud02');
+      } else {
+        this.loadTexture('cloud01');
+      }
+    }
+  }, {
+    key: 'update',
+    value: function update() {
+      this.x -= 2;
+      this.reposition();
+    }
+  }]);
+
+  return Cloud;
+}(_phaser2.default.Sprite);
+
+exports.default = Cloud;
 
 /***/ })
 ],[313]);

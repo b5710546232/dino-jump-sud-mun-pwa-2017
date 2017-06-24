@@ -5,6 +5,7 @@ import Phaser from 'phaser'
 
 import Dino from '../prefabs/dino'
 import Obstracle from '../prefabs/obstracle'
+import Cloud from '../prefabs/cloud'
 import Config from '../config'// eslint-disable-line
 
 export default class extends Phaser.State {
@@ -20,7 +21,7 @@ export default class extends Phaser.State {
     banner.fill = '#77BFA3'
     banner.smoothed = false
     banner.anchor.setTo(0.5)
-    this.game.physics.arcade.gravity.y = 250
+    this.game.physics.arcade.gravity.y = 300
     // this.mushroom = new Mushroom({
     //   game: this,
     //   x: this.world.centerX,
@@ -43,7 +44,7 @@ export default class extends Phaser.State {
     this.dino = new Dino({
       game: this.game,
       x: 40,
-      y: 40,
+      y: 300,
       asset: 'dino'
     })
     this.score = 0
@@ -57,16 +58,30 @@ export default class extends Phaser.State {
     // this.scoreText.anchor.setTo(0.5)
     this.scoreText.fixedToCamera = true
     this.obstracles = []
-    this.initializeObject()
+    this.initializeObstracle()
+    this.clouds = []
+    this.initializeClouds()
   }
 
-  initializeObject () {
+  initializeClouds () {
+    for (let i = 0; i < 3; i++) {
+      let newCloud = new Cloud({
+        game: this,
+        x: 500 + (i * 300),
+        y: 50 + (Math.random() * 50),
+        asset: 'cloud01'
+      })
+      this.clouds.push(newCloud)
+    }
+  }
+
+  initializeObstracle () {
     for (let i = 0; i < 6; i++) {
       let newObstracle = new Obstracle({
         game: this,
         x: 500 + (i * 300 * Math.random()) + (i * 300),
-        y: 300,
-        asset: 'obstracle'
+        y: 270,
+        asset: 'cactus01'
       })
       this.obstracles.push(newObstracle)
     }
@@ -85,5 +100,8 @@ export default class extends Phaser.State {
   }
 
   render () {
+    for (let i in this.obstracles) {
+      this.game.debug.body(this.obstracles[i])
+    }
   }
 }

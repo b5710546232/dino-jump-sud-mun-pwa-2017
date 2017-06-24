@@ -13,6 +13,12 @@ export default class extends Phaser.State {
 
     // load your assets
     this.load.image('mushroom', 'assets/images/mushroom2.png')
+    this.load.image('cloud01', 'assets/images/cloud01.png')
+    this.load.image('cloud02', 'assets/images/cloud02.png')
+    this.load.image('cloud03', 'assets/images/cloud03.png')
+    this.load.image('cactus01', 'assets/images/cactus01.png')
+    this.load.image('cactus02', 'assets/images/cactus02.png')
+    this.load.image('cactus03', 'assets/images/cactus03.png')
     this.load.image('obstracle', 'assets/images/obstacle.png')
     this.load.audio('jump_sfx', ('assets/sfx/jump.wav'))
   }

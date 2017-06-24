@@ -10,17 +10,33 @@ export default class Cloud extends Phaser.Sprite {
 
   setup () {
     this.game.physics.enable(this, Phaser.Physics.ARCADE)
+    this.body.allowGravity = false
+    this.scale.x = 1
+    this.scale.y = 1
+    this.randomSpriteGenerator()
   }
 
   reposition () {
-    if (this.x < -15) {
-      let offset = Math.random() * 30
-      this.x = this.game.width + offset
+    if (this.x < -30) {
+      let offset = (Math.random() * 300) + 800
+      this.x = offset
+      this.randomSpriteGenerator()
+    }
+  }
+
+  randomSpriteGenerator () {
+    let randomNumber = Math.floor(Math.random() * 3) + 1
+    if (randomNumber > 2) {
+      this.loadTexture('cloud03')
+    } else if (randomNumber > 1) {
+      this.loadTexture('cloud02')
+    } else {
+      this.loadTexture('cloud01')
     }
   }
 
   update () {
-    this.x -= 1
+    this.x -= 2
     this.reposition()
   }
 }
