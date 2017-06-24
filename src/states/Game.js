@@ -128,10 +128,12 @@ export default class extends Phaser.State {
     this.respawnButton.visible = false
   }
   render () {
-    for (let i in this.obstracles) {
-      this.game.debug.body(this.obstracles[i])
+    if(__DEV__){ // eslint-disable-line
+      for (let i in this.obstracles) {
+        this.game.debug.body(this.obstracles[i])
+      }
+      this.game.debug.body(this.dino)
+      this.game.debug.body(this.ground)
     }
-    this.game.debug.body(this.dino)
-    this.game.debug.body(this.ground)
   }
 }
