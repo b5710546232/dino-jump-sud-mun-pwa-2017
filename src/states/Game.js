@@ -22,7 +22,6 @@ export default class extends Phaser.State {
       asset: 'ground'
     })
 
-    this.timeStart = 0
     this.game.physics.arcade.gravity.y = 1000
     // this.fontsReady = false
     // this.fontsLoaded = this.fontsLoaded.bind(this)
@@ -47,7 +46,7 @@ export default class extends Phaser.State {
     this.clouds = []
     this.initializeObstracle()
     this.initializeClouds()
-    this.respawnButton = this.add.button(this.game.width / 2 - 50, this.game.height / 2 - 90, 'respawn_button', () => { })
+    this.respawnButton = this.add.button(this.game.width / 2 - 50, this.game.height / 2 + 60, 'respawn_button', () => { })
     this.respawnButton.onInputDown.add(() => {
       this.score = 0
       this.game.paused = false
@@ -55,6 +54,7 @@ export default class extends Phaser.State {
     })
     this.closeDeadScene()
     this.game.paused = true
+    this.timeStart = this.getTimenow()
     this.game.input.onDown.add(() => {
       if (!this.dino.isDead) {
         this.game.paused = false
@@ -102,8 +102,11 @@ export default class extends Phaser.State {
   groundCollisionHandler (dino, ground) {
     dino.isOnGround = true
   }
+  getTimenow () {
+    return Math.floor(parseInt(this.game.time.now)) / 1000
+  }
   updateScore () {
-    this.score = parseInt(this.game.time.totalElapsedSeconds())
+    this.score = parseInt(this.getTimenow() - this.timeStart)
     this.scoreText.setText('Score : ' + this.score)
   }
   collistionHandler () {
@@ -117,6 +120,20 @@ export default class extends Phaser.State {
     this.showDeadScene()
     this.dino.isDead = true
     this.game.paused = true
+
+    if (!this.game.disconnect) {
+      let rootRef = this.game.firebase.ref()
+      let urlRef = rootRef.child('scores/').limitToLast(3)
+      urlRef.once('value', (snapshot) => {
+        if (snapshot.val()) {
+          snapshot.forEach((child) => {
+            console.log(child.key, child.val())
+          })
+        }
+      })
+
+      this.game.firebase.ref(`scores/${this.score}`).set(parseInt(this.score))
+    }
   }
   showDeadScene () {
     this.respawnButton.visible = true

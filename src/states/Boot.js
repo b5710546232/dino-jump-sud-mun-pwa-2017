@@ -1,11 +1,12 @@
 import Phaser from 'phaser'
-import WebFont from 'webfontloader'
+import * as firebase from 'firebase'
+import config from '../config'
+   // Initialize Firebase
 
+const firebaseDB = firebase.initializeApp(config.firebaseConfig)
 export default class extends Phaser.State {
   init () {
     this.stage.backgroundColor = '#EDEEC9'
-    this.fontsReady = false
-    this.fontsLoaded = this.fontsLoaded.bind(this)
 
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
     this.scale.pageAlignHorizontally = true
@@ -14,16 +15,44 @@ export default class extends Phaser.State {
     this.game.scale.refresh()
     // this.scale.refresh();
 
-    this.game.firebase = firebase.database(); //  eslint-disable-line
+    this.game.firebase = firebaseDB.database(); //  eslint-disable-line
+
+    // firebaseDB.database().onDisconnect().set('I disconnected!')
+    // if (firebaseDB.database().onDisconnect()) {
+    //   // this.game.firebase = firebaseDB.database()
+    //   this.game.disconnect = true
+    //   console.log('disconnect')
+    // }
+    // firebase.auth().onAuthStateChanged((user) => {  //  eslint-disable-line
+    //   if (user) {
+    //             // User is signed in.
+    //     // let isAnonymous = user.isAnonymous;
+    //     // let uid = user.uid;
+    //     // console.log('user-id', uid)
+    //     // this.uid = uid;
+    //     // this.game.current_user = firebase.auth().currentUser;
+    //         // console.log('current-user', this.game.current_user)
+    //   } else {
+    //     firebase.auth().signInAnonymously().catch(function (error) { //eslint-disable-line
+    //       var errorCode = error.code
+    //       // var errorMessage = error.message
+    //       if (errorCode === 'auth/operation-not-allowed') {
+    //         alert('You must enable Anonymous auth in the Firebase Console.');
+    //       } else {
+    //         console.error(error)
+    //       }
+    //     })
+    //   }
+    // })
   }
 
   preload () {
-    WebFont.load({
-      google: {
-        families: ['Bangers']
-      },
-      active: this.fontsLoaded
-    })
+    // WebFont.load({
+    //   google: {
+    //     families: ['Bangers']
+    //   },
+    //   active: this.fontsLoaded
+    // })
 
     let text = this.add.text(this.world.centerX, this.world.centerY, 'loading fonts', {
       font: '16px Arial',
@@ -37,9 +66,9 @@ export default class extends Phaser.State {
   }
 
   render () {
-    if (this.fontsReady) {
-      this.state.start('Splash')
-    }
+    // if (this.fontsReady) {
+    this.state.start('Splash')
+    // }
   }
 
   fontsLoaded () {
