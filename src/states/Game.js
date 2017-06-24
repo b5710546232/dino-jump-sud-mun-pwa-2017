@@ -22,6 +22,7 @@ export default class extends Phaser.State {
       asset: 'ground'
     })
 
+    this.timeStart = 0
     this.game.physics.arcade.gravity.y = 1000
     // this.fontsReady = false
     // this.fontsLoaded = this.fontsLoaded.bind(this)
@@ -29,7 +30,7 @@ export default class extends Phaser.State {
     this.dino = new Dino({
       game: this.game,
       x: 40,
-      y: this.game.height / 2 - this.game.cache.getImage('ground').height,
+      y: 216,
       asset: 'dino'
     })
     this.score = 0
@@ -53,6 +54,13 @@ export default class extends Phaser.State {
       this.state.start('Game')
     })
     this.closeDeadScene()
+    this.game.paused = true
+    this.game.input.onDown.add(() => {
+      if (!this.dino.isDead) {
+        this.game.paused = false
+        this.dino.onJump()
+      }
+    }, this)
   }
 
   initializeClouds () {
@@ -83,6 +91,10 @@ export default class extends Phaser.State {
   }
 
   update () {
+    if (this.game.input.activePointer.isDown) {
+      this.game.paused = false
+    }
+
     this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this)
     this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this)
     this.updateScore()
