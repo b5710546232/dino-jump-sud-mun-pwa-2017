@@ -191,15 +191,11 @@ export default class extends Phaser.State {
             console.log(child.key, child.val())
             scores.push(child.val())
           })
-          scores.sort((a, b) => (b - a))
+          scores = scores.sort((a, b) => (b - a))
 
           let yourRank = 1
-          scores.forEach((item) => {
-            if (this.highscore === item) {
-              return 0
-            }
-            yourRank++
-          })
+          yourRank = scores.findIndex(item => item === this.highscore) + 1
+          console.log('rank ur o', yourRank)
 
           this.top3Score = 'TOP 3 HIGH SCORE'
           let rank = 1
