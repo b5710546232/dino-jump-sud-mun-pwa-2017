@@ -3818,6 +3818,8 @@ if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
 "use strict";
 
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 __webpack_require__(/*! pixi */ 87);
 
 __webpack_require__(/*! p2 */ 88);
@@ -3867,6 +3869,17 @@ var Game = function (_Phaser$Game) {
     _this.state.start('Boot');
     return _this;
   }
+
+  _createClass(Game, [{
+    key: 'addServiceWorker',
+    value: function addServiceWorker() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./config/service-worker.js').then(function () {
+          console.log('Service Worker Registered');
+        });
+      }
+    }
+  }]);
 
   return Game;
 }(_phaser2.default.Game);
