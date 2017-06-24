@@ -10,13 +10,21 @@ export default class Obstracle extends Phaser.Sprite {
 
   setup () {
     this.game.physics.enable(this, Phaser.Physics.ARCADE)
-  }
 
-  jump () {
-
+    // this.body.setCircle(16)
+    // this.body.setSize(30, 40)
+    this.checkWorldBounds = true
+    this.outOfBoundsKill = true
+    this.outOfCameraBoundsKill = true
+    this.body.allowGravity = false
+    this.scale.x = 1
+    this.scale.y = 1
+    this.smoothed = false
   }
 
   update () {
-
+    this.x -= 1
+    // console.log(this.x)
+    // this.game.physics.arcade.moveToXY(this, 0, this.game.width, 50)
   }
 }

@@ -5,6 +5,7 @@ body {
   background: black;
   width: 100%;
   height: 100%;
+  overflow-y: hidden;
 }
 
 #content {
@@ -18,7 +19,7 @@ body {
 }
 
 #content canvas {
-  
+
   image-rendering: optimizeSpeed;
   /* Legal fallback */
   image-rendering: -moz-crisp-edges;

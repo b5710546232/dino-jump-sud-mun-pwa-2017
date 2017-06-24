@@ -11,6 +11,8 @@ export default class extends Phaser.State {
     this.scale.pageAlignHorizontally = true
     this.scale.pageAlignVertically = true
     this.game.scale.setScreenSize = true
+    this.game.scale.refresh()
+    // this.scale.refresh();
   }
 
   preload () {
