@@ -8,7 +8,7 @@ export default class extends Phaser.State {
     this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg')
     this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar')
     centerGameObjects([this.loaderBg, this.loaderBar])
-    this.load.spritesheet('dino', 'assets/sprites/dino_52x58.png', 52, 58)
+    this.load.spritesheet('dino', 'assets/images/dino_fix_52x58.png', 52, 58)
     this.load.setPreloadSprite(this.loaderBar)
 
     // load your assets
@@ -21,6 +21,7 @@ export default class extends Phaser.State {
     this.load.image('cactus03', 'assets/images/cactus03.png')
     this.load.image('obstracle', 'assets/images/obstacle.png')
     this.load.audio('jump_sfx', ('assets/sfx/jump.wav'))
+    this.load.image('respawn_button', 'assets/images/playAgainButton.png')
   }
 
   create () {

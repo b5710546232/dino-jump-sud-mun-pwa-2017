@@ -13,14 +13,6 @@ export default class extends Phaser.State {
   preload () {}
 
   create () {
-    const bannerText = 'Phaser + ES6 + Webpack'
-    let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText)
-    banner.font = 'Bangers'
-    banner.padding.set(10, 16)
-    banner.fontSize = 40
-    banner.fill = '#77BFA3'
-    banner.smoothed = false
-    banner.anchor.setTo(0.5)
     this.game.physics.arcade.gravity.y = 300
     // this.mushroom = new Mushroom({
     //   game: this,
@@ -61,6 +53,13 @@ export default class extends Phaser.State {
     this.initializeObstracle()
     this.clouds = []
     this.initializeClouds()
+    this.respawnButton = this.add.button(this.game.width / 2 - 50, this.game.height / 2 - 90, 'respawn_button', () => { })
+    this.respawnButton.onInputDown.add(() => {
+      this.score = 0
+      this.game.paused = false
+      this.state.start('Game')
+    })
+    this.closeDeadScene()
   }
 
   initializeClouds () {
@@ -96,9 +95,23 @@ export default class extends Phaser.State {
     this.scoreText.setText('Score : ' + this.score)
   }
   collistionHandler () {
+    this.highscore = `High Score : ` + this.score
+    this.highscoreTxt = this.game.add.text(this.game.width / 2 - 90, this.game.height / 2 - 130, this.highscore)
+    this.highscoreTxt.fill = '#FFFFFF'
+    this.highscoreTxt.align = 'center'
+    this.highscoreTxt.font = '10px Barrio'
+    this.highscoreTxt.stroke = '#000000'
+    this.highscoreTxt.strokeThickness = 2
+    this.showDeadScene()
     this.dino.isDead = true
+    this.game.paused = true
   }
-
+  showDeadScene () {
+    this.respawnButton.visible = true
+  }
+  closeDeadScene () {
+    this.respawnButton.visible = false
+  }
   render () {
     for (let i in this.obstracles) {
       this.game.debug.body(this.obstracles[i])
