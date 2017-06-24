@@ -39,8 +39,6 @@ export default class extends Phaser.State {
         })
       }
     })
-
-
     // firebaseDB.database().onDisconnect().set('I disconnected!')
     // if (firebaseDB.database().onDisconnect()) {
     //   // this.game.firebase = firebaseDB.database()

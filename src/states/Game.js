@@ -178,8 +178,6 @@ export default class extends Phaser.State {
     this.showDeadScene()
     this.dino.isDead = true
     this.game.paused = true
-
-
     if (!this.game.disconnect) {
       let rootRef = this.game.firebase.ref()
       let urlRef = rootRef.child('scores/')
