@@ -64,11 +64,11 @@ const preCache = () => {
 }
 
 const fromNetwork = (req, timeout) => {
-  return Promise((fulfill, reject) => {
+  return new Promise((resolve, reject) => {
     let timeoutId = setTimeout(reject, timeout)
     fetch(req).then((res) => {
       clearTimeout(timeoutId)
-      fulfill(res)
+      resolve(res)
     }, reject)
   })
 }
