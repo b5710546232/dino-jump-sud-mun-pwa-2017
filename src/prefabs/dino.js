@@ -32,16 +32,20 @@ export default class Dino extends Phaser.Sprite {
   jump () {
     if (this.isDead === true) {
       this.play('dead')
-    } else if (this.game.input.activePointer.isDown && this.body.onFloor() && this.game.time.now > this.jumpTimer) {
+    } else if (this.game.input.activePointer.isDown && this.onFloor() && this.game.time.now > this.jumpTimer) {
       this.play('jump')
       this.jumpSound.play()
       this.body.velocity.y = JUMP_VALUE
       this.jumpTimer = this.game.time.now + 750
-    } else if (this.body.onFloor()) {
+    } else if (this.onFloor() ) {
       this.play('run')
     } else {
       this.play('idle')
     }
+  }
+
+  onFloor () {
+    return this.body.velocity.y === 0
   }
 
   update () {

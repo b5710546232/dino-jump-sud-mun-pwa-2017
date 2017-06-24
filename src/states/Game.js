@@ -15,7 +15,6 @@ export default class extends Phaser.State {
   preload () {}
 
   create () {
-
     // bg set up.
     this.bg = this.game.add.image(0, 0, 'bg')
     this.ground = new Ground({
@@ -32,7 +31,7 @@ export default class extends Phaser.State {
     this.dino = new Dino({
       game: this.game,
       x: 40,
-      y: this.game.height/2 - this.game.cache.getImage('ground').height,
+      y: this.game.height / 2 - this.game.cache.getImage('ground').height,
       asset: 'dino'
     })
     this.score = 0
@@ -76,9 +75,12 @@ export default class extends Phaser.State {
   }
 
   update () {
-    this.game.physics.arcade.collide(this.dino, this.ground)
+    this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this)
     this.game.physics.arcade.collide(this.dino, this.obstracles, this.collistionHandler, null, this)
     this.updateScore()
+  }
+  groundCollisionHandler (dino, ground) {
+    dino.isOnGround = true
   }
   updateScore () {
     this.score = parseInt(this.game.time.totalElapsedSeconds())

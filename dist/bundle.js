@@ -4082,16 +4082,21 @@ var Dino = function (_Phaser$Sprite) {
     value: function jump() {
       if (this.isDead === true) {
         this.play('dead');
-      } else if (this.game.input.activePointer.isDown && this.body.onFloor() && this.game.time.now > this.jumpTimer) {
+      } else if (this.game.input.activePointer.isDown && this.onFloor() && this.game.time.now > this.jumpTimer) {
         this.play('jump');
         this.jumpSound.play();
         this.body.velocity.y = JUMP_VALUE;
         this.jumpTimer = this.game.time.now + 750;
-      } else if (this.body.onFloor()) {
+      } else if (this.onFloor()) {
         this.play('run');
       } else {
         this.play('idle');
       }
+    }
+  }, {
+    key: 'onFloor',
+    value: function onFloor() {
+      return this.body.velocity.y === 0;
     }
   }, {
     key: 'update',
@@ -4441,7 +4446,6 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'create',
     value: function create() {
-
       // bg set up.
       this.bg = this.game.add.image(0, 0, 'bg');
       this.ground = new _ground2.default({
@@ -4505,9 +4509,14 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'update',
     value: function update() {
-      this.game.physics.arcade.collide(this.dino, this.ground);
+      this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this);
       this.game.physics.arcade.collide(this.dino, this.obstracles, this.collistionHandler, null, this);
       this.updateScore();
+    }
+  }, {
+    key: 'groundCollisionHandler',
+    value: function groundCollisionHandler(dino, ground) {
+      dino.isOnGround = true;
     }
   }, {
     key: 'updateScore',
