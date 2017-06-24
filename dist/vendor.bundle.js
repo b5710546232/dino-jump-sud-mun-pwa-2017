@@ -150,12 +150,264 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 316);
+/******/ 	return __webpack_require__(__webpack_require__.s = 372);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 24:
+/***/ 103:
+/* no static exports found */
+/* all exports used */
+/*!******************************************!*\
+  !*** ./~/phaser-ce/build/custom/pixi.js ***!
+  \******************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["PIXI"] = __webpack_require__(/*! -!./pixi.js */ 366);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 34)))
+
+/***/ }),
+
+/***/ 104:
+/* no static exports found */
+/* all exports used */
+/*!****************************************!*\
+  !*** ./~/phaser-ce/build/custom/p2.js ***!
+  \****************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["p2"] = __webpack_require__(/*! -!./p2.js */ 364);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 34)))
+
+/***/ }),
+
+/***/ 144:
+/* no static exports found */
+/* all exports used */
+/*!******************************!*\
+  !*** ./~/process/browser.js ***!
+  \******************************/
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+
+/***/ 147:
+/* no static exports found */
+/* all exports used */
+/*!******************************************!*\
+  !*** ./~/webfontloader/webfontloader.js ***!
+  \******************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/* Web Font Loader v1.6.28 - (c) Adobe Systems, Google. License: Apache 2.0 */(function(){function aa(a,b,c){return a.call.apply(a.bind,arguments)}function ba(a,b,c){if(!a)throw Error();if(2<arguments.length){var d=Array.prototype.slice.call(arguments,2);return function(){var c=Array.prototype.slice.call(arguments);Array.prototype.unshift.apply(c,d);return a.apply(b,c)}}return function(){return a.apply(b,arguments)}}function p(a,b,c){p=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?aa:ba;return p.apply(null,arguments)}var q=Date.now||function(){return+new Date};function ca(a,b){this.a=a;this.o=b||a;this.c=this.o.document}var da=!!window.FontFace;function t(a,b,c,d){b=a.c.createElement(b);if(c)for(var e in c)c.hasOwnProperty(e)&&("style"==e?b.style.cssText=c[e]:b.setAttribute(e,c[e]));d&&b.appendChild(a.c.createTextNode(d));return b}function u(a,b,c){a=a.c.getElementsByTagName(b)[0];a||(a=document.documentElement);a.insertBefore(c,a.lastChild)}function v(a){a.parentNode&&a.parentNode.removeChild(a)}
+function w(a,b,c){b=b||[];c=c||[];for(var d=a.className.split(/\s+/),e=0;e<b.length;e+=1){for(var f=!1,g=0;g<d.length;g+=1)if(b[e]===d[g]){f=!0;break}f||d.push(b[e])}b=[];for(e=0;e<d.length;e+=1){f=!1;for(g=0;g<c.length;g+=1)if(d[e]===c[g]){f=!0;break}f||b.push(d[e])}a.className=b.join(" ").replace(/\s+/g," ").replace(/^\s+|\s+$/,"")}function y(a,b){for(var c=a.className.split(/\s+/),d=0,e=c.length;d<e;d++)if(c[d]==b)return!0;return!1}
+function ea(a){return a.o.location.hostname||a.a.location.hostname}function z(a,b,c){function d(){m&&e&&f&&(m(g),m=null)}b=t(a,"link",{rel:"stylesheet",href:b,media:"all"});var e=!1,f=!0,g=null,m=c||null;da?(b.onload=function(){e=!0;d()},b.onerror=function(){e=!0;g=Error("Stylesheet failed to load");d()}):setTimeout(function(){e=!0;d()},0);u(a,"head",b)}
+function A(a,b,c,d){var e=a.c.getElementsByTagName("head")[0];if(e){var f=t(a,"script",{src:b}),g=!1;f.onload=f.onreadystatechange=function(){g||this.readyState&&"loaded"!=this.readyState&&"complete"!=this.readyState||(g=!0,c&&c(null),f.onload=f.onreadystatechange=null,"HEAD"==f.parentNode.tagName&&e.removeChild(f))};e.appendChild(f);setTimeout(function(){g||(g=!0,c&&c(Error("Script load timeout")))},d||5E3);return f}return null};function B(){this.a=0;this.c=null}function C(a){a.a++;return function(){a.a--;D(a)}}function E(a,b){a.c=b;D(a)}function D(a){0==a.a&&a.c&&(a.c(),a.c=null)};function F(a){this.a=a||"-"}F.prototype.c=function(a){for(var b=[],c=0;c<arguments.length;c++)b.push(arguments[c].replace(/[\W_]+/g,"").toLowerCase());return b.join(this.a)};function G(a,b){this.c=a;this.f=4;this.a="n";var c=(b||"n4").match(/^([nio])([1-9])$/i);c&&(this.a=c[1],this.f=parseInt(c[2],10))}function fa(a){return H(a)+" "+(a.f+"00")+" 300px "+I(a.c)}function I(a){var b=[];a=a.split(/,\s*/);for(var c=0;c<a.length;c++){var d=a[c].replace(/['"]/g,"");-1!=d.indexOf(" ")||/^\d/.test(d)?b.push("'"+d+"'"):b.push(d)}return b.join(",")}function J(a){return a.a+a.f}function H(a){var b="normal";"o"===a.a?b="oblique":"i"===a.a&&(b="italic");return b}
+function ga(a){var b=4,c="n",d=null;a&&((d=a.match(/(normal|oblique|italic)/i))&&d[1]&&(c=d[1].substr(0,1).toLowerCase()),(d=a.match(/([1-9]00|normal|bold)/i))&&d[1]&&(/bold/i.test(d[1])?b=7:/[1-9]00/.test(d[1])&&(b=parseInt(d[1].substr(0,1),10))));return c+b};function ha(a,b){this.c=a;this.f=a.o.document.documentElement;this.h=b;this.a=new F("-");this.j=!1!==b.events;this.g=!1!==b.classes}function ia(a){a.g&&w(a.f,[a.a.c("wf","loading")]);K(a,"loading")}function L(a){if(a.g){var b=y(a.f,a.a.c("wf","active")),c=[],d=[a.a.c("wf","loading")];b||c.push(a.a.c("wf","inactive"));w(a.f,c,d)}K(a,"inactive")}function K(a,b,c){if(a.j&&a.h[b])if(c)a.h[b](c.c,J(c));else a.h[b]()};function ja(){this.c={}}function ka(a,b,c){var d=[],e;for(e in b)if(b.hasOwnProperty(e)){var f=a.c[e];f&&d.push(f(b[e],c))}return d};function M(a,b){this.c=a;this.f=b;this.a=t(this.c,"span",{"aria-hidden":"true"},this.f)}function N(a){u(a.c,"body",a.a)}function O(a){return"display:block;position:absolute;top:-9999px;left:-9999px;font-size:300px;width:auto;height:auto;line-height:normal;margin:0;padding:0;font-variant:normal;white-space:nowrap;font-family:"+I(a.c)+";"+("font-style:"+H(a)+";font-weight:"+(a.f+"00")+";")};function P(a,b,c,d,e,f){this.g=a;this.j=b;this.a=d;this.c=c;this.f=e||3E3;this.h=f||void 0}P.prototype.start=function(){var a=this.c.o.document,b=this,c=q(),d=new Promise(function(d,e){function f(){q()-c>=b.f?e():a.fonts.load(fa(b.a),b.h).then(function(a){1<=a.length?d():setTimeout(f,25)},function(){e()})}f()}),e=null,f=new Promise(function(a,d){e=setTimeout(d,b.f)});Promise.race([f,d]).then(function(){e&&(clearTimeout(e),e=null);b.g(b.a)},function(){b.j(b.a)})};function Q(a,b,c,d,e,f,g){this.v=a;this.B=b;this.c=c;this.a=d;this.s=g||"BESbswy";this.f={};this.w=e||3E3;this.u=f||null;this.m=this.j=this.h=this.g=null;this.g=new M(this.c,this.s);this.h=new M(this.c,this.s);this.j=new M(this.c,this.s);this.m=new M(this.c,this.s);a=new G(this.a.c+",serif",J(this.a));a=O(a);this.g.a.style.cssText=a;a=new G(this.a.c+",sans-serif",J(this.a));a=O(a);this.h.a.style.cssText=a;a=new G("serif",J(this.a));a=O(a);this.j.a.style.cssText=a;a=new G("sans-serif",J(this.a));a=
+O(a);this.m.a.style.cssText=a;N(this.g);N(this.h);N(this.j);N(this.m)}var R={D:"serif",C:"sans-serif"},S=null;function T(){if(null===S){var a=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent);S=!!a&&(536>parseInt(a[1],10)||536===parseInt(a[1],10)&&11>=parseInt(a[2],10))}return S}Q.prototype.start=function(){this.f.serif=this.j.a.offsetWidth;this.f["sans-serif"]=this.m.a.offsetWidth;this.A=q();U(this)};
+function la(a,b,c){for(var d in R)if(R.hasOwnProperty(d)&&b===a.f[R[d]]&&c===a.f[R[d]])return!0;return!1}function U(a){var b=a.g.a.offsetWidth,c=a.h.a.offsetWidth,d;(d=b===a.f.serif&&c===a.f["sans-serif"])||(d=T()&&la(a,b,c));d?q()-a.A>=a.w?T()&&la(a,b,c)&&(null===a.u||a.u.hasOwnProperty(a.a.c))?V(a,a.v):V(a,a.B):ma(a):V(a,a.v)}function ma(a){setTimeout(p(function(){U(this)},a),50)}function V(a,b){setTimeout(p(function(){v(this.g.a);v(this.h.a);v(this.j.a);v(this.m.a);b(this.a)},a),0)};function W(a,b,c){this.c=a;this.a=b;this.f=0;this.m=this.j=!1;this.s=c}var X=null;W.prototype.g=function(a){var b=this.a;b.g&&w(b.f,[b.a.c("wf",a.c,J(a).toString(),"active")],[b.a.c("wf",a.c,J(a).toString(),"loading"),b.a.c("wf",a.c,J(a).toString(),"inactive")]);K(b,"fontactive",a);this.m=!0;na(this)};
+W.prototype.h=function(a){var b=this.a;if(b.g){var c=y(b.f,b.a.c("wf",a.c,J(a).toString(),"active")),d=[],e=[b.a.c("wf",a.c,J(a).toString(),"loading")];c||d.push(b.a.c("wf",a.c,J(a).toString(),"inactive"));w(b.f,d,e)}K(b,"fontinactive",a);na(this)};function na(a){0==--a.f&&a.j&&(a.m?(a=a.a,a.g&&w(a.f,[a.a.c("wf","active")],[a.a.c("wf","loading"),a.a.c("wf","inactive")]),K(a,"active")):L(a.a))};function oa(a){this.j=a;this.a=new ja;this.h=0;this.f=this.g=!0}oa.prototype.load=function(a){this.c=new ca(this.j,a.context||this.j);this.g=!1!==a.events;this.f=!1!==a.classes;pa(this,new ha(this.c,a),a)};
+function qa(a,b,c,d,e){var f=0==--a.h;(a.f||a.g)&&setTimeout(function(){var a=e||null,m=d||null||{};if(0===c.length&&f)L(b.a);else{b.f+=c.length;f&&(b.j=f);var h,l=[];for(h=0;h<c.length;h++){var k=c[h],n=m[k.c],r=b.a,x=k;r.g&&w(r.f,[r.a.c("wf",x.c,J(x).toString(),"loading")]);K(r,"fontloading",x);r=null;if(null===X)if(window.FontFace){var x=/Gecko.*Firefox\/(\d+)/.exec(window.navigator.userAgent),xa=/OS X.*Version\/10\..*Safari/.exec(window.navigator.userAgent)&&/Apple/.exec(window.navigator.vendor);
+X=x?42<parseInt(x[1],10):xa?!1:!0}else X=!1;X?r=new P(p(b.g,b),p(b.h,b),b.c,k,b.s,n):r=new Q(p(b.g,b),p(b.h,b),b.c,k,b.s,a,n);l.push(r)}for(h=0;h<l.length;h++)l[h].start()}},0)}function pa(a,b,c){var d=[],e=c.timeout;ia(b);var d=ka(a.a,c,a.c),f=new W(a.c,b,e);a.h=d.length;b=0;for(c=d.length;b<c;b++)d[b].load(function(b,d,c){qa(a,f,b,d,c)})};function ra(a,b){this.c=a;this.a=b}
+ra.prototype.load=function(a){function b(){if(f["__mti_fntLst"+d]){var c=f["__mti_fntLst"+d](),e=[],h;if(c)for(var l=0;l<c.length;l++){var k=c[l].fontfamily;void 0!=c[l].fontStyle&&void 0!=c[l].fontWeight?(h=c[l].fontStyle+c[l].fontWeight,e.push(new G(k,h))):e.push(new G(k))}a(e)}else setTimeout(function(){b()},50)}var c=this,d=c.a.projectId,e=c.a.version;if(d){var f=c.c.o;A(this.c,(c.a.api||"https://fast.fonts.net/jsapi")+"/"+d+".js"+(e?"?v="+e:""),function(e){e?a([]):(f["__MonotypeConfiguration__"+
+d]=function(){return c.a},b())}).id="__MonotypeAPIScript__"+d}else a([])};function sa(a,b){this.c=a;this.a=b}sa.prototype.load=function(a){var b,c,d=this.a.urls||[],e=this.a.families||[],f=this.a.testStrings||{},g=new B;b=0;for(c=d.length;b<c;b++)z(this.c,d[b],C(g));var m=[];b=0;for(c=e.length;b<c;b++)if(d=e[b].split(":"),d[1])for(var h=d[1].split(","),l=0;l<h.length;l+=1)m.push(new G(d[0],h[l]));else m.push(new G(d[0]));E(g,function(){a(m,f)})};function ta(a,b){a?this.c=a:this.c=ua;this.a=[];this.f=[];this.g=b||""}var ua="https://fonts.googleapis.com/css";function va(a,b){for(var c=b.length,d=0;d<c;d++){var e=b[d].split(":");3==e.length&&a.f.push(e.pop());var f="";2==e.length&&""!=e[1]&&(f=":");a.a.push(e.join(f))}}
+function wa(a){if(0==a.a.length)throw Error("No fonts to load!");if(-1!=a.c.indexOf("kit="))return a.c;for(var b=a.a.length,c=[],d=0;d<b;d++)c.push(a.a[d].replace(/ /g,"+"));b=a.c+"?family="+c.join("%7C");0<a.f.length&&(b+="&subset="+a.f.join(","));0<a.g.length&&(b+="&text="+encodeURIComponent(a.g));return b};function ya(a){this.f=a;this.a=[];this.c={}}
+var za={latin:"BESbswy","latin-ext":"\u00e7\u00f6\u00fc\u011f\u015f",cyrillic:"\u0439\u044f\u0416",greek:"\u03b1\u03b2\u03a3",khmer:"\u1780\u1781\u1782",Hanuman:"\u1780\u1781\u1782"},Aa={thin:"1",extralight:"2","extra-light":"2",ultralight:"2","ultra-light":"2",light:"3",regular:"4",book:"4",medium:"5","semi-bold":"6",semibold:"6","demi-bold":"6",demibold:"6",bold:"7","extra-bold":"8",extrabold:"8","ultra-bold":"8",ultrabold:"8",black:"9",heavy:"9",l:"3",r:"4",b:"7"},Ba={i:"i",italic:"i",n:"n",normal:"n"},
+Ca=/^(thin|(?:(?:extra|ultra)-?)?light|regular|book|medium|(?:(?:semi|demi|extra|ultra)-?)?bold|black|heavy|l|r|b|[1-9]00)?(n|i|normal|italic)?$/;
+function Da(a){for(var b=a.f.length,c=0;c<b;c++){var d=a.f[c].split(":"),e=d[0].replace(/\+/g," "),f=["n4"];if(2<=d.length){var g;var m=d[1];g=[];if(m)for(var m=m.split(","),h=m.length,l=0;l<h;l++){var k;k=m[l];if(k.match(/^[\w-]+$/)){var n=Ca.exec(k.toLowerCase());if(null==n)k="";else{k=n[2];k=null==k||""==k?"n":Ba[k];n=n[1];if(null==n||""==n)n="4";else var r=Aa[n],n=r?r:isNaN(n)?"4":n.substr(0,1);k=[k,n].join("")}}else k="";k&&g.push(k)}0<g.length&&(f=g);3==d.length&&(d=d[2],g=[],d=d?d.split(","):
+g,0<d.length&&(d=za[d[0]])&&(a.c[e]=d))}a.c[e]||(d=za[e])&&(a.c[e]=d);for(d=0;d<f.length;d+=1)a.a.push(new G(e,f[d]))}};function Ea(a,b){this.c=a;this.a=b}var Fa={Arimo:!0,Cousine:!0,Tinos:!0};Ea.prototype.load=function(a){var b=new B,c=this.c,d=new ta(this.a.api,this.a.text),e=this.a.families;va(d,e);var f=new ya(e);Da(f);z(c,wa(d),C(b));E(b,function(){a(f.a,f.c,Fa)})};function Ga(a,b){this.c=a;this.a=b}Ga.prototype.load=function(a){var b=this.a.id,c=this.c.o;b?A(this.c,(this.a.api||"https://use.typekit.net")+"/"+b+".js",function(b){if(b)a([]);else if(c.Typekit&&c.Typekit.config&&c.Typekit.config.fn){b=c.Typekit.config.fn;for(var e=[],f=0;f<b.length;f+=2)for(var g=b[f],m=b[f+1],h=0;h<m.length;h++)e.push(new G(g,m[h]));try{c.Typekit.load({events:!1,classes:!1,async:!0})}catch(l){}a(e)}},2E3):a([])};function Ha(a,b){this.c=a;this.f=b;this.a=[]}Ha.prototype.load=function(a){var b=this.f.id,c=this.c.o,d=this;b?(c.__webfontfontdeckmodule__||(c.__webfontfontdeckmodule__={}),c.__webfontfontdeckmodule__[b]=function(b,c){for(var g=0,m=c.fonts.length;g<m;++g){var h=c.fonts[g];d.a.push(new G(h.name,ga("font-weight:"+h.weight+";font-style:"+h.style)))}a(d.a)},A(this.c,(this.f.api||"https://f.fontdeck.com/s/css/js/")+ea(this.c)+"/"+b+".js",function(b){b&&a([])})):a([])};var Y=new oa(window);Y.a.c.custom=function(a,b){return new sa(b,a)};Y.a.c.fontdeck=function(a,b){return new Ha(b,a)};Y.a.c.monotype=function(a,b){return new ra(b,a)};Y.a.c.typekit=function(a,b){return new Ga(b,a)};Y.a.c.google=function(a,b){return new Ea(b,a)};var Z={load:p(Y.load,Y)}; true?!(__WEBPACK_AMD_DEFINE_RESULT__ = function(){return Z}.call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):"undefined"!==typeof module&&module.exports?module.exports=Z:(window.WebFont=Z,window.WebFontConfig&&Y.load(window.WebFontConfig));}());
+
+
+/***/ }),
+
+/***/ 25:
 /* no static exports found */
 /* all exports used */
 /*!**************************************************!*\
@@ -163,12 +415,45 @@
   \**************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["Phaser"] = __webpack_require__(/*! -!./phaser-split.js */ 311);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 49)))
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["Phaser"] = __webpack_require__(/*! -!./phaser-split.js */ 365);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 34)))
 
 /***/ }),
 
-/***/ 310:
+/***/ 34:
+/* no static exports found */
+/* all exports used */
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 364:
 /* no static exports found */
 /* all exports used */
 /*!****************************************!*\
@@ -13817,7 +14102,7 @@ World.prototype.raycast = function(result, ray){
 
 /***/ }),
 
-/***/ 311:
+/***/ 365:
 /* no static exports found */
 /* all exports used */
 /*!**************************************************!*\
@@ -13834,7 +14119,7 @@ World.prototype.raycast = function(result, ray){
 *
 * Phaser - http://phaser.io
 *
-* v2.8.1 "2017-06-20" - Built: Tue Jun 20 2017 19:07:14
+* v2.8.0 "2017-05-30" - Built: Tue May 30 2017 21:46:23
 *
 * By Richard Davey http://www.photonstorm.com @photonstorm
 *
@@ -13880,7 +14165,7 @@ var Phaser = Phaser || {    // jshint ignore:line
     * @constant Phaser.VERSION
     * @type {string}
     */
-    VERSION: '2.8.1',
+    VERSION: '2.8.0',
 
     /**
     * An array of Phaser game instances.
@@ -17184,24 +17469,6 @@ Phaser.Point.prototype = {
     },
 
     /**
-     * Sets the `x` and `y` values of this Point object from a given polar coordinate.
-     *
-     * @method Phaser.Point#setToPolar
-     * @param {number} azimuth - The angular coordinate, in radians (unless `asDegrees`).
-     * @param {number} [radius=1] - The radial coordinate (length).
-     * @param {boolean} [asDegrees=false] - True if `azimuth` is in degrees.
-     * @return {Phaser.Point} This Point object. Useful for chaining method calls.
-     */
-    setToPolar: function(azimuth, radius, asDegrees) {
-
-      if (radius == null) { radius = 1; }
-      if (asDegrees) { azimuth = Phaser.Math.degToRad(azimuth); }
-
-      return this.setTo(Math.cos(azimuth) * radius, Math.sin(azimuth) * radius);
-
-    },
-
-    /**
     * Adds the given x and y values to this Point.
     *
     * @method Phaser.Point#add
@@ -19718,32 +19985,24 @@ Phaser.Camera = function (game, id, x, y, width, height) {
 };
 
 /**
-* A follow style that uses no deadzone.
-*
 * @constant
 * @type {number}
 */
 Phaser.Camera.FOLLOW_LOCKON = 0;
 
 /**
-* A follow style that uses a tall, narrow deadzone (0.33 x 0.125) with a center slightly above the view center.
-*
 * @constant
 * @type {number}
 */
 Phaser.Camera.FOLLOW_PLATFORMER = 1;
 
 /**
-* A follow style that uses a square deadzone (0.25 of the larger view edge).
-*
 * @constant
 * @type {number}
 */
 Phaser.Camera.FOLLOW_TOPDOWN = 2;
 
 /**
-* A follow style that uses a small square deadzone (0.125 of the larger view edge).
-*
 * @constant
 * @type {number}
 */
@@ -19820,7 +20079,7 @@ Phaser.Camera.prototype = {
     *
     * @method Phaser.Camera#follow
     * @param {Phaser.Sprite|Phaser.Image|Phaser.Text} target - The object you want the camera to track. Set to null to not follow anything.
-    * @param {number} [style] - Leverage one of the existing {@link deadzone} presets. If you use a custom deadzone, ignore this parameter and manually specify the deadzone after calling follow().
+    * @param {number} [style] - Leverage one of the existing "deadzone" presets. If you use a custom deadzone, ignore this parameter and manually specify the deadzone after calling follow().
     * @param {float} [lerpX=1] - A value between 0 and 1. This value specifies the amount of linear interpolation to use when horizontally tracking the target. The closer the value to 1, the faster the camera will track.
     * @param {float} [lerpY=1] - A value between 0 and 1. This value specifies the amount of linear interpolation to use when vertically tracking the target. The closer the value to 1, the faster the camera will track.
     */
@@ -20316,8 +20575,6 @@ Phaser.Camera.prototype = {
         this.view.y = 0;
 
         this._shake.duration = 0;
-        this._shake.x = 0;
-        this._shake.y = 0;
 
         this.resetFX();
 
@@ -21523,7 +21780,7 @@ Object.defineProperty(Phaser.StateManager.prototype, "created", {
 * You can listen for a Signal by binding a callback / function to it.
 * This is done by using either `Signal.add` or `Signal.addOnce`.
 *
-* For example you can listen for a touch or click event from the Input Manager
+* For example you can listen for a touch or click event from the Input Manager 
 * by using its `onDown` Signal:
 *
 * `game.input.onDown.add(function() { ... });`
@@ -21538,10 +21795,6 @@ Object.defineProperty(Phaser.StateManager.prototype, "created", {
 * Now every time the InputManager dispatches the `onDown` signal (or event), your function
 * will be called.
 *
-* Multiple callbacks can be bound to the same signal.
-* They're ordered first by their `priority` arguments and then by the order in which they were added.
-* If a callback calls {@link #halt} or returns `false`, any remaining callbacks are skipped.
-*
 * Very often a Signal will send arguments to your function.
 * This is specific to the Signal itself.
 * If you're unsure then check the documentation, or failing that simply do:
@@ -21553,7 +21806,7 @@ Object.defineProperty(Phaser.StateManager.prototype, "created", {
 * Sprites have lots of default signals you can listen to in their Events class, such as:
 *
 * `sprite.events.onKilled`
-*
+* 
 * Which is called automatically whenever the Sprite is killed.
 * There are lots of other events, see the Events component for a list.
 *
@@ -21760,10 +22013,8 @@ Phaser.Signal.prototype = {
     *
     * When onDown dispatches it will call the `shoot` callback passing it: `Phaser.Key, 'lazer', 100`.
     *
-    * Where the first parameter is the one that Key.onDown dispatches internally and 'lazer',
+    * Where the first parameter is the one that Key.onDown dispatches internally and 'lazer', 
     * and the value 100 were the custom arguments given in the call to 'add'.
-    *
-    * If the callback calls {@link #halt} or returns `false`, any remaining callbacks bound to this Signal are skipped.
     *
     * @method Phaser.Signal#add
     * @param {function} listener - The function to call when this Signal is dispatched.
@@ -23462,7 +23713,7 @@ Phaser.Group = function (game, parent, name, addToStage, enableBody, physicsBody
     this.alive = true;
 
     /**
-    * If exists is false the group will be excluded from collision checks and filters such as {@link #forEachExists}. The group will not call `preUpdate` and `postUpdate` on its children and the children will not receive physics updates or camera/world boundary checks. The group will still be {@link #visible} and will still call `update` on its children.
+    * If exists is false the group will be excluded from collision checks and filters such as {@link forEachExists}. The group will not call `preUpdate` and `postUpdate` on its children and the children will not receive physics updates or camera/world boundary checks. The group will still be {@link #visible} and will still call `update` on its children.
     * @property {boolean} exists
     * @default
     */
@@ -24738,7 +24989,6 @@ Phaser.Group.prototype.setAllChildren = function (key, value, checkAlive, checkV
 * @param {boolean} [checkAlive=false] - If set then only children with alive=true will be checked. This includes any Groups that are children.
 * @param {boolean} [checkVisible=false] - If set then only children with visible=true will be checked. This includes any Groups that are children.
 * @param {boolean} [force=false] - Also return false if the property is missing or undefined (regardless of the `value` argument).
-* @return {boolean} - True if all eligible children have the given property value (but see `force`); otherwise false.
 */
 Phaser.Group.prototype.checkAll = function (key, value, checkAlive, checkVisible, force) {
 
@@ -24773,7 +25023,6 @@ Phaser.Group.prototype.checkAll = function (key, value, checkAlive, checkVisible
 * @param {any} value - The value that will be checked.
 * @param {boolean} [checkAlive=false] - If set then only children with alive=true will be checked. This includes any Groups that are children.
 * @param {boolean} [checkVisible=false] - If set then only children with visible=true will be checked. This includes any Groups that are children.
-* @return {boolean} - True if at least one eligible child has the given property value; otherwise false.
 */
 Phaser.Group.prototype.checkAny = function (key, value, checkAlive, checkVisible) {
 
@@ -26091,7 +26340,7 @@ Phaser.Group.prototype.removeBetween = function (startIndex, endIndex, destroy, 
 /**
  * Places each child at a random position within the given Rectangle (or the {@link Phaser.World#bounds World bounds}).
  *
- * @method Phaser.Group#scatter
+ * @method Phaser.Group.prototype#scatter
  * @param {Phaser.Rectangle} [rect=this.game.world.bounds] - A Rectangle. If omitted {@link Phaser.World#bounds} is used.
  * @param {boolean} [checkExists=false] - Place only children with exists=true.
  */
@@ -26104,20 +26353,6 @@ Phaser.Group.prototype.scatter = function (rect, checkExists) {
         child.position.set(rect.randomX, rect.randomY);
 
     }, null, checkExists);
-
-};
-
-/**
- * Orders this Group's children randomly.
- *
- * This can be more efficient than calling {@link #getRandom} repeatedly.
- *
- * @method Phaser.Group#shuffle
- */
-Phaser.Group.prototype.shuffle = function () {
-
-    Phaser.ArrayUtils.shuffle(this.children);
-    this.updateZ();
 
 };
 
@@ -26924,19 +27159,6 @@ Object.defineProperty(Phaser.World.prototype, "randomY", {
 * start running the `Boot` state when it has finished initializing. There are example
 * project templates you can use in the Phaser GitHub repo, inside the `resources` folder.
 *
-* @class Phaser.Game
-* @constructor
-* @param {number|string} [width=800] - The width of your game in game pixels. If given as a string the value must be between 0 and 100 and will be used as the percentage width of the parent container, or the browser window if no parent is given.
-* @param {number|string} [height=600] - The height of your game in game pixels. If given as a string the value must be between 0 and 100 and will be used as the percentage height of the parent container, or the browser window if no parent is given.
-* @param {number} [renderer=Phaser.AUTO] - Which renderer to use: Phaser.AUTO will auto-detect, Phaser.WEBGL, Phaser.WEBGL_MULTI, Phaser.CANVAS or Phaser.HEADLESS (no rendering at all).
-* @param {string|HTMLElement} [parent=''] - The DOM element into which this games canvas will be injected. Either a DOM ID (string) or the element itself.
-* @param {object} [state=null] - The default state object. A object consisting of Phaser.State functions (preload, create, update, render) or null.
-* @param {boolean} [transparent=false] - Use a transparent canvas background or not.
-* @param {boolean} [antialias=true] - Draw all image textures anti-aliased or not. The default is for smooth textures, but disable if your game features pixel art.
-* @param {object} [physicsConfig=null] - A physics configuration object to pass to the Physics world on creation.
-*/
-
-/**
 * Instead of specifying arguments you can also pass a single object instead:
 *
 * ```
@@ -26958,19 +27180,25 @@ Object.defineProperty(Phaser.World.prototype, "randomY", {
 *
 * @class Phaser.Game
 * @constructor
+* @param {number|string} [width=800] - The width of your game in game pixels. If given as a string the value must be between 0 and 100 and will be used as the percentage width of the parent container, or the browser window if no parent is given.
+* @param {number|string} [height=600] - The height of your game in game pixels. If given as a string the value must be between 0 and 100 and will be used as the percentage height of the parent container, or the browser window if no parent is given.
+* @param {number} [renderer=Phaser.AUTO] - Which renderer to use: Phaser.AUTO will auto-detect, Phaser.WEBGL, Phaser.WEBGL_MULTI, Phaser.CANVAS or Phaser.HEADLESS (no rendering at all).
+* @param {string|HTMLElement} [parent=''] - The DOM element into which this games canvas will be injected. Either a DOM ID (string) or the element itself.
+* @param {object} [state=null] - The default state object. A object consisting of Phaser.State functions (preload, create, update, render) or null.
+* @param {boolean} [transparent=false] - Use a transparent canvas background or not.
+* @param {boolean} [antialias=true] - Draw all image textures anti-aliased or not. The default is for smooth textures, but disable if your game features pixel art.
+* @param {object} [physicsConfig=null] - A physics configuration object to pass to the Physics world on creation.
+*
 * @param {object} [config] - A single configuration object
 * @param {number|string} [config.antialias=true]
 * @param {number|string} [config.height=600]
 * @param {boolean} [config.enableDebug=true] - Enable {@link Phaser.Utils.Debug}. You can gain a little performance by disabling this in production.
-* @param {number} [config.fullScreenScaleMode] - The scaling method used by the ScaleManager when in fullscreen.
-* @param {DOMElement} [config.fullScreenTarget] - The DOM element on which the Fullscreen API enter request will be invoked.
 * @param {boolean} [config.multiTexture=false] - Enable support for multiple bound Textures in WebGL. Same as `renderer: Phaser.WEBGL_MULTI`.
 * @param {string|HTMLElement} [config.parent='']
 * @param {object} [config.physicsConfig=null]
 * @param {boolean} [config.preserveDrawingBuffer=false] - Whether or not the contents of the stencil buffer is retained after rendering.
 * @param {number} [config.renderer=Phaser.AUTO]
 * @param {number} [config.resolution=1] - The resolution of your game, as a ratio of canvas pixels to game pixels.
-* @param {number} [config.scaleMode] - The scaling method used by the ScaleManager when not in fullscreen.
 * @param {number} [config.seed] - Seed for {@link Phaser.RandomDataGenerator}.
 * @param {object} [config.state=null]
 * @param {boolean} [config.transparent=false]
@@ -27550,7 +27778,7 @@ Phaser.Game.prototype = {
         }
         else
         {
-            this.debug = { preUpdate: function () {}, update: function () {}, reset: function () {}, isDisabled: true };
+            this.debug = { preUpdate: function () {}, update: function () {}, reset: function () {} };
         }
 
         this.showDebugHeader();
@@ -27697,8 +27925,6 @@ Phaser.Game.prototype = {
             if (this.multiTexture || this.renderType === Phaser.WEBGL_MULTI)
             {
                 PIXI.enableMultiTexture();
-
-                this.multiTexture = true;
             }
 
             this.renderType = Phaser.WEBGL;
@@ -29135,8 +29361,8 @@ Phaser.Input.prototype = {
             return (displayObject.hitArea.contains(this._localPoint.x, this._localPoint.y));
         }
         else if (Phaser.Creature && displayObject instanceof Phaser.Creature) {
-          var width = Math.abs(displayObject.width);
-          var height = Math.abs(displayObject.height);
+          var width = displayObject.width;
+          var height = displayObject.height;
           var x1 = displayObject.x - (width * displayObject.anchorX);
 
           if (this.game.camera.x + pointer.x >= x1 && this.game.camera.x + pointer.x < x1 + width)
@@ -29167,8 +29393,8 @@ Phaser.Input.prototype = {
         }
         else if (displayObject instanceof PIXI.Sprite)
         {
-            var width = displayObject.texture.frame.width / displayObject.texture.baseTexture.resolution;
-            var height = displayObject.texture.frame.height / displayObject.texture.baseTexture.resolution;
+            var width = displayObject.texture.frame.width;
+            var height = displayObject.texture.frame.height;
             var x1 = -width * displayObject.anchor.x;
 
             if (this._localPoint.x >= x1 && this._localPoint.x < x1 + width)
@@ -55705,13 +55931,6 @@ Phaser.Math = {
     PI2: Math.PI * 2,
 
     /**
-     * Half PI.
-     * @property {number} Phaser.Math#HALF_PI
-     * @default ~1.570
-     */
-    HALF_PI: Math.PI * 0.5,
-
-    /**
     * Degrees to Radians factor.
     * @property {number} Phaser.Math#DEG_TO_RAD
     */
@@ -72291,11 +72510,7 @@ Object.defineProperty(Phaser.SoundManager.prototype, "volume", {
 *
 * -  ##### Fluid game/canvas size
 *
-*    Use `scaleMode` RESIZE. Examine the game or canvas size from the {@link #onSizeChange} signal and reposition game objects if necessary.
-*
-* -  ##### Preferred orientation
-*
-*    Call {@link #forceOrientation} with the preferred orientation and use any of the {@link #onOrientationChange}, {@link #enterIncorrectOrientation}, or {@link #leaveIncorrectOrientation} signals.
+*    Use `scaleMode` RESIZE. Examine the game or canvas size from the {@link onSizeChange} signal and reposition game objects.
 *
 * @description
 * Create a new ScaleManager object - this is done automatically by {@link Phaser.Game}
@@ -73459,12 +73674,6 @@ Phaser.ScaleManager.prototype = {
     forceOrientation: function (forceLandscape, forcePortrait) {
 
         if (forcePortrait === undefined) { forcePortrait = false; }
-
-        if (forceLandscape === true && forcePortrait === true)
-        {
-            console.warn('Phaser.ScaleManager: forceLandscape and forcePortrait cannot both be true.');
-            return;
-        }
 
         this.forceLandscape = forceLandscape;
         this.forcePortrait = forcePortrait;
@@ -74786,25 +74995,6 @@ Phaser.Utils.Debug = function (game) {
     */
     this.dirty = false;
 
-    /**
-     * @property {boolean} isDisabled - If `enableDebug: false` is passed to {@link Phaser.Game} or if Phaser is built without the Debug class, this will be true.
-     * @default
-     * @readonly
-     */
-    this.isDisabled = false;
-
-    /**
-     * @property {Phaser.Line} _line - A reusable rendering line.
-     * @private
-     */
-    this._line = null;
-
-    /**
-     * @property {Phaser.Rectangle} _rect - A reusable rendering rectangle.
-     * @private
-     */
-    this._rect = null;
-
 };
 
 Phaser.Utils.Debug.prototype = {
@@ -74832,9 +75022,6 @@ Phaser.Utils.Debug.prototype = {
             this.canvas = Phaser.CanvasPool.create(this, this.game.width, this.game.height);
             this.context = this.canvas.getContext('2d');
         }
-
-        this._line = new Phaser.Line();
-        this._rect = new Phaser.Rectangle();
 
     },
 
@@ -75000,35 +75187,6 @@ Phaser.Utils.Debug.prototype = {
     },
 
     /**
-    * Marks the follow {@link #target} and {@link #deadzone}.
-    *
-    * @method Phaser.Utils.Debug#camera
-    * @param {Phaser.Camera} camera - The Phaser.Camera to show the debug information for.
-    * @param {string} [color] - Color of the debug shapes to be rendered (format is css color string).
-    * @param {boolean} [filled=true] - Render the shapes filled (default, true) or stroked (false).
-    */
-    camera: function (camera, color, filled) {
-
-        var deadzone = camera.deadzone;
-        var target = camera.target;
-        var view = camera.view;
-
-        if (deadzone)
-        {
-            this._rect.setTo(view.x + deadzone.x, view.y + deadzone.y, deadzone.width, deadzone.height);
-            this.rectangle(this._rect, color, filled);
-        }
-
-        if (target)
-        {
-            this._line.setTo(view.centerX, view.centerY, target.x, target.y);
-            this.geom(this._line, color, filled);
-            this.geom(target, color, false, 3);
-        }
-
-    },
-
-    /**
     * Render camera information including dimensions and location.
     *
     * @method Phaser.Utils.Debug#cameraInfo
@@ -75039,25 +75197,18 @@ Phaser.Utils.Debug.prototype = {
     */
     cameraInfo: function (camera, x, y, color) {
 
-        var bounds = camera.bounds;
-        var deadzone = camera.deadzone;
-        var target = camera.target;
-        var view = camera.view;
-
         this.start(x, y, color);
         this.line('Camera (' + camera.width + ' x ' + camera.height + ')');
-        this.line('x: ' + camera.x + ' y: ' + camera.y);
+        this.line('X: ' + camera.x + ' Y: ' + camera.y);
 
-        if (bounds)
+        if (camera.bounds)
         {
-            this.line('Bounds x: ' + bounds.x + ' y: ' + bounds.y + ' w: ' + bounds.width + ' h: ' + bounds.height);
+            this.line('Bounds x: ' + camera.bounds.x + ' Y: ' + camera.bounds.y + ' w: ' + camera.bounds.width + ' h: ' + camera.bounds.height);
         }
 
-        this.line('View x: ' + view.x + ' y: ' + view.y + ' w: ' + view.width + ' h: ' + view.height);
-        this.line('Deadzone: ' + (deadzone ? ('x: ' + deadzone.x + ' y: ' + deadzone.y + ' w: ' + deadzone.width + ' h: ' + deadzone.height) : deadzone));
+        this.line('View x: ' + camera.view.x + ' Y: ' + camera.view.y + ' w: ' + camera.view.width + ' h: ' + camera.view.height);
+        // this.line('Screen View x: ' + camera.screenView.x + ' Y: ' + camera.screenView.y + ' w: ' + camera.screenView.width + ' h: ' + camera.screenView.height);
         this.line('Total in view: ' + camera.totalInView);
-        this.line('At limit: x: ' + camera.atLimit.x + ' y: ' + camera.atLimit.y);
-        this.line('Target: ' + (target ? (target.name || target) : target));
         this.stop();
 
     },
@@ -75399,10 +75550,10 @@ Phaser.Utils.Debug.prototype = {
     /**
     * Renders a Rectangle.
     *
-    * @method Phaser.Utils.Debug#rectangle
-    * @param {Phaser.Rectangle|object} object - The rectangle to render.
+    * @method Phaser.Utils.Debug#geom
+    * @param {Phaser.Rectangle|object} object - The geometry object to render.
     * @param {string} [color] - Color of the debug info to be rendered (format is css color string).
-    * @param {boolean} [filled=true] - Render the rectangle as filled (default, true) or a stroked (false)
+    * @param {boolean} [filled=true] - Render the objected as a filled (default, true) or a stroked (false)
     */
     rectangle: function (object, color, filled) {
 
@@ -75625,46 +75776,6 @@ Phaser.Utils.Debug.prototype = {
                 this.game.debug.displayList(displayObject.children[i]);
             }
         }
-
-    },
-
-    /**
-     * Prints a description of the {@link Phaser.Game#renderer renderer} and render session.
-     *
-     * @method Phaser.Utils.Debug#renderer
-     * @param {number} [x=0] - The X value the debug info will start from.
-     * @param {number} [y=0] - The Y value the debug info will start from.
-     * @param {string} [color='rgb(255,255,255)'] - The color the debug text will drawn in.
-     */
-    renderer: function (x, y, color) {
-
-        var r = this.game.renderer;
-        var s = r.renderSession;
-
-        this.start(x, y, color);
-
-        this.line((r.gl ? 'WebGL' : 'Canvas') + ' Renderer (' + r.width + ' x ' + r.height + ')');
-        this.line('autoResize: ' + r.autoResize);
-        this.line('clearBeforeRender: ' + r.clearBeforeRender);
-        this.line('resolution: ' + r.resolution);
-        this.line('transparent: ' + r.transparent);
-
-        if (r.gl)
-        {
-            this.line('drawCount: ' + s.drawCount);
-            this.line('flushCount: ' + s.flushCount);
-            this.line('maxTextures: ' + r.maxTextures);
-            this.line('maxTextureSize: ' + r.maxTextureSize);
-            this.line('maxTextureAvailableSpace: ' + s.maxTextureAvailableSpace);
-            this.line('currentBatchedTextures: '+ r.currentBatchedTextures.length);
-        }
-        else
-        {
-            this.line('roundPx: ' + s.roundPixels);
-            this.line('scaleMode: ' + (s.scaleMode === 0 ? 'LINEAR' : (s.scaleMode === 1 ? 'NEAREST' : s.scaleMode)));
-        }
-
-        this.stop();
 
     },
 
@@ -81169,7 +81280,8 @@ Phaser.Physics.Arcade.prototype = {
             speed = this.distanceBetween(displayObject, destination) / (maxTime / 1000);
         }
 
-        displayObject.body.velocity.setToPolar(angle, speed);
+        displayObject.body.velocity.x = Math.cos(angle) * speed;
+        displayObject.body.velocity.y = Math.sin(angle) * speed;
 
         return angle;
 
@@ -81203,7 +81315,8 @@ Phaser.Physics.Arcade.prototype = {
             speed = this.distanceToPointer(displayObject, pointer) / (maxTime / 1000);
         }
 
-        displayObject.body.velocity.setToPolar(angle, speed);
+        displayObject.body.velocity.x = Math.cos(angle) * speed;
+        displayObject.body.velocity.y = Math.sin(angle) * speed;
 
         return angle;
 
@@ -81238,7 +81351,8 @@ Phaser.Physics.Arcade.prototype = {
             speed = this.distanceToXY(displayObject, x, y) / (maxTime / 1000);
         }
 
-        displayObject.body.velocity.setToPolar(angle, speed);
+        displayObject.body.velocity.x = Math.cos(angle) * speed;
+        displayObject.body.velocity.y = Math.sin(angle) * speed;
 
         return angle;
 
@@ -81259,7 +81373,7 @@ Phaser.Physics.Arcade.prototype = {
         if (speed === undefined) { speed = 60; }
         point = point || new Phaser.Point();
 
-        return point.setToPolar(angle, speed, true);
+        return point.setTo((Math.cos(Phaser.Math.degToRad(angle)) * speed), (Math.sin(Phaser.Math.degToRad(angle)) * speed));
 
     },
 
@@ -81278,7 +81392,7 @@ Phaser.Physics.Arcade.prototype = {
         if (speed === undefined) { speed = 60; }
         point = point || new Phaser.Point();
 
-        return point.setToPolar(rotation, speed);
+        return point.setTo((Math.cos(rotation) * speed), (Math.sin(rotation) * speed));
 
     },
 
@@ -81297,7 +81411,7 @@ Phaser.Physics.Arcade.prototype = {
         if (speed === undefined) { speed = 60; }
         point = point || new Phaser.Point();
 
-        return point.setToPolar(rotation, speed);
+        return point.setTo((Math.cos(rotation) * speed), (Math.sin(rotation) * speed));
 
     },
 
@@ -81323,7 +81437,7 @@ Phaser.Physics.Arcade.prototype = {
 
         var angle = this.angleBetween(displayObject, destination);
 
-        displayObject.body.acceleration.setToPolar(angle, speed);
+        displayObject.body.acceleration.setTo(Math.cos(angle) * speed, Math.sin(angle) * speed);
         displayObject.body.maxVelocity.setTo(xSpeedMax, ySpeedMax);
 
         return angle;
@@ -81353,7 +81467,7 @@ Phaser.Physics.Arcade.prototype = {
 
         var angle = this.angleToPointer(displayObject, pointer);
 
-        displayObject.body.acceleration.setToPolar(angle, speed);
+        displayObject.body.acceleration.setTo(Math.cos(angle) * speed, Math.sin(angle) * speed);
         displayObject.body.maxVelocity.setTo(xSpeedMax, ySpeedMax);
 
         return angle;
@@ -81383,7 +81497,7 @@ Phaser.Physics.Arcade.prototype = {
 
         var angle = this.angleToXY(displayObject, x, y);
 
-        displayObject.body.acceleration.setTo(angle, speed);
+        displayObject.body.acceleration.setTo(Math.cos(angle) * speed, Math.sin(angle) * speed);
         displayObject.body.maxVelocity.setTo(xSpeedMax, ySpeedMax);
 
         return angle;
@@ -81636,9 +81750,9 @@ Phaser.Physics.Arcade.Body = function (sprite) {
 
     /**
     * The radius of the circular collision shape this Body is using if Body.setCircle has been enabled, relative to the Sprite's _texture_.
-    * If you wish to change the radius then call {@link #setCircle} again with the new value.
-    * If you wish to stop the Body using a circle then call {@link #setCircle} with a radius of zero (or undefined).
-    * The actual radius of the Body (at any Sprite scale) is equal to {@link #halfWidth} and the diameter is equal to {@link #width}.
+    * If you wish to change the radius then call `setCircle` again with the new value.
+    * If you wish to stop the Body using a circle then call `setCircle` with a radius of zero (or undefined).
+    * The actual radius of the Body (at any Sprite scale) is equal to {@link halfWidth}.
     * @property {number} radius
     * @default
     * @readOnly
@@ -81651,7 +81765,7 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.offset = new Phaser.Point();
 
     /**
-    * @property {Phaser.Point} position - The position of the physics body, equivalent to ({@link #left}, {@link #top}).
+    * @property {Phaser.Point} position - The position of the physics body.
     * @readonly
     */
     this.position = new Phaser.Point(sprite.x, sprite.y);
@@ -81751,13 +81865,13 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.acceleration = new Phaser.Point();
 
     /**
-     * @property {boolean} allowDrag - Allow this Body to be influenced by {@link #drag}?
+     * @property {boolean} allowDrag - Apply this Body's {@link drag}.
      * @default
      */
      this.allowDrag = true;
 
     /**
-    * @property {Phaser.Point} drag - The drag applied to the motion of the Body (when {@link #allowDrag} is enabled). Measured in pixels per second squared.
+    * @property {Phaser.Point} drag - The drag applied to the motion of the Body (when {@link allowDrag} is enabled). Measured in pixels per second squared.
     */
     this.drag = new Phaser.Point();
 
@@ -81987,9 +82101,9 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     /**
     * This object is populated with boolean values when the Body collides with the World bounds or a Tile.
     * For example if blocked.up is true then the Body cannot move up.
-    * @property {object} blocked - An object containing on which faces this Body is blocked from moving, if any (none, up, down, left, right).
+    * @property {object} blocked - An object containing on which faces this Body is blocked from moving, if any.
     */
-    this.blocked = { none: true, up: false, down: false, left: false, right: false };
+    this.blocked = { up: false, down: false, left: false, right: false };
 
     /**
     * If this is an especially small or fast moving object then it can sometimes skip over tilemap collisions if it moves through a tile in a step.
@@ -82158,9 +82272,7 @@ Phaser.Physics.Arcade.Body.prototype = {
     * @protected
     */
     updateCenter: function () {
-
         this.center.setTo(this.position.x + this.halfWidth, this.position.y + this.halfHeight);
-
     },
 
     /**
@@ -82191,7 +82303,6 @@ Phaser.Physics.Arcade.Body.prototype = {
         this.touching.left = false;
         this.touching.right = false;
 
-        this.blocked.none = true;
         this.blocked.up = false;
         this.blocked.down = false;
         this.blocked.left = false;
@@ -82210,8 +82321,6 @@ Phaser.Physics.Arcade.Body.prototype = {
 
         this.position.y = (this.sprite.world.y - (this.sprite.anchor.y * this.sprite.height)) + this.sprite.scale.y * this.offset.y;
         this.position.y -= this.sprite.scale.y < 0 ? this.height : 0;
-
-        this.updateCenter();
 
         this.rotation = this.sprite.angle;
 
@@ -82435,14 +82544,12 @@ Phaser.Physics.Arcade.Body.prototype = {
             pos.x = bounds.x;
             this.velocity.x *= bx;
             this.blocked.left = true;
-            this.blocked.none = false;
         }
         else if (this.right > bounds.right && check.right)
         {
             pos.x = bounds.right - this.width;
             this.velocity.x *= bx;
             this.blocked.right = true;
-            this.blocked.none = false;
         }
 
         if (pos.y < bounds.y && check.up)
@@ -82450,17 +82557,15 @@ Phaser.Physics.Arcade.Body.prototype = {
             pos.y = bounds.y;
             this.velocity.y *= by;
             this.blocked.up = true;
-            this.blocked.none = false;
         }
         else if (this.bottom > bounds.bottom && check.down)
         {
             pos.y = bounds.bottom - this.height;
             this.velocity.y *= by;
             this.blocked.down = true;
-            this.blocked.none = false;
         }
 
-        return !this.blocked.none;
+        return (this.blocked.up || this.blocked.down || this.blocked.left || this.blocked.right);
 
     },
 
@@ -82529,7 +82634,7 @@ Phaser.Physics.Arcade.Body.prototype = {
         }
         else
         {
-            this.velocity.setToPolar(angle, speed);
+            this.velocity.set(Math.cos(angle) * speed, Math.sin(angle) * speed);
         }
 
         this.isMoving = true;
@@ -82616,7 +82721,7 @@ Phaser.Physics.Arcade.Body.prototype = {
         }
         else
         {
-            this.velocity.setToPolar(angle, speed);
+            this.velocity.set(Math.cos(angle) * speed, Math.sin(angle) * speed);
         }
 
         this.isMoving = true;
@@ -82730,7 +82835,12 @@ Phaser.Physics.Arcade.Body.prototype = {
     */
     reset: function (x, y) {
 
-        this.stop();
+        this.velocity.set(0);
+        this.acceleration.set(0);
+
+        this.speed = 0;
+        this.angularVelocity = 0;
+        this.angularAcceleration = 0;
 
         this.position.x = (x - (this.sprite.anchor.x * this.sprite.width)) + this.sprite.scale.x * this.offset.x;
         this.position.x -= this.sprite.scale.x < 0 ? this.width : 0;
@@ -82747,21 +82857,6 @@ Phaser.Physics.Arcade.Body.prototype = {
         this.updateBounds();
 
         this.updateCenter();
-
-    },
-
-    /**
-     * Sets acceleration, velocity, and {@link #speed} to 0.
-     *
-     * @method Phaser.Physics.Arcade.Body#stop
-     */
-    stop: function () {
-
-        this.velocity.set(0);
-        this.acceleration.set(0);
-        this.speed = 0;
-        this.angularVelocity = 0;
-        this.angularAcceleration = 0;
 
     },
 
@@ -83442,12 +83537,10 @@ Phaser.Physics.Arcade.TilemapCollision.prototype = {
         if (x < 0)
         {
             body.blocked.left = true;
-            body.blocked.none = false;
         }
         else if (x > 0)
         {
             body.blocked.right = true;
-            body.blocked.none = false;
         }
 
         body.position.x -= x;
@@ -83476,12 +83569,10 @@ Phaser.Physics.Arcade.TilemapCollision.prototype = {
         if (y < 0)
         {
             body.blocked.up = true;
-            body.blocked.none = false;
         }
         else if (y > 0)
         {
             body.blocked.down = true;
-            body.blocked.none = false;
         }
 
         body.position.y -= y;
@@ -94113,25 +94204,25 @@ Phaser.Particles.Arcade.Emitter = function (game, x, y, maxParticles) {
     this.area = new Phaser.Rectangle(x, y, 1, 1);
 
     /**
-     * @property {?number} minAngle - The minimum angle of initial particle velocities, in degrees. When set to a non-null value (with {@link #maxAngle}), {@link #minSpeed} and {@link #maxSpeed} are used and {@link #minParticleSpeed} and {@link #maxParticleSpeed} are ignored.
+     * @property {?number} minAngle - The minimum angle of initial particle velocities, in degrees. When set to a non-null value (with {@link maxAngle}), {@link minSpeed} and {@link maxSpeed} are used and {@link minParticleSpeed} and {@link maxParticleSpeed} are ignored.
      * @default
      */
     this.minAngle = null;
 
     /**
-     * @property {?number} maxAngle - The maximum angle of initial particle velocities, in degrees. When set to a non-null value (with {@link #minAngle}), {@link #minSpeed} and {@link #maxSpeed} are used and {@link #minParticleSpeed} and {@link #maxParticleSpeed} are ignored.
+     * @property {?number} maxAngle - The maximum angle of initial particle velocities, in degrees. When set to a non-null value (with {@link minAngle}), {@link minSpeed} and {@link maxSpeed} are used and {@link minParticleSpeed} and {@link maxParticleSpeed} are ignored.
      * @default
      */
     this.maxAngle = null;
 
     /**
-     * @property {number} minSpeed - The minimum initial speed of particles released within {@link #minAngle} and {@link #maxAngle}.
+     * @property {number} minSpeed - The minimum initial speed of particles released within {@link minAngle} and {@link maxAngle}.
      * @default
      */
     this.minSpeed = 0;
 
     /**
-     * @property {number} maxSpeed - The maximum initial speed of particles released within {@link #minAngle} and {@link #maxAngle}.
+     * @property {number} maxSpeed - The maximum initial speed of particles released within {@link minAngle} and {@link maxAngle}.
      * @default
      */
     this.maxSpeed = 100;
@@ -94285,20 +94376,6 @@ Phaser.Particles.Arcade.Emitter = function (game, x, y, maxParticles) {
     this.particleSendToBack = false;
 
     /**
-     * @property {object} count
-     * @property {number} count.emitted - How many particles were emitted during the last update.
-     * @property {number} count.failed - How many particles could not be emitted during the last update (because no particles were available).
-     * @property {number} count.totalEmitted - How many particles have been emitted.
-     * @property {number} count.totalFailed - How many particles could not be emitted when they were due (because no particles were available).
-     */
-    this.count = {
-        emitted: 0,
-        failed: 0,
-        totalEmitted: 0,
-        totalFailed: 0
-    };
-
-    /**
     * @property {Phaser.Point} _gravity - Internal gravity value.
     * @private
     */
@@ -94369,9 +94446,6 @@ Phaser.Particles.Arcade.Emitter.prototype.constructor = Phaser.Particles.Arcade.
 * @method Phaser.Particles.Arcade.Emitter#update
 */
 Phaser.Particles.Arcade.Emitter.prototype.update = function () {
-
-    this.count.emitted = 0;
-    this.count.failed = 0;
 
     if (this.on && this.game.time.time >= this._timer)
     {
@@ -94687,14 +94761,8 @@ Phaser.Particles.Arcade.Emitter.prototype.emitParticle = function (x, y, key, fr
 
     if (particle === null)
     {
-        this.count.failed++;
-        this.count.totalFailed++;
-
         return false;
     }
-
-    this.count.emitted++;
-    this.count.totalEmitted++;
 
     var rnd = this.game.rnd;
 
@@ -94997,11 +95065,11 @@ Phaser.Particles.Arcade.Emitter.prototype.setScale = function (minX, maxX, minY,
 /**
  * Sets a radial pattern for emitting particles.
  *
- * This is a shorthand for setting {@link #minAngle}, {@link #maxAngle}, {@link #minSpeed}, and {@link #maxSpeed}.
+ * This is a shorthand for setting {@link minAngle}, {@link maxAngle}, {@link minSpeed}, and {@link maxSpeed}.
  *
  * To remove the radial pattern, use `setAngle(null, null)`.
  *
- * @method Phaser.Particles.Arcade.Emitter#setAngle
+ * @method Phaser.Particle.Emitter.prototype.setAngle
  * @param {?number} minAngle - The minimum angle of initial particle velocities, in degrees.
  * @param {?number} maxAngle - The maximum angle of initial particle velocities, in degrees.
  * @param {number} [minSpeed] - The minimum initial particle speed.
@@ -95197,7 +95265,7 @@ Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "bottom", {
 
 /**
  * @name Phaser.Particles.Arcade.Emitter#output
- * @property {number} output - The number of particles released per second, after calling {@link #flow}.
+ * @property {number} output - The number of particles released per second, after calling {@link flow}.
  * @readonly
  */
 Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "output", {
@@ -95210,7 +95278,7 @@ Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "output", {
 
 /**
  * @name Phaser.Particles.Arcade.Emitter#lifespanOutput
- * @property {number} lifespanOutput - The number of particles released during one particle's {@link #lifespan}, after calling {@link #flow}.
+ * @property {number} lifespanOutput - The number of particles released during one particle's {@link lifespan}, after calling {@link flow}.
  * @readonly
  */
 Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "lifespanOutput", {
@@ -95223,7 +95291,7 @@ Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "lifespanOutput
 
 /**
  * @name Phaser.Particles.Arcade.Emitter#remainder
- * @property {number} remainder - The expected number of unreleased particles after a flow interval of {@link #lifespan}, after calling {@link #flow}.
+ * @property {number} remainder - The expected number of unreleased particles after a flow interval of {@link lifespan}, after calling {@link flow}.
  * @readonly
  */
 Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "remainder", {
@@ -98226,11 +98294,6 @@ if (PIXI.DisplayObject._tempMatrix === undefined)
 
 PIXI.TextureSilentFail = true;
 
-// Required by Particle Storm
-PIXI.canUseNewCanvasBlendModes = function () {
-    return Phaser.Device.canUseMultiply;
-};
-
 /**
 * @author       Richard Davey <rich@photonstorm.com>
 * @copyright    2016 Photon Storm Ltd.
@@ -98255,11 +98318,11 @@ PIXI.canUseNewCanvasBlendModes = function () {
 * "What matters in this life is not what we do but what we do for others, the legacy we leave and the imprint we make." - Eric Meyer
 */
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 313)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 144)))
 
 /***/ }),
 
-/***/ 312:
+/***/ 366:
 /* no static exports found */
 /* all exports used */
 /*!******************************************!*\
@@ -98276,7 +98339,7 @@ PIXI.canUseNewCanvasBlendModes = function () {
 *
 * Phaser - http://phaser.io
 *
-* v2.8.1 "2017-06-20" - Built: Tue Jun 20 2017 19:07:20
+* v2.8.0 "2017-05-30" - Built: Tue May 30 2017 21:46:30
 *
 * By Richard Davey http://www.photonstorm.com @photonstorm
 *
@@ -98694,9 +98757,8 @@ PIXI.DisplayObject.prototype = {
         {
             // lets do the fast version as we know there is no rotation..
             a  = this.scale.x;
-            b  = 0;
-            c  = 0;
             d  = this.scale.y;
+
             tx = this.position.x - this.pivot.x * a;
             ty = this.position.y - this.pivot.y * d;
 
@@ -98708,12 +98770,8 @@ PIXI.DisplayObject.prototype = {
             wt.ty = tx * pt.b + ty * pt.d + pt.ty;
         }
 
-        a = wt.a;
-        b = wt.b;
-        c = wt.c;
-        d = wt.d;
-
         var determ = (a * d) - (b * c);
+        var TAU = Math.PI * 0.5;
 
         if (a || b)
         {
@@ -98727,7 +98785,7 @@ PIXI.DisplayObject.prototype = {
         {
             var s = Math.sqrt((c * c) + (d * d));
 
-            this.worldRotation = Phaser.Math.HALF_PI - ((d > 0) ? Math.acos(-c / s) : -Math.acos(c / s));
+            this.worldRotation = TAU - ((d > 0) ? Math.acos(-c / s) : -Math.acos(c / s));
             this.worldScale.x = determ / s;
             this.worldScale.y = s;
         }
@@ -98886,9 +98944,7 @@ PIXI.DisplayObject.prototype = {
         {
             var textureUnit = 0;
             if (this.texture && this.texture.baseTexture && PIXI._enableMultiTextureToggle)
-            {
                 textureUnit = this.texture.baseTexture.textureIndex;
-            }
             var renderTexture = new Phaser.RenderTexture(this.game, bounds.width, bounds.height, undefined, undefined, undefined, undefined, textureUnit);
             this._cachedSprite = new PIXI.Sprite(renderTexture);
             this._cachedSprite.worldTransform = this.worldTransform;
@@ -99819,7 +99875,7 @@ PIXI.Sprite = function (texture) {
      * @property anchor
      * @type Point
      */
-    this.anchor = new PIXI.Point(PIXI.Sprite.defaultAnchor.x, PIXI.Sprite.defaultAnchor.y);
+    this.anchor = new PIXI.Point();
 
     /**
      * The texture that the sprite is using
@@ -99913,15 +99969,6 @@ PIXI.Sprite = function (texture) {
     this.renderable = true;
 
 };
-
-/**
- * @property {object} PIXI.Sprite.defaultAnchor - A Point-like object.
- * @property {number} PIXI.Sprite.defaultAnchor.x
- * @default 0
- * @property {number} PIXI.Sprite.defaultAnchor.y
- * @default 0
- */
-PIXI.Sprite.defaultAnchor = {x: 0, y: 0};
 
 // constructor
 PIXI.Sprite.prototype = Object.create(PIXI.DisplayObjectContainer.prototype);
@@ -101798,7 +101845,6 @@ PIXI.WebGLRenderer = function(game) {
     this.renderSession.game = this.game;
     this.renderSession.gl = this.gl;
     this.renderSession.drawCount = 0;
-    this.renderSession.flushCount = 0;
     this.renderSession.shaderManager = this.shaderManager;
     this.renderSession.maskManager = this.maskManager;
     this.renderSession.filterManager = this.filterManager;
@@ -101807,7 +101853,6 @@ PIXI.WebGLRenderer = function(game) {
     this.renderSession.stencilManager = this.stencilManager;
     this.renderSession.renderer = this;
     this.renderSession.resolution = this.resolution;
-    this.renderSession.maxTextureAvailableSpace = null; // filled in setTexturePriority()
 
     // time init the context..
     this.initContext();
@@ -101835,7 +101880,6 @@ PIXI.WebGLRenderer.prototype.initContext = function()
     }
 
     this.maxTextures = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
-    this.maxTextureSize = this.gl.getParameter(gl.MAX_TEXTURE_SIZE);
 
     this.glContextId = gl.id = PIXI.WebGLRenderer.glContextId++;
 
@@ -101868,9 +101912,9 @@ PIXI.WebGLRenderer.prototype.initContext = function()
     var pvrtc = gl.getExtension('WEBGL_compressed_texture_pvrtc') || gl.getExtension('WEBKIT_WEBGL_compressed_texture_pvrtc');
     var s3tc = gl.getExtension('WEBGL_compressed_texture_s3tc') || gl.getExtension('WEBKIT_WEBGL_compressed_texture_s3tc');
 
-    if (etc1) { this.extensions.compression.ETC1 = etc1; }
-    if (pvrtc) { this.extensions.compression.PVRTC = pvrtc; }
-    if (s3tc) { this.extensions.compression.S3TC = s3tc; }
+    if (etc1) this.extensions.compression.ETC1 = etc1;
+    if (pvrtc) this.extensions.compression.PVRTC = pvrtc;
+    if (s3tc) this.extensions.compression.S3TC = s3tc;
 };
 
 /**
@@ -101923,11 +101967,10 @@ PIXI.WebGLRenderer.prototype.setTexturePriority = function (textureNameCollectio
     //  deal with that in their own way.
     for (var i = 0; i < this.currentBatchedTextures.length; i++)
     {
-        imageName = this.currentBatchedTextures[i];
+        imageName = textureNameCollection[index];
 
         if (!(imageName in imageCache))
         {
-            console.warn('setTexturePriority: There is no image "%s" in the image cache.', imageName);
             continue;
         }
 
@@ -101936,13 +101979,12 @@ PIXI.WebGLRenderer.prototype.setTexturePriority = function (textureNameCollectio
     var maxTextureAvailableSpace = (maxTextureSize) - clampPot(Math.max(this.width, this.height));
     this.currentBatchedTextures.length = 0;
     // We start from 1 because framebuffer texture uses unit 0.
-    for (var j = 0; j < textureNameCollection.length; ++j)
+    for (var index = 0; index < textureNameCollection.length; ++index)
     {
-        imageName = textureNameCollection[j];
+        imageName = textureNameCollection[index];
 
         if (!(imageName in imageCache))
         {
-            console.warn('setTexturePriority: There is no image "%s" in the image cache.', imageName);
             continue;
         }
         // Unit 0 is reserved for Pixi's framebuffer
@@ -101950,15 +101992,11 @@ PIXI.WebGLRenderer.prototype.setTexturePriority = function (textureNameCollectio
         maxTextureAvailableSpace -= clampPot(Math.max(base.width, base.height));
         if (maxTextureAvailableSpace <= 0) {
             base.textureIndex = 0;
-            console.warn('setTexturePriority: Image "%s" was given textureIndex=0 because there is no available texture space (%s).',
-                imageName, maxTextureAvailableSpace);
         } else {
-            base.textureIndex = (1 + (j % (maxTextures - 1)));
+            base.textureIndex = (1 + (index % (maxTextures - 1)));
         }
         this.currentBatchedTextures.push(imageName);
     }
-
-    this.renderSession.maxTextureAvailableSpace = maxTextureAvailableSpace;
 
     return this.currentBatchedTextures;
 
@@ -102013,7 +102051,6 @@ PIXI.WebGLRenderer.prototype.renderDisplayObject = function(displayObject, proje
 
     // reset the render session data..
     this.renderSession.drawCount = 0;
-    this.renderSession.flushCount = 0;
 
     // make sure to flip the Y if using a render texture..
     this.renderSession.flipY = buffer ? -1 : 1;
@@ -103556,7 +103593,6 @@ PIXI.WebGLSpriteBatch.prototype.flush = function () {
 
     // then reset the batch!
     this.currentBatchSize = 0;
-    this.renderSession.flushCount++;
 };
 
 /**
@@ -104017,8 +104053,6 @@ PIXI.WebGLFastSpriteBatch.prototype.flush = function()
 
     // increment the draw count
     this.renderSession.drawCount++;
-    this.renderSession.flushCount++;
-
 };
 
 
@@ -105841,203 +105875,7 @@ PIXI.TextureUvs = function()
 
 /***/ }),
 
-/***/ 313:
-/* no static exports found */
-/* all exports used */
-/*!******************************!*\
-  !*** ./~/process/browser.js ***!
-  \******************************/
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-
-/***/ 316:
+/***/ 372:
 /* no static exports found */
 /* all exports used */
 /*!******************************************!*\
@@ -106045,99 +105883,10 @@ process.umask = function() { return 0; };
   \******************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! pixi */87);
-__webpack_require__(/*! p2 */88);
-__webpack_require__(/*! phaser */24);
-module.exports = __webpack_require__(/*! webfontloader */89);
-
-
-/***/ }),
-
-/***/ 49:
-/* no static exports found */
-/* all exports used */
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 87:
-/* no static exports found */
-/* all exports used */
-/*!******************************************!*\
-  !*** ./~/phaser-ce/build/custom/pixi.js ***!
-  \******************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["PIXI"] = __webpack_require__(/*! -!./pixi.js */ 312);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 49)))
-
-/***/ }),
-
-/***/ 88:
-/* no static exports found */
-/* all exports used */
-/*!****************************************!*\
-  !*** ./~/phaser-ce/build/custom/p2.js ***!
-  \****************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["p2"] = __webpack_require__(/*! -!./p2.js */ 310);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 49)))
-
-/***/ }),
-
-/***/ 89:
-/* no static exports found */
-/* all exports used */
-/*!******************************************!*\
-  !*** ./~/webfontloader/webfontloader.js ***!
-  \******************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_RESULT__;/* Web Font Loader v1.6.28 - (c) Adobe Systems, Google. License: Apache 2.0 */(function(){function aa(a,b,c){return a.call.apply(a.bind,arguments)}function ba(a,b,c){if(!a)throw Error();if(2<arguments.length){var d=Array.prototype.slice.call(arguments,2);return function(){var c=Array.prototype.slice.call(arguments);Array.prototype.unshift.apply(c,d);return a.apply(b,c)}}return function(){return a.apply(b,arguments)}}function p(a,b,c){p=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?aa:ba;return p.apply(null,arguments)}var q=Date.now||function(){return+new Date};function ca(a,b){this.a=a;this.o=b||a;this.c=this.o.document}var da=!!window.FontFace;function t(a,b,c,d){b=a.c.createElement(b);if(c)for(var e in c)c.hasOwnProperty(e)&&("style"==e?b.style.cssText=c[e]:b.setAttribute(e,c[e]));d&&b.appendChild(a.c.createTextNode(d));return b}function u(a,b,c){a=a.c.getElementsByTagName(b)[0];a||(a=document.documentElement);a.insertBefore(c,a.lastChild)}function v(a){a.parentNode&&a.parentNode.removeChild(a)}
-function w(a,b,c){b=b||[];c=c||[];for(var d=a.className.split(/\s+/),e=0;e<b.length;e+=1){for(var f=!1,g=0;g<d.length;g+=1)if(b[e]===d[g]){f=!0;break}f||d.push(b[e])}b=[];for(e=0;e<d.length;e+=1){f=!1;for(g=0;g<c.length;g+=1)if(d[e]===c[g]){f=!0;break}f||b.push(d[e])}a.className=b.join(" ").replace(/\s+/g," ").replace(/^\s+|\s+$/,"")}function y(a,b){for(var c=a.className.split(/\s+/),d=0,e=c.length;d<e;d++)if(c[d]==b)return!0;return!1}
-function ea(a){return a.o.location.hostname||a.a.location.hostname}function z(a,b,c){function d(){m&&e&&f&&(m(g),m=null)}b=t(a,"link",{rel:"stylesheet",href:b,media:"all"});var e=!1,f=!0,g=null,m=c||null;da?(b.onload=function(){e=!0;d()},b.onerror=function(){e=!0;g=Error("Stylesheet failed to load");d()}):setTimeout(function(){e=!0;d()},0);u(a,"head",b)}
-function A(a,b,c,d){var e=a.c.getElementsByTagName("head")[0];if(e){var f=t(a,"script",{src:b}),g=!1;f.onload=f.onreadystatechange=function(){g||this.readyState&&"loaded"!=this.readyState&&"complete"!=this.readyState||(g=!0,c&&c(null),f.onload=f.onreadystatechange=null,"HEAD"==f.parentNode.tagName&&e.removeChild(f))};e.appendChild(f);setTimeout(function(){g||(g=!0,c&&c(Error("Script load timeout")))},d||5E3);return f}return null};function B(){this.a=0;this.c=null}function C(a){a.a++;return function(){a.a--;D(a)}}function E(a,b){a.c=b;D(a)}function D(a){0==a.a&&a.c&&(a.c(),a.c=null)};function F(a){this.a=a||"-"}F.prototype.c=function(a){for(var b=[],c=0;c<arguments.length;c++)b.push(arguments[c].replace(/[\W_]+/g,"").toLowerCase());return b.join(this.a)};function G(a,b){this.c=a;this.f=4;this.a="n";var c=(b||"n4").match(/^([nio])([1-9])$/i);c&&(this.a=c[1],this.f=parseInt(c[2],10))}function fa(a){return H(a)+" "+(a.f+"00")+" 300px "+I(a.c)}function I(a){var b=[];a=a.split(/,\s*/);for(var c=0;c<a.length;c++){var d=a[c].replace(/['"]/g,"");-1!=d.indexOf(" ")||/^\d/.test(d)?b.push("'"+d+"'"):b.push(d)}return b.join(",")}function J(a){return a.a+a.f}function H(a){var b="normal";"o"===a.a?b="oblique":"i"===a.a&&(b="italic");return b}
-function ga(a){var b=4,c="n",d=null;a&&((d=a.match(/(normal|oblique|italic)/i))&&d[1]&&(c=d[1].substr(0,1).toLowerCase()),(d=a.match(/([1-9]00|normal|bold)/i))&&d[1]&&(/bold/i.test(d[1])?b=7:/[1-9]00/.test(d[1])&&(b=parseInt(d[1].substr(0,1),10))));return c+b};function ha(a,b){this.c=a;this.f=a.o.document.documentElement;this.h=b;this.a=new F("-");this.j=!1!==b.events;this.g=!1!==b.classes}function ia(a){a.g&&w(a.f,[a.a.c("wf","loading")]);K(a,"loading")}function L(a){if(a.g){var b=y(a.f,a.a.c("wf","active")),c=[],d=[a.a.c("wf","loading")];b||c.push(a.a.c("wf","inactive"));w(a.f,c,d)}K(a,"inactive")}function K(a,b,c){if(a.j&&a.h[b])if(c)a.h[b](c.c,J(c));else a.h[b]()};function ja(){this.c={}}function ka(a,b,c){var d=[],e;for(e in b)if(b.hasOwnProperty(e)){var f=a.c[e];f&&d.push(f(b[e],c))}return d};function M(a,b){this.c=a;this.f=b;this.a=t(this.c,"span",{"aria-hidden":"true"},this.f)}function N(a){u(a.c,"body",a.a)}function O(a){return"display:block;position:absolute;top:-9999px;left:-9999px;font-size:300px;width:auto;height:auto;line-height:normal;margin:0;padding:0;font-variant:normal;white-space:nowrap;font-family:"+I(a.c)+";"+("font-style:"+H(a)+";font-weight:"+(a.f+"00")+";")};function P(a,b,c,d,e,f){this.g=a;this.j=b;this.a=d;this.c=c;this.f=e||3E3;this.h=f||void 0}P.prototype.start=function(){var a=this.c.o.document,b=this,c=q(),d=new Promise(function(d,e){function f(){q()-c>=b.f?e():a.fonts.load(fa(b.a),b.h).then(function(a){1<=a.length?d():setTimeout(f,25)},function(){e()})}f()}),e=null,f=new Promise(function(a,d){e=setTimeout(d,b.f)});Promise.race([f,d]).then(function(){e&&(clearTimeout(e),e=null);b.g(b.a)},function(){b.j(b.a)})};function Q(a,b,c,d,e,f,g){this.v=a;this.B=b;this.c=c;this.a=d;this.s=g||"BESbswy";this.f={};this.w=e||3E3;this.u=f||null;this.m=this.j=this.h=this.g=null;this.g=new M(this.c,this.s);this.h=new M(this.c,this.s);this.j=new M(this.c,this.s);this.m=new M(this.c,this.s);a=new G(this.a.c+",serif",J(this.a));a=O(a);this.g.a.style.cssText=a;a=new G(this.a.c+",sans-serif",J(this.a));a=O(a);this.h.a.style.cssText=a;a=new G("serif",J(this.a));a=O(a);this.j.a.style.cssText=a;a=new G("sans-serif",J(this.a));a=
-O(a);this.m.a.style.cssText=a;N(this.g);N(this.h);N(this.j);N(this.m)}var R={D:"serif",C:"sans-serif"},S=null;function T(){if(null===S){var a=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent);S=!!a&&(536>parseInt(a[1],10)||536===parseInt(a[1],10)&&11>=parseInt(a[2],10))}return S}Q.prototype.start=function(){this.f.serif=this.j.a.offsetWidth;this.f["sans-serif"]=this.m.a.offsetWidth;this.A=q();U(this)};
-function la(a,b,c){for(var d in R)if(R.hasOwnProperty(d)&&b===a.f[R[d]]&&c===a.f[R[d]])return!0;return!1}function U(a){var b=a.g.a.offsetWidth,c=a.h.a.offsetWidth,d;(d=b===a.f.serif&&c===a.f["sans-serif"])||(d=T()&&la(a,b,c));d?q()-a.A>=a.w?T()&&la(a,b,c)&&(null===a.u||a.u.hasOwnProperty(a.a.c))?V(a,a.v):V(a,a.B):ma(a):V(a,a.v)}function ma(a){setTimeout(p(function(){U(this)},a),50)}function V(a,b){setTimeout(p(function(){v(this.g.a);v(this.h.a);v(this.j.a);v(this.m.a);b(this.a)},a),0)};function W(a,b,c){this.c=a;this.a=b;this.f=0;this.m=this.j=!1;this.s=c}var X=null;W.prototype.g=function(a){var b=this.a;b.g&&w(b.f,[b.a.c("wf",a.c,J(a).toString(),"active")],[b.a.c("wf",a.c,J(a).toString(),"loading"),b.a.c("wf",a.c,J(a).toString(),"inactive")]);K(b,"fontactive",a);this.m=!0;na(this)};
-W.prototype.h=function(a){var b=this.a;if(b.g){var c=y(b.f,b.a.c("wf",a.c,J(a).toString(),"active")),d=[],e=[b.a.c("wf",a.c,J(a).toString(),"loading")];c||d.push(b.a.c("wf",a.c,J(a).toString(),"inactive"));w(b.f,d,e)}K(b,"fontinactive",a);na(this)};function na(a){0==--a.f&&a.j&&(a.m?(a=a.a,a.g&&w(a.f,[a.a.c("wf","active")],[a.a.c("wf","loading"),a.a.c("wf","inactive")]),K(a,"active")):L(a.a))};function oa(a){this.j=a;this.a=new ja;this.h=0;this.f=this.g=!0}oa.prototype.load=function(a){this.c=new ca(this.j,a.context||this.j);this.g=!1!==a.events;this.f=!1!==a.classes;pa(this,new ha(this.c,a),a)};
-function qa(a,b,c,d,e){var f=0==--a.h;(a.f||a.g)&&setTimeout(function(){var a=e||null,m=d||null||{};if(0===c.length&&f)L(b.a);else{b.f+=c.length;f&&(b.j=f);var h,l=[];for(h=0;h<c.length;h++){var k=c[h],n=m[k.c],r=b.a,x=k;r.g&&w(r.f,[r.a.c("wf",x.c,J(x).toString(),"loading")]);K(r,"fontloading",x);r=null;if(null===X)if(window.FontFace){var x=/Gecko.*Firefox\/(\d+)/.exec(window.navigator.userAgent),xa=/OS X.*Version\/10\..*Safari/.exec(window.navigator.userAgent)&&/Apple/.exec(window.navigator.vendor);
-X=x?42<parseInt(x[1],10):xa?!1:!0}else X=!1;X?r=new P(p(b.g,b),p(b.h,b),b.c,k,b.s,n):r=new Q(p(b.g,b),p(b.h,b),b.c,k,b.s,a,n);l.push(r)}for(h=0;h<l.length;h++)l[h].start()}},0)}function pa(a,b,c){var d=[],e=c.timeout;ia(b);var d=ka(a.a,c,a.c),f=new W(a.c,b,e);a.h=d.length;b=0;for(c=d.length;b<c;b++)d[b].load(function(b,d,c){qa(a,f,b,d,c)})};function ra(a,b){this.c=a;this.a=b}
-ra.prototype.load=function(a){function b(){if(f["__mti_fntLst"+d]){var c=f["__mti_fntLst"+d](),e=[],h;if(c)for(var l=0;l<c.length;l++){var k=c[l].fontfamily;void 0!=c[l].fontStyle&&void 0!=c[l].fontWeight?(h=c[l].fontStyle+c[l].fontWeight,e.push(new G(k,h))):e.push(new G(k))}a(e)}else setTimeout(function(){b()},50)}var c=this,d=c.a.projectId,e=c.a.version;if(d){var f=c.c.o;A(this.c,(c.a.api||"https://fast.fonts.net/jsapi")+"/"+d+".js"+(e?"?v="+e:""),function(e){e?a([]):(f["__MonotypeConfiguration__"+
-d]=function(){return c.a},b())}).id="__MonotypeAPIScript__"+d}else a([])};function sa(a,b){this.c=a;this.a=b}sa.prototype.load=function(a){var b,c,d=this.a.urls||[],e=this.a.families||[],f=this.a.testStrings||{},g=new B;b=0;for(c=d.length;b<c;b++)z(this.c,d[b],C(g));var m=[];b=0;for(c=e.length;b<c;b++)if(d=e[b].split(":"),d[1])for(var h=d[1].split(","),l=0;l<h.length;l+=1)m.push(new G(d[0],h[l]));else m.push(new G(d[0]));E(g,function(){a(m,f)})};function ta(a,b){a?this.c=a:this.c=ua;this.a=[];this.f=[];this.g=b||""}var ua="https://fonts.googleapis.com/css";function va(a,b){for(var c=b.length,d=0;d<c;d++){var e=b[d].split(":");3==e.length&&a.f.push(e.pop());var f="";2==e.length&&""!=e[1]&&(f=":");a.a.push(e.join(f))}}
-function wa(a){if(0==a.a.length)throw Error("No fonts to load!");if(-1!=a.c.indexOf("kit="))return a.c;for(var b=a.a.length,c=[],d=0;d<b;d++)c.push(a.a[d].replace(/ /g,"+"));b=a.c+"?family="+c.join("%7C");0<a.f.length&&(b+="&subset="+a.f.join(","));0<a.g.length&&(b+="&text="+encodeURIComponent(a.g));return b};function ya(a){this.f=a;this.a=[];this.c={}}
-var za={latin:"BESbswy","latin-ext":"\u00e7\u00f6\u00fc\u011f\u015f",cyrillic:"\u0439\u044f\u0416",greek:"\u03b1\u03b2\u03a3",khmer:"\u1780\u1781\u1782",Hanuman:"\u1780\u1781\u1782"},Aa={thin:"1",extralight:"2","extra-light":"2",ultralight:"2","ultra-light":"2",light:"3",regular:"4",book:"4",medium:"5","semi-bold":"6",semibold:"6","demi-bold":"6",demibold:"6",bold:"7","extra-bold":"8",extrabold:"8","ultra-bold":"8",ultrabold:"8",black:"9",heavy:"9",l:"3",r:"4",b:"7"},Ba={i:"i",italic:"i",n:"n",normal:"n"},
-Ca=/^(thin|(?:(?:extra|ultra)-?)?light|regular|book|medium|(?:(?:semi|demi|extra|ultra)-?)?bold|black|heavy|l|r|b|[1-9]00)?(n|i|normal|italic)?$/;
-function Da(a){for(var b=a.f.length,c=0;c<b;c++){var d=a.f[c].split(":"),e=d[0].replace(/\+/g," "),f=["n4"];if(2<=d.length){var g;var m=d[1];g=[];if(m)for(var m=m.split(","),h=m.length,l=0;l<h;l++){var k;k=m[l];if(k.match(/^[\w-]+$/)){var n=Ca.exec(k.toLowerCase());if(null==n)k="";else{k=n[2];k=null==k||""==k?"n":Ba[k];n=n[1];if(null==n||""==n)n="4";else var r=Aa[n],n=r?r:isNaN(n)?"4":n.substr(0,1);k=[k,n].join("")}}else k="";k&&g.push(k)}0<g.length&&(f=g);3==d.length&&(d=d[2],g=[],d=d?d.split(","):
-g,0<d.length&&(d=za[d[0]])&&(a.c[e]=d))}a.c[e]||(d=za[e])&&(a.c[e]=d);for(d=0;d<f.length;d+=1)a.a.push(new G(e,f[d]))}};function Ea(a,b){this.c=a;this.a=b}var Fa={Arimo:!0,Cousine:!0,Tinos:!0};Ea.prototype.load=function(a){var b=new B,c=this.c,d=new ta(this.a.api,this.a.text),e=this.a.families;va(d,e);var f=new ya(e);Da(f);z(c,wa(d),C(b));E(b,function(){a(f.a,f.c,Fa)})};function Ga(a,b){this.c=a;this.a=b}Ga.prototype.load=function(a){var b=this.a.id,c=this.c.o;b?A(this.c,(this.a.api||"https://use.typekit.net")+"/"+b+".js",function(b){if(b)a([]);else if(c.Typekit&&c.Typekit.config&&c.Typekit.config.fn){b=c.Typekit.config.fn;for(var e=[],f=0;f<b.length;f+=2)for(var g=b[f],m=b[f+1],h=0;h<m.length;h++)e.push(new G(g,m[h]));try{c.Typekit.load({events:!1,classes:!1,async:!0})}catch(l){}a(e)}},2E3):a([])};function Ha(a,b){this.c=a;this.f=b;this.a=[]}Ha.prototype.load=function(a){var b=this.f.id,c=this.c.o,d=this;b?(c.__webfontfontdeckmodule__||(c.__webfontfontdeckmodule__={}),c.__webfontfontdeckmodule__[b]=function(b,c){for(var g=0,m=c.fonts.length;g<m;++g){var h=c.fonts[g];d.a.push(new G(h.name,ga("font-weight:"+h.weight+";font-style:"+h.style)))}a(d.a)},A(this.c,(this.f.api||"https://f.fontdeck.com/s/css/js/")+ea(this.c)+"/"+b+".js",function(b){b&&a([])})):a([])};var Y=new oa(window);Y.a.c.custom=function(a,b){return new sa(b,a)};Y.a.c.fontdeck=function(a,b){return new Ha(b,a)};Y.a.c.monotype=function(a,b){return new ra(b,a)};Y.a.c.typekit=function(a,b){return new Ga(b,a)};Y.a.c.google=function(a,b){return new Ea(b,a)};var Z={load:p(Y.load,Y)}; true?!(__WEBPACK_AMD_DEFINE_RESULT__ = function(){return Z}.call(exports, __webpack_require__, exports, module),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):"undefined"!==typeof module&&module.exports?module.exports=Z:(window.WebFont=Z,window.WebFontConfig&&Y.load(window.WebFontConfig));}());
+__webpack_require__(/*! pixi */103);
+__webpack_require__(/*! p2 */104);
+__webpack_require__(/*! phaser */25);
+module.exports = __webpack_require__(/*! webfontloader */147);
 
 
 /***/ })

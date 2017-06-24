@@ -17,6 +17,30 @@ export default class extends Phaser.State {
 
     this.game.firebase = firebaseDB.database(); //  eslint-disable-line
 
+    firebaseDB.auth().onAuthStateChanged((user) => {
+      if (user) {
+          // User is signed in.
+        let isAnonymous = user.isAnonymous
+        let uid = user.uid
+        console.log('user-id', uid, isAnonymous)
+
+        this.game.current_user = firebaseDB.auth().currentUser
+        console.log('current-user', this.game.current_user)
+      } else {
+        firebaseDB.auth().signInAnonymously().catch(function (error) {
+          var errorCode = error.code
+          var errorMessage = error.message
+          console.log(errorMessage)
+          if (errorCode === 'auth/operation-not-allowed') {
+            alert('You must enable Anonymous auth in the Firebase Console.')
+          } else {
+            console.error(error)
+          }
+        })
+      }
+    })
+
+
     // firebaseDB.database().onDisconnect().set('I disconnected!')
     // if (firebaseDB.database().onDisconnect()) {
     //   // this.game.firebase = firebaseDB.database()

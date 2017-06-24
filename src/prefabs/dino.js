@@ -35,10 +35,7 @@ export default class Dino extends Phaser.Sprite {
     if (this.isDead === true) {
       this.play('dead')
     } else if (this.game.input.activePointer.isDown && this.onFloor() && this.game.time.now > this.jumpTimer) {
-      this.play('jump')
-      this.jumpSound.play()
       this.onJump()
-      this.jumpTimer = this.game.time.now + 750
     } else if (this.onFloor()) {
       this.play('run')
     } else {
@@ -46,7 +43,10 @@ export default class Dino extends Phaser.Sprite {
     }
   }
   onJump () {
+    this.play('jump')
+    this.jumpSound.play()
     this.body.velocity.y = JUMP_VALUE
+    this.jumpTimer = this.game.time.now + 750
   }
   onFloor () {
     return this.body.velocity.y === 0
