@@ -3867,6 +3867,7 @@ var Game = function (_Phaser$Game) {
     _this.state.add('Splash', _Splash2.default, false);
     _this.state.add('Game', _Game2.default, false);
     _this.state.start('Boot');
+    _this.addServiceWorker();
     return _this;
   }
 
@@ -3874,7 +3875,7 @@ var Game = function (_Phaser$Game) {
     key: 'addServiceWorker',
     value: function addServiceWorker() {
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./config/service-worker.js').then(function () {
+        navigator.serviceWorker.register('./src/config/service-worker.js').then(function () {
           console.log('Service Worker Registered');
         });
       }
@@ -10198,7 +10199,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 24);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */120);
-module.exports = __webpack_require__(/*! C:\Users\USER\Desktop\Hackatron\sud-mun-pwa-2017\src\main.js */119);
+module.exports = __webpack_require__(/*! D:\works\pwa\sud-mun-pwa-2017\src\main.js */119);
 
 
 /***/ })
