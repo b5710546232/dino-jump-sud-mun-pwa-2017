@@ -8,15 +8,15 @@ export default class Obstracle extends Phaser.Sprite {
     this.setup()
   }
 
-  setup(){
-      this.game.physics.enable(this, Phaser.Physics.ARCADE)
+  setup () {
+    this.game.physics.enable(this, Phaser.Physics.ARCADE)
   }
-  
-  jump(){
+
+  jump () {
 
   }
 
   update () {
-   
+
   }
 }

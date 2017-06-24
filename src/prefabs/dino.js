@@ -8,15 +8,11 @@ export default class Dino extends Phaser.Sprite {
     this.setup()
   }
 
-  setup(){
-      this.game.physics.enable(this, Phaser.Physics.ARCADE)
-  }
-  
-  jump(){
-
+  setup () {
+    this.game.physics.enable(this, Phaser.Physics.ARCADE)
   }
 
-  update () {
-   
-  }
+  jump () {}
+
+  update () {}
 }
