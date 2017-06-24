@@ -5,7 +5,7 @@ import Phaser from 'phaser'
 
 import Dino from '../prefabs/dino'
 import Obstracle from '../prefabs/obstracle'
-import Config from '../config'// eslint-disable-line 
+import Config from '../config'// eslint-disable-line
 
 export default class extends Phaser.State {
   init () {}
@@ -41,16 +41,10 @@ export default class extends Phaser.State {
     // this.scale.refresh();
 
     this.dino = new Dino({
-      game: this,
+      game: this.game,
       x: 40,
       y: 40,
       asset: 'dino'
-    })
-    this.obstracle = new Obstracle({
-      game: this,
-      x: 300,
-      y: 300,
-      asset: 'obstracle'
     })
     this.score = 0
     this.scoreStr = `Score : ${this.score}`
@@ -62,10 +56,24 @@ export default class extends Phaser.State {
     this.scoreText.strokeThickness = 2
     // this.scoreText.anchor.setTo(0.5)
     this.scoreText.fixedToCamera = true
+    this.obstracles = []
+    this.initializeObject()
+  }
+
+  initializeObject () {
+    for (let i = 0; i < 6; i++) {
+      let newObstracle = new Obstracle({
+        game: this,
+        x: 500 + (i * 300 * Math.random()) + (i * 300),
+        y: 300,
+        asset: 'obstracle'
+      })
+      this.obstracles.push(newObstracle)
+    }
   }
 
   update () {
-    this.game.physics.arcade.collide(this.dino, this.obstracle, this.collistionHandler, null, this)
+    this.game.physics.arcade.collide(this.dino, this.obstracles, this.collistionHandler, null, this)
     this.updateScore()
   }
   updateScore () {
@@ -73,10 +81,9 @@ export default class extends Phaser.State {
     this.scoreText.setText('Score : ' + this.score)
   }
   collistionHandler () {
-    this.obstracle.destroy()
+    this.dino.isDead = true
   }
 
   render () {
-    this.game.debug.body(this.obstracle)
   }
 }

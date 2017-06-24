@@ -3965,16 +3965,32 @@ var Dino = function (_Phaser$Sprite) {
   _createClass(Dino, [{
     key: 'setup',
     value: function setup() {
+      this.isDead = false;
       this.jumpTimer = 0;
       this.game.physics.enable(this, _phaser2.default.Physics.ARCADE);
       this.body.collideWorldBounds = true;
+      this.animations.add('jump', [0], 10, true);
+      this.animations.add('idle', [0], 10, true);
+      this.animations.add('run', [1, 2], 10, true);
+      this.animations.add('dead', [3], 10, true);
+      this.animations.play('idle');
+      this.jumpSound = this.game.add.audio('jump_sfx');
+      // this.character.animations.add('idle', [0], 10, true)
     }
   }, {
     key: 'jump',
     value: function jump() {
-      if (this.game.input.activePointer.isDown && this.body.onFloor() && this.game.time.now > this.jumpTimer) {
+      if (this.isDead === true) {
+        this.play('dead');
+      } else if (this.game.input.activePointer.isDown && this.body.onFloor() && this.game.time.now > this.jumpTimer) {
+        this.play('jump');
+        this.jumpSound.play();
         this.body.velocity.y = -200;
         this.jumpTimer = this.game.time.now + 750;
+      } else if (this.body.onFloor()) {
+        this.play('run');
+      } else {
+        this.play('idle');
       }
     }
   }, {
@@ -4045,18 +4061,18 @@ var Obstracle = function (_Phaser$Sprite) {
 
       // this.body.setCircle(16)
       // this.body.setSize(30, 40)
-      this.checkWorldBounds = true;
-      this.outOfBoundsKill = true;
-      this.outOfCameraBoundsKill = true;
       this.body.allowGravity = false;
       this.scale.x = 1;
       this.scale.y = 1;
-      this.smoothed = false;
     }
   }, {
     key: 'update',
     value: function update() {
-      this.x -= 1;
+      this.x -= 3;
+      if (this.x < -100) {
+        this.x = 700 + Math.random() * 600;
+        // console.log(this.game.height)
+      }
       // console.log(this.x)
       // this.game.physics.arcade.moveToXY(this, 0, this.game.width, 50)
     }
@@ -4203,8 +4219,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* globals __DEV__ */
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * globals __DEV__ // eslint-disable-line no-use-before-define
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
+
+// eslint-disable-line
 
 var _class = function (_Phaser$State) {
   _inherits(_class, _Phaser$State);
@@ -4253,16 +4273,10 @@ var _class = function (_Phaser$State) {
       // this.scale.refresh();
 
       this.dino = new _dino2.default({
-        game: this,
+        game: this.game,
         x: 40,
         y: 40,
         asset: 'dino'
-      });
-      this.obstracle = new _obstracle2.default({
-        game: this,
-        x: 300,
-        y: 300,
-        asset: 'obstracle'
       });
       this.score = 0;
       this.scoreStr = 'Score : ' + this.score;
@@ -4274,11 +4288,26 @@ var _class = function (_Phaser$State) {
       this.scoreText.strokeThickness = 2;
       // this.scoreText.anchor.setTo(0.5)
       this.scoreText.fixedToCamera = true;
+      this.obstracles = [];
+      this.initializeObject();
+    }
+  }, {
+    key: 'initializeObject',
+    value: function initializeObject() {
+      for (var i = 0; i < 6; i++) {
+        var newObstracle = new _obstracle2.default({
+          game: this,
+          x: 500 + i * 300 * Math.random() + i * 300,
+          y: 300,
+          asset: 'obstracle'
+        });
+        this.obstracles.push(newObstracle);
+      }
     }
   }, {
     key: 'update',
     value: function update() {
-      this.game.physics.arcade.collide(this.dino, this.obstracle, this.collistionHandler, null, this);
+      this.game.physics.arcade.collide(this.dino, this.obstracles, this.collistionHandler, null, this);
       this.updateScore();
     }
   }, {
@@ -4290,13 +4319,11 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'collistionHandler',
     value: function collistionHandler() {
-      this.obstracle.destroy();
+      this.dino.isDead = true;
     }
   }, {
     key: 'render',
-    value: function render() {
-      this.game.debug.body(this.obstracle);
-    }
+    value: function render() {}
   }]);
 
   return _class;
@@ -4354,13 +4381,13 @@ var _class = function (_Phaser$State) {
       this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg');
       this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar');
       (0, _utils.centerGameObjects)([this.loaderBg, this.loaderBar]);
-
+      this.load.spritesheet('dino', 'assets/sprites/dino_52x58.png', 52, 58);
       this.load.setPreloadSprite(this.loaderBar);
 
       // load your assets
       this.load.image('mushroom', 'assets/images/mushroom2.png');
-      this.load.image('dino', 'assets/images/dino.png');
       this.load.image('obstracle', 'assets/images/obstacle.png');
+      this.load.audio('jump_sfx', 'assets/sfx/jump.wav');
     }
   }, {
     key: 'create',
@@ -10158,7 +10185,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 24);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */120);
-module.exports = __webpack_require__(/*! /Users/nattapat/Learning/sud-mun-pwa-2017/src/main.js */119);
+module.exports = __webpack_require__(/*! C:\Users\USER\Desktop\Hackatron\sud-mun-pwa-2017\src\main.js */119);
 
 
 /***/ })
