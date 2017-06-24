@@ -6,7 +6,7 @@ import config from '../config'
 const firebaseDB = firebase.initializeApp(config.firebaseConfig)
 export default class extends Phaser.State {
   init () {
-    this.stage.backgroundColor = '#EDEEC9'
+    this.stage.backgroundColor = '#57546f'
 
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
     this.scale.pageAlignHorizontally = true
@@ -78,7 +78,7 @@ export default class extends Phaser.State {
     //   active: this.fontsLoaded
     // })
 
-    let text = this.add.text(this.world.centerX, this.world.centerY, 'loading fonts', {
+    let text = this.add.text(this.world.centerX, this.world.centerY, 'loading...', {
       font: '16px Arial',
       fill: '#dddddd',
       align: 'center'

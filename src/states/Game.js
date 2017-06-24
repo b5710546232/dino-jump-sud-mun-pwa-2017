@@ -31,7 +31,12 @@ export default class extends Phaser.State {
       y: this.game.height - this.game.cache.getImage('ground').height / 2,
       asset: 'ground'
     })
-
+    if (localStorage.getItem('hightScore')) {
+      this.highscore = parseInt(localStorage.getItem('hightScore'))
+      console.log('hightscore', this.highscore)
+    } else {
+      this.highscore = 0
+    }
     this.game.physics.arcade.gravity.y = 1000
     // this.fontsReady = false
     // this.fontsLoaded = this.fontsLoaded.bind(this)
@@ -47,7 +52,7 @@ export default class extends Phaser.State {
     this.scoreText = this.game.add.text(500, 10, this.scoreStr)
     this.scoreText.fill = '#FFFFFF'
     this.scoreText.align = 'center'
-    this.scoreText.font = '10px Barrio'
+    // this.scoreText.font = '10px Barrio'
     this.scoreText.stroke = '#000000'
     this.scoreText.strokeThickness = 2
     // this.scoreText.anchor.setTo(0.5)
@@ -129,11 +134,17 @@ export default class extends Phaser.State {
     this.scoreText.setText(this.pad(this.score, 5))
   }
   collistionHandler () {
-    this.highscore = `Hi : ` + this.pad(this.score, 5)
-    this.highscoreTxt = this.game.add.text(this.game.width / 2 - 90, 10, this.highscore)
+    if (this.score > this.highscore) {
+      this.highscore = this.score
+      localStorage.setItem('hightScore', this.highscore)
+    }
+    this.highscore = parseInt(this.highscore)
+    console.log('hgiht= ', this.highscore)
+    this.highscoreStr = `Hi : ` + this.pad(this.highscore, 5)
+    this.highscoreTxt = this.game.add.text(this.game.width / 2 - 90, 10, this.highscoreStr)
     this.highscoreTxt.fill = '#FFFFFF'
     this.highscoreTxt.align = 'center'
-    this.highscoreTxt.font = '10px Barrio'
+    // this.highscoreTxt.font = '10px Barrio'
     this.highscoreTxt.stroke = '#000000'
     this.highscoreTxt.strokeThickness = 2
     this.highscoreTxt.anchor.x = -1
@@ -141,18 +152,44 @@ export default class extends Phaser.State {
     this.dino.isDead = true
     this.game.paused = true
 
+
     if (!this.game.disconnect) {
       let rootRef = this.game.firebase.ref()
-      let urlRef = rootRef.child('scores/').limitToLast(3)
+      let urlRef = rootRef.child('scores/')
+      this.game.firebase.ref(`scores/${this.highscore}`).set(parseInt(this.highscore))
       urlRef.once('value', (snapshot) => {
+        let scores = []
         if (snapshot.val()) {
           snapshot.forEach((child) => {
             console.log(child.key, child.val())
+            scores.push(child.val())
           })
+          scores.sort((a, b) => (b - a))
+
+          let yourRank = 1
+          scores.forEach((item) => {
+            if (this.highscore === item) {
+              return 0
+            }
+            yourRank++
+          })
+
+          this.top3Score = 'TOP 3 HIGH SCORE'
+          let rank = 1
+          scores.splice(0, 3).forEach((item) => {
+            this.top3Score += '\n' + `RANK ${rank}  score : ${item} `
+            rank++
+          })
+          this.top3Score += '\n' + `YOUR HIGHT SCORE RANK IS ${yourRank}`
+          this.topScoreText = this.game.add.text(300, 40, this.top3Score, {fontSize: '14px'})
+          this.topScoreText.fill = '#FFFFFF'
+          this.topScoreText.align = 'center'
+          // this.topScoreText.font = 'Barrio'
+          this.topScoreText.stroke = '#000000'
+          this.topScoreText.anchor.x = 0.5
+          this.topScoreText.strokeThickness = 2
         }
       })
-
-      this.game.firebase.ref(`scores/${this.score}`).set(parseInt(this.score))
     }
   }
   showDeadScene () {

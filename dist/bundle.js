@@ -7849,7 +7849,7 @@ var _class = function (_Phaser$State) {
     value: function init() {
       var _this2 = this;
 
-      this.stage.backgroundColor = '#EDEEC9';
+      this.stage.backgroundColor = '#57546f';
 
       this.scale.scaleMode = _phaser2.default.ScaleManager.SHOW_ALL;
       this.scale.pageAlignHorizontally = true;
@@ -7921,7 +7921,7 @@ var _class = function (_Phaser$State) {
       //   active: this.fontsLoaded
       // })
 
-      var text = this.add.text(this.world.centerX, this.world.centerY, 'loading fonts', {
+      var text = this.add.text(this.world.centerX, this.world.centerY, 'loading...', {
         font: '16px Arial',
         fill: '#dddddd',
         align: 'center'
@@ -8047,7 +8047,12 @@ var _class = function (_Phaser$State) {
         y: this.game.height - this.game.cache.getImage('ground').height / 2,
         asset: 'ground'
       });
-
+      if (localStorage.getItem('hightScore')) {
+        this.highscore = parseInt(localStorage.getItem('hightScore'));
+        console.log('hightscore', this.highscore);
+      } else {
+        this.highscore = 0;
+      }
       this.game.physics.arcade.gravity.y = 1000;
       // this.fontsReady = false
       // this.fontsLoaded = this.fontsLoaded.bind(this)
@@ -8063,7 +8068,7 @@ var _class = function (_Phaser$State) {
       this.scoreText = this.game.add.text(500, 10, this.scoreStr);
       this.scoreText.fill = '#FFFFFF';
       this.scoreText.align = 'center';
-      this.scoreText.font = '10px Barrio';
+      // this.scoreText.font = '10px Barrio'
       this.scoreText.stroke = '#000000';
       this.scoreText.strokeThickness = 2;
       // this.scoreText.anchor.setTo(0.5)
@@ -8156,11 +8161,19 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'collistionHandler',
     value: function collistionHandler() {
-      this.highscore = 'Hi : ' + this.pad(this.score, 5);
-      this.highscoreTxt = this.game.add.text(this.game.width / 2 - 90, 10, this.highscore);
+      var _this3 = this;
+
+      if (this.score > this.highscore) {
+        this.highscore = this.score;
+        localStorage.setItem('hightScore', this.highscore);
+      }
+      this.highscore = parseInt(this.highscore);
+      console.log('hgiht= ', this.highscore);
+      this.highscoreStr = 'Hi : ' + this.pad(this.highscore, 5);
+      this.highscoreTxt = this.game.add.text(this.game.width / 2 - 90, 10, this.highscoreStr);
       this.highscoreTxt.fill = '#FFFFFF';
       this.highscoreTxt.align = 'center';
-      this.highscoreTxt.font = '10px Barrio';
+      // this.highscoreTxt.font = '10px Barrio'
       this.highscoreTxt.stroke = '#000000';
       this.highscoreTxt.strokeThickness = 2;
       this.highscoreTxt.anchor.x = -1;
@@ -8170,16 +8183,43 @@ var _class = function (_Phaser$State) {
 
       if (!this.game.disconnect) {
         var rootRef = this.game.firebase.ref();
-        var urlRef = rootRef.child('scores/').limitToLast(3);
+        var urlRef = rootRef.child('scores/');
+        this.game.firebase.ref('scores/' + this.highscore).set(parseInt(this.highscore));
         urlRef.once('value', function (snapshot) {
+          var scores = [];
           if (snapshot.val()) {
             snapshot.forEach(function (child) {
               console.log(child.key, child.val());
+              scores.push(child.val());
             });
+            scores.sort(function (a, b) {
+              return b - a;
+            });
+
+            var yourRank = 1;
+            scores.forEach(function (item) {
+              if (_this3.highscore === item) {
+                return 0;
+              }
+              yourRank++;
+            });
+
+            _this3.top3Score = 'TOP 3 HIGH SCORE';
+            var rank = 1;
+            scores.splice(0, 3).forEach(function (item) {
+              _this3.top3Score += '\n' + ('RANK ' + rank + '  score : ' + item + ' ');
+              rank++;
+            });
+            _this3.top3Score += '\n' + ('YOUR HIGHT SCORE RANK IS ' + yourRank);
+            _this3.topScoreText = _this3.game.add.text(300, 40, _this3.top3Score, { fontSize: '14px' });
+            _this3.topScoreText.fill = '#FFFFFF';
+            _this3.topScoreText.align = 'center';
+            // this.topScoreText.font = 'Barrio'
+            _this3.topScoreText.stroke = '#000000';
+            _this3.topScoreText.anchor.x = 0.5;
+            _this3.topScoreText.strokeThickness = 2;
           }
         });
-
-        this.game.firebase.ref('scores/' + this.score).set(parseInt(this.score));
       }
     }
   }, {
