@@ -17,17 +17,6 @@ class Game extends Phaser.Game {
     this.state.add('Splash', SplashState, false)
     this.state.add('Game', GameState, false)
     this.state.start('Boot')
-    this.addServiceWorker()
-  }
-
-  addServiceWorker () {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('./src/config/service-worker.js')
-        .then(() => {
-          console.log('Service Worker Registered')
-        })
-    }
   }
 }
 
