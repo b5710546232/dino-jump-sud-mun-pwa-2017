@@ -13,12 +13,21 @@ export default class Obstracle extends Phaser.Sprite {
     this.body.allowGravity = false
     this.anchor.y = 1
     this.smoothed = false
+    this.dead = false
+  }
+
+  getX () {
+    return this.position
+  }
+
+  setX (xValue) {
+    this.x = xValue
   }
 
   update () {
     this.x -= 3
     if (this.x < -100) {
-      this.x = 700 + (Math.random() * 600)
+      this.dead = true
     }
   }
 }

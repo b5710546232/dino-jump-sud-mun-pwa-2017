@@ -101,12 +101,12 @@ export default class extends Phaser.State {
 
   initializeObstracle () {
     let obsracles = [ 'cactus01', 'cactus02', 'cactus03' ]
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       let random = Math.floor(Math.random() * obsracles.length)
       console.log('random', random)
       let newObstracle = new Obstracle({
         game: this,
-        x: 500 + (i * 300 * Math.random()) + (i * 300),
+        x: 500 + (300 * Math.random()) + (i * 400),
         y: 250,
         asset: obsracles[random]
       })
@@ -114,7 +114,34 @@ export default class extends Phaser.State {
     }
   }
 
+  handleObstracle () {
+    for (let i in this.obstracles) {
+      if (this.obstracles[i].dead === true) {
+        let modeGenerator = Math.floor(Math.random() * 3) + 1
+        let randomNumber = 0
+        if (modeGenerator >= 3) {
+          randomNumber = 300 + Math.floor(Math.random() * 100)
+        } else if (modeGenerator >= 2) {
+          randomNumber = 200 + Math.floor(Math.random() * 100)
+        } else if (modeGenerator >= 1) {
+          randomNumber = Math.floor(Math.random() * 100) + 400
+        }
+        let maximumX = 0
+        for (let j = 0; j < this.obstracles.length - 1; j++) {
+          let newMax = Math.max(this.obstracles[j].x, this.obstracles[j + 1].x)
+          if (newMax > maximumX) {
+            maximumX = newMax
+          }
+        }
+        console.log('Respawn At' + maximumX)
+        this.obstracles[i].setX(maximumX + randomNumber)
+        this.obstracles[i].dead = false
+      }
+    }
+  }
+
   update () {
+    this.handleObstracle()
     this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this)
     this.game.physics.arcade.collide(this.dino, this.ground2, this.groundCollisionHandler, null, this)
     this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this)
