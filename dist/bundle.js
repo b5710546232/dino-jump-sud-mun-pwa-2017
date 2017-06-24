@@ -4568,11 +4568,14 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'render',
     value: function render() {
-      for (var i in this.obstracles) {
-        this.game.debug.body(this.obstracles[i]);
+      if (true) {
+        // eslint-disable-line
+        for (var i in this.obstracles) {
+          this.game.debug.body(this.obstracles[i]);
+        }
+        this.game.debug.body(this.dino);
+        this.game.debug.body(this.ground);
       }
-      this.game.debug.body(this.dino);
-      this.game.debug.body(this.ground);
     }
   }]);
 
