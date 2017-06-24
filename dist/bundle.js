@@ -8,10 +8,10 @@ webpackJsonp([0],[
 /***/ (function(module, exports, __webpack_require__) {
 
 var global    = __webpack_require__(/*! ./_global */ 2)
-  , core      = __webpack_require__(/*! ./_core */ 25)
+  , core      = __webpack_require__(/*! ./_core */ 24)
   , hide      = __webpack_require__(/*! ./_hide */ 12)
   , redefine  = __webpack_require__(/*! ./_redefine */ 13)
-  , ctx       = __webpack_require__(/*! ./_ctx */ 26)
+  , ctx       = __webpack_require__(/*! ./_ctx */ 25)
   , PROTOTYPE = 'prototype';
 
 var $export = function(type, name, source){
@@ -265,7 +265,7 @@ var global    = __webpack_require__(/*! ./_global */ 2)
   , $toString = Function[TO_STRING]
   , TPL       = ('' + $toString).split(TO_STRING);
 
-__webpack_require__(/*! ./_core */ 25).inspectSource = function(it){
+__webpack_require__(/*! ./_core */ 24).inspectSource = function(it){
   return $toString.call(it);
 };
 
@@ -447,15 +447,11 @@ module.exports = function(method, arg){
 // 4 -> Array#every
 // 5 -> Array#find
 // 6 -> Array#findIndex
-var ctx      = __webpack_require__(/*! ./_ctx */ 26)
+var ctx      = __webpack_require__(/*! ./_ctx */ 25)
   , IObject  = __webpack_require__(/*! ./_iobject */ 47)
   , toObject = __webpack_require__(/*! ./_to-object */ 9)
   , toLength = __webpack_require__(/*! ./_to-length */ 8)
-<<<<<<< HEAD
   , asc      = __webpack_require__(/*! ./_array-species-create */ 130);
-=======
-  , asc      = __webpack_require__(/*! ./_array-species-create */ 131);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 module.exports = function(TYPE, $create){
   var IS_MAP        = TYPE == 1
     , IS_FILTER     = TYPE == 2
@@ -500,7 +496,7 @@ module.exports = function(TYPE, $create){
 
 // most Object methods by ES6 should accept primitives
 var $export = __webpack_require__(/*! ./_export */ 0)
-  , core    = __webpack_require__(/*! ./_core */ 25)
+  , core    = __webpack_require__(/*! ./_core */ 24)
   , fails   = __webpack_require__(/*! ./_fails */ 3);
 module.exports = function(KEY, exec){
   var fn  = (core.Object || {})[KEY] || Object[KEY]
@@ -532,8 +528,7 @@ module.exports = function(it, S){
 };
 
 /***/ }),
-/* 24 */,
-/* 25 */
+/* 24 */
 /* no static exports found */
 /* all exports used */
 /*!************************************!*\
@@ -545,7 +540,7 @@ var core = module.exports = {version: '2.4.0'};
 if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ }),
-/* 26 */
+/* 25 */
 /* no static exports found */
 /* all exports used */
 /*!***********************************!*\
@@ -575,7 +570,7 @@ module.exports = function(fn, that, length){
 };
 
 /***/ }),
-/* 27 */
+/* 26 */
 /* no static exports found */
 /* all exports used */
 /*!****************************************!*\
@@ -636,7 +631,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 28 */
+/* 27 */
 /* no static exports found */
 /* all exports used */
 /*!*******************************************!*\
@@ -653,7 +648,7 @@ if(__webpack_require__(/*! ./_descriptors */ 6)){
     , $export             = __webpack_require__(/*! ./_export */ 0)
     , $typed              = __webpack_require__(/*! ./_typed */ 60)
     , $buffer             = __webpack_require__(/*! ./_typed-buffer */ 83)
-    , ctx                 = __webpack_require__(/*! ./_ctx */ 26)
+    , ctx                 = __webpack_require__(/*! ./_ctx */ 25)
     , anInstance          = __webpack_require__(/*! ./_an-instance */ 32)
     , propertyDesc        = __webpack_require__(/*! ./_property-desc */ 30)
     , hide                = __webpack_require__(/*! ./_hide */ 12)
@@ -1126,10 +1121,7 @@ if(__webpack_require__(/*! ./_descriptors */ 6)){
 } else module.exports = function(){ /* empty */ };
 
 /***/ }),
-<<<<<<< HEAD
 /* 28 */,
-=======
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* 29 */
 /* no static exports found */
 /* all exports used */
@@ -1435,7 +1427,7 @@ module.exports = function(key){
   \**************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx         = __webpack_require__(/*! ./_ctx */ 26)
+var ctx         = __webpack_require__(/*! ./_ctx */ 25)
   , call        = __webpack_require__(/*! ./_iter-call */ 101)
   , isArrayIter = __webpack_require__(/*! ./_is-array-iter */ 68)
   , anObject    = __webpack_require__(/*! ./_an-object */ 1)
@@ -2332,7 +2324,7 @@ module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
     function(test, buggy, set){
       try {
-        set = __webpack_require__(/*! ./_ctx */ 26)(Function.call, __webpack_require__(/*! ./_object-gopd */ 16).f(Object.prototype, '__proto__').set, 2);
+        set = __webpack_require__(/*! ./_ctx */ 25)(Function.call, __webpack_require__(/*! ./_object-gopd */ 16).f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch(e){ buggy = true; }
@@ -2468,7 +2460,7 @@ module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u20
   \************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx                = __webpack_require__(/*! ./_ctx */ 26)
+var ctx                = __webpack_require__(/*! ./_ctx */ 25)
   , invoke             = __webpack_require__(/*! ./_invoke */ 54)
   , html               = __webpack_require__(/*! ./_html */ 66)
   , cel                = __webpack_require__(/*! ./_dom-create */ 63)
@@ -2838,7 +2830,7 @@ exports[DATA_VIEW] = $DataView;
 /***/ (function(module, exports, __webpack_require__) {
 
 var global         = __webpack_require__(/*! ./_global */ 2)
-  , core           = __webpack_require__(/*! ./_core */ 25)
+  , core           = __webpack_require__(/*! ./_core */ 24)
   , LIBRARY        = __webpack_require__(/*! ./_library */ 33)
   , wksExt         = __webpack_require__(/*! ./_wks-ext */ 114)
   , defineProperty = __webpack_require__(/*! ./_object-dp */ 7).f;
@@ -2859,7 +2851,7 @@ module.exports = function(name){
 var classof   = __webpack_require__(/*! ./_classof */ 46)
   , ITERATOR  = __webpack_require__(/*! ./_wks */ 5)('iterator')
   , Iterators = __webpack_require__(/*! ./_iterators */ 43);
-module.exports = __webpack_require__(/*! ./_core */ 25).getIteratorMethod = function(it){
+module.exports = __webpack_require__(/*! ./_core */ 24).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
     || it['@@iterator']
     || Iterators[classof(it)];
@@ -3092,7 +3084,7 @@ module.exports = Function.bind || function bind(that /*, args... */){
 var dP          = __webpack_require__(/*! ./_object-dp */ 7).f
   , create      = __webpack_require__(/*! ./_object-create */ 34)
   , redefineAll = __webpack_require__(/*! ./_redefine-all */ 37)
-  , ctx         = __webpack_require__(/*! ./_ctx */ 26)
+  , ctx         = __webpack_require__(/*! ./_ctx */ 25)
   , anInstance  = __webpack_require__(/*! ./_an-instance */ 32)
   , defined     = __webpack_require__(/*! ./_defined */ 19)
   , forOf       = __webpack_require__(/*! ./_for-of */ 42)
@@ -3830,22 +3822,7 @@ __webpack_require__(/*! pixi */ 87);
 
 __webpack_require__(/*! p2 */ 88);
 
-<<<<<<< HEAD
 var _phaser = __webpack_require__(/*! phaser */ 28);
-
-var _phaser2 = _interopRequireDefault(_phaser);
-
-var _Boot = __webpack_require__(/*! ./states/Boot */ 124);
-
-var _Boot2 = _interopRequireDefault(_Boot);
-
-var _Splash = __webpack_require__(/*! ./states/Splash */ 126);
-
-var _Splash2 = _interopRequireDefault(_Splash);
-
-var _Game = __webpack_require__(/*! ./states/Game */ 125);
-=======
-var _phaser = __webpack_require__(/*! phaser */ 24);
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
@@ -3858,7 +3835,6 @@ var _Splash = __webpack_require__(/*! ./states/Splash */ 127);
 var _Splash2 = _interopRequireDefault(_Splash);
 
 var _Game = __webpack_require__(/*! ./states/Game */ 126);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 var _Game2 = _interopRequireDefault(_Game);
 
@@ -3909,19 +3885,11 @@ window.game = new Game();
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! core-js/shim */ 308);
 
 __webpack_require__(/*! regenerator-runtime/runtime */ 313);
 
 __webpack_require__(/*! core-js/fn/regexp/escape */ 128);
-=======
-__webpack_require__(/*! core-js/shim */ 309);
-
-__webpack_require__(/*! regenerator-runtime/runtime */ 314);
-
-__webpack_require__(/*! core-js/fn/regexp/escape */ 129);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 if (global._babelPolyfill) {
   throw new Error("only one instance of babel-polyfill is allowed");
@@ -3963,11 +3931,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-<<<<<<< HEAD
 var _phaser = __webpack_require__(/*! phaser */ 28);
-=======
-var _phaser = __webpack_require__(/*! phaser */ 24);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
@@ -4059,11 +4023,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-<<<<<<< HEAD
 var _phaser = __webpack_require__(/*! phaser */ 28);
-=======
-var _phaser = __webpack_require__(/*! phaser */ 24);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
@@ -4152,8 +4112,6 @@ exports.default = Dino;
 
 /***/ }),
 /* 123 */
-<<<<<<< HEAD
-=======
 /* no static exports found */
 /* all exports used */
 /*!*******************************!*\
@@ -4170,7 +4128,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _phaser = __webpack_require__(/*! phaser */ 24);
+var _phaser = __webpack_require__(/*! phaser */ 28);
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
@@ -4228,7 +4186,6 @@ exports.default = Ground;
 
 /***/ }),
 /* 124 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************!*\
@@ -4245,11 +4202,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-<<<<<<< HEAD
 var _phaser = __webpack_require__(/*! phaser */ 28);
-=======
-var _phaser = __webpack_require__(/*! phaser */ 24);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
@@ -4324,11 +4277,7 @@ var Obstracle = function (_Phaser$Sprite) {
 exports.default = Obstracle;
 
 /***/ }),
-<<<<<<< HEAD
-/* 124 */
-=======
 /* 125 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************!*\
@@ -4345,11 +4294,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-<<<<<<< HEAD
 var _phaser = __webpack_require__(/*! phaser */ 28);
-=======
-var _phaser = __webpack_require__(/*! phaser */ 24);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
@@ -4428,11 +4373,7 @@ var _class = function (_Phaser$State) {
 exports.default = _class;
 
 /***/ }),
-<<<<<<< HEAD
-/* 125 */
-=======
 /* 126 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************!*\
@@ -4449,11 +4390,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-<<<<<<< HEAD
 var _phaser = __webpack_require__(/*! phaser */ 28);
-=======
-var _phaser = __webpack_require__(/*! phaser */ 24);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
@@ -4461,11 +4398,7 @@ var _dino = __webpack_require__(/*! ../prefabs/dino */ 122);
 
 var _dino2 = _interopRequireDefault(_dino);
 
-<<<<<<< HEAD
-var _obstracle = __webpack_require__(/*! ../prefabs/obstracle */ 123);
-=======
 var _obstracle = __webpack_require__(/*! ../prefabs/obstracle */ 124);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 var _obstracle2 = _interopRequireDefault(_obstracle);
 
@@ -4493,8 +4426,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 // eslint-disable-line
-
-
 var _class = function (_Phaser$State) {
   _inherits(_class, _Phaser$State);
 
@@ -4513,22 +4444,8 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'create',
     value: function create() {
-<<<<<<< HEAD
       var _this2 = this;
 
-      this.game.physics.arcade.gravity.y = 300;
-      // this.mushroom = new Mushroom({
-      //   game: this,
-      //   x: this.world.centerX,
-      //   y: this.world.centerY,
-      //   asset: 'mushroom'
-      // })
-
-      // this.game.add.existing(this.mushroom)
-      if (!this.game.device.desktop) {
-        this.game.scale.startFullScreen(false);
-      }
-=======
       // bg set up.
       this.bg = this.game.add.image(0, 0, 'bg');
       this.ground = new _ground2.default({
@@ -4539,7 +4456,6 @@ var _class = function (_Phaser$State) {
       });
 
       this.game.physics.arcade.gravity.y = 1000;
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
       // this.fontsReady = false
       // this.fontsLoaded = this.fontsLoaded.bind(this)
 
@@ -4656,131 +4572,18 @@ var _class = function (_Phaser$State) {
 exports.default = _class;
 
 /***/ }),
-<<<<<<< HEAD
-/* 126 */
-=======
 /* 127 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!******************************!*\
   !*** ./src/states/Splash.js ***!
   \******************************/
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-<<<<<<< HEAD
-var _phaser = __webpack_require__(/*! phaser */ 28);
-
-var _phaser2 = _interopRequireDefault(_phaser);
-
-var _utils = __webpack_require__(/*! ../utils */ 127);
-=======
-var _phaser = __webpack_require__(/*! phaser */ 24);
-
-var _phaser2 = _interopRequireDefault(_phaser);
-
-var _utils = __webpack_require__(/*! ../utils */ 128);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _class = function (_Phaser$State) {
-  _inherits(_class, _Phaser$State);
-
-  function _class() {
-    _classCallCheck(this, _class);
-
-    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
-  }
-
-  _createClass(_class, [{
-    key: 'init',
-    value: function init() {}
-  }, {
-    key: 'preload',
-    value: function preload() {
-      this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg');
-      this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar');
-      (0, _utils.centerGameObjects)([this.loaderBg, this.loaderBar]);
-      this.load.spritesheet('dino', 'assets/images/dino_fix_52x58.png', 52, 58);
-<<<<<<< HEAD
-=======
-
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
-      this.load.setPreloadSprite(this.loaderBar);
-
-      // load your assets
-      this.load.image('mushroom', 'assets/images/mushroom2.png');
-      this.load.image('cloud01', 'assets/images/cloud01.png');
-      this.load.image('cloud02', 'assets/images/cloud02.png');
-      this.load.image('cloud03', 'assets/images/cloud03.png');
-      this.load.image('cactus01', 'assets/images/cactus01.png');
-      this.load.image('cactus02', 'assets/images/cactus02.png');
-      this.load.image('cactus03', 'assets/images/cactus03.png');
-      this.load.image('obstracle', 'assets/images/obstacle.png');
-      this.load.image('bg', 'assets/images/bg.png');
-      this.load.image('ground', 'assets/images/ground.png');
-      this.load.audio('jump_sfx', 'assets/sfx/jump.wav');
-      this.load.image('respawn_button', 'assets/images/playAgainButton.png');
-    }
-  }, {
-    key: 'create',
-    value: function create() {
-      this.state.start('Game');
-    }
-  }]);
-
-  return _class;
-}(_phaser2.default.State);
-
-exports.default = _class;
+throw new Error("Module build failed: SyntaxError: C:/Users/USER/Desktop/Hackatron/sud-mun-pwa-2017/src/states/Splash.js: Unexpected token (12:2)\n\n\u001b[0m \u001b[90m 10 | \u001b[39m    centerGameObjects([\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloaderBg\u001b[33m,\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloaderBar])\n \u001b[90m 11 | \u001b[39m    \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mload\u001b[33m.\u001b[39mspritesheet(\u001b[32m'dino'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'assets/images/dino_fix_52x58.png'\u001b[39m\u001b[33m,\u001b[39m \u001b[35m52\u001b[39m\u001b[33m,\u001b[39m \u001b[35m58\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m    | \u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 14 | \u001b[39m    \n \u001b[90m 15 | \u001b[39m\u001b[33m>>>\u001b[39m\u001b[33m>>>\u001b[39m\u001b[33m>\u001b[39m ebcb2def8689cea32d4489cacdac4fa777ff3b8c\u001b[0m\n");
 
 /***/ }),
-<<<<<<< HEAD
-/* 127 */
-=======
 /* 128 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
-/* no static exports found */
-/* all exports used */
-/*!**********************!*\
-  !*** ./src/utils.js ***!
-  \**********************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var centerGameObjects = exports.centerGameObjects = function centerGameObjects(objects) {
-  objects.forEach(function (object) {
-    object.anchor.setTo(0.5);
-  });
-};
-
-/***/ }),
-<<<<<<< HEAD
-/* 128 */
-=======
-/* 129 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************!*\
@@ -4788,19 +4591,11 @@ var centerGameObjects = exports.centerGameObjects = function centerGameObjects(o
   \***************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! ../../modules/core.regexp.escape */ 137);
 module.exports = __webpack_require__(/*! ../../modules/_core */ 24).RegExp.escape;
 
 /***/ }),
 /* 129 */
-=======
-__webpack_require__(/*! ../../modules/core.regexp.escape */ 138);
-module.exports = __webpack_require__(/*! ../../modules/_core */ 25).RegExp.escape;
-
-/***/ }),
-/* 130 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************************!*\
@@ -4826,11 +4621,7 @@ module.exports = function(original){
 };
 
 /***/ }),
-<<<<<<< HEAD
 /* 130 */
-=======
-/* 131 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -4839,22 +4630,14 @@ module.exports = function(original){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 9.4.2.3 ArraySpeciesCreate(originalArray, length)
-<<<<<<< HEAD
 var speciesConstructor = __webpack_require__(/*! ./_array-species-constructor */ 129);
-=======
-var speciesConstructor = __webpack_require__(/*! ./_array-species-constructor */ 130);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 module.exports = function(original, length){
   return new (speciesConstructor(original))(length);
 };
 
 /***/ }),
-<<<<<<< HEAD
 /* 131 */
-=======
-/* 132 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -4874,11 +4657,7 @@ module.exports = function(hint){
 };
 
 /***/ }),
-<<<<<<< HEAD
 /* 132 */
-=======
-/* 133 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************!*\
@@ -4903,11 +4682,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-<<<<<<< HEAD
 /* 133 */
-=======
-/* 134 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************!*\
@@ -4927,11 +4702,7 @@ module.exports = function(object, el){
 };
 
 /***/ }),
-<<<<<<< HEAD
 /* 134 */
-=======
-/* 135 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************!*\
@@ -4941,11 +4712,7 @@ module.exports = function(object, el){
 
 "use strict";
 
-<<<<<<< HEAD
 var path      = __webpack_require__(/*! ./_path */ 135)
-=======
-var path      = __webpack_require__(/*! ./_path */ 136)
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
   , invoke    = __webpack_require__(/*! ./_invoke */ 54)
   , aFunction = __webpack_require__(/*! ./_a-function */ 11);
 module.exports = function(/* ...pargs */){
@@ -4969,11 +4736,7 @@ module.exports = function(/* ...pargs */){
 };
 
 /***/ }),
-<<<<<<< HEAD
 /* 135 */
-=======
-/* 136 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************!*\
@@ -4984,11 +4747,7 @@ module.exports = function(/* ...pargs */){
 module.exports = __webpack_require__(/*! ./_global */ 2);
 
 /***/ }),
-<<<<<<< HEAD
 /* 136 */
-=======
-/* 137 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************!*\
@@ -5006,11 +4765,7 @@ module.exports = function(regExp, replace){
 };
 
 /***/ }),
-<<<<<<< HEAD
 /* 137 */
-=======
-/* 138 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -5020,21 +4775,13 @@ module.exports = function(regExp, replace){
 
 // https://github.com/benjamingr/RexExp.escape
 var $export = __webpack_require__(/*! ./_export */ 0)
-<<<<<<< HEAD
   , $re     = __webpack_require__(/*! ./_replacer */ 136)(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-=======
-  , $re     = __webpack_require__(/*! ./_replacer */ 137)(/[\\^$*+?.()|[\]{}]/g, '\\$&');
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 
 $export($export.S, 'RegExp', {escape: function escape(it){ return $re(it); }});
 
 
 /***/ }),
-<<<<<<< HEAD
 /* 138 */
-=======
-/* 139 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -5050,11 +4797,7 @@ $export($export.P, 'Array', {copyWithin: __webpack_require__(/*! ./_array-copy-w
 __webpack_require__(/*! ./_add-to-unscopables */ 41)('copyWithin');
 
 /***/ }),
-<<<<<<< HEAD
 /* 139 */
-=======
-/* 140 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -5075,11 +4818,7 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ 20)
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 140 */
-=======
-/* 141 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5095,11 +4834,7 @@ $export($export.P, 'Array', {fill: __webpack_require__(/*! ./_array-fill */ 61)}
 __webpack_require__(/*! ./_add-to-unscopables */ 41)('fill');
 
 /***/ }),
-<<<<<<< HEAD
 /* 141 */
-=======
-/* 142 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -5120,11 +4855,7 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ 20)
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 142 */
-=======
-/* 143 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -5149,11 +4880,7 @@ $export($export.P + $export.F * forced, 'Array', {
 __webpack_require__(/*! ./_add-to-unscopables */ 41)(KEY);
 
 /***/ }),
-<<<<<<< HEAD
 /* 143 */
-=======
-/* 144 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5178,11 +4905,7 @@ $export($export.P + $export.F * forced, 'Array', {
 __webpack_require__(/*! ./_add-to-unscopables */ 41)(KEY);
 
 /***/ }),
-<<<<<<< HEAD
 /* 144 */
-=======
-/* 145 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -5204,11 +4927,7 @@ $export($export.P + $export.F * !STRICT, 'Array', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 145 */
-=======
-/* 146 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5218,7 +4937,7 @@ $export($export.P + $export.F * !STRICT, 'Array', {
 
 "use strict";
 
-var ctx            = __webpack_require__(/*! ./_ctx */ 26)
+var ctx            = __webpack_require__(/*! ./_ctx */ 25)
   , $export        = __webpack_require__(/*! ./_export */ 0)
   , toObject       = __webpack_require__(/*! ./_to-object */ 9)
   , call           = __webpack_require__(/*! ./_iter-call */ 101)
@@ -5257,11 +4976,7 @@ $export($export.S + $export.F * !__webpack_require__(/*! ./_iter-detect */ 56)(f
 
 
 /***/ }),
-<<<<<<< HEAD
 /* 146 */
-=======
-/* 147 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -5287,11 +5002,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(/*! ./_st
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 147 */
-=======
-/* 148 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -5305,11 +5016,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Array', {isArray: __webpack_require__(/*! ./_is-array */ 69)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 148 */
-=======
-/* 149 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5332,11 +5039,7 @@ $export($export.P + $export.F * (__webpack_require__(/*! ./_iobject */ 47) != Ob
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 149 */
-=======
-/* 150 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!******************************************************!*\
@@ -5369,11 +5072,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(/*! ./_st
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 150 */
-=======
-/* 151 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -5394,11 +5093,7 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ 20)
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 151 */
-=======
-/* 152 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************!*\
@@ -5428,11 +5123,7 @@ $export($export.S + $export.F * __webpack_require__(/*! ./_fails */ 3)(function(
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 152 */
-=======
-/* 153 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -5453,11 +5144,7 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ 20)
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 153 */
-=======
-/* 154 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -5478,11 +5165,7 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ 20)
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 154 */
-=======
-/* 155 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -5521,11 +5204,7 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails */ 3)(function(
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 155 */
-=======
-/* 156 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5546,11 +5225,7 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ 20)
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 156 */
-=======
-/* 157 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5584,11 +5259,7 @@ $export($export.P + $export.F * (fails(function(){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 157 */
-=======
-/* 158 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -5599,11 +5270,7 @@ $export($export.P + $export.F * (fails(function(){
 __webpack_require__(/*! ./_set-species */ 38)('Array');
 
 /***/ }),
-<<<<<<< HEAD
 /* 158 */
-=======
-/* 159 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************!*\
@@ -5617,11 +5284,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Date', {now: function(){ return new Date().getTime(); }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 159 */
-=======
-/* 160 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -5660,11 +5323,7 @@ $export($export.P + $export.F * (fails(function(){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 160 */
-=======
-/* 161 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -5689,11 +5348,7 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails */ 3)(function(
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 161 */
-=======
-/* 162 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -5704,17 +5359,10 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails */ 3)(function(
 var TO_PRIMITIVE = __webpack_require__(/*! ./_wks */ 5)('toPrimitive')
   , proto        = Date.prototype;
 
-<<<<<<< HEAD
 if(!(TO_PRIMITIVE in proto))__webpack_require__(/*! ./_hide */ 12)(proto, TO_PRIMITIVE, __webpack_require__(/*! ./_date-to-primitive */ 131));
 
 /***/ }),
 /* 162 */
-=======
-if(!(TO_PRIMITIVE in proto))__webpack_require__(/*! ./_hide */ 12)(proto, TO_PRIMITIVE, __webpack_require__(/*! ./_date-to-primitive */ 132));
-
-/***/ }),
-/* 163 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -5735,11 +5383,7 @@ if(new Date(NaN) + '' != INVALID_DATE){
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 163 */
-=======
-/* 164 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -5753,11 +5397,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.P, 'Function', {bind: __webpack_require__(/*! ./_bind */ 95)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 164 */
-=======
-/* 165 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************************!*\
@@ -5781,11 +5421,7 @@ if(!(HAS_INSTANCE in FunctionProto))__webpack_require__(/*! ./_object-dp */ 7).f
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 165 */
-=======
-/* 166 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -5820,11 +5456,7 @@ NAME in FProto || __webpack_require__(/*! ./_descriptors */ 6) && dP(FProto, NAM
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 166 */
-=======
-/* 167 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5852,11 +5484,7 @@ $export($export.S + $export.F * !($acosh
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 167 */
-=======
-/* 168 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5876,11 +5504,7 @@ function asinh(x){
 $export($export.S + $export.F * !($asinh && 1 / $asinh(0) > 0), 'Math', {asinh: asinh});
 
 /***/ }),
-<<<<<<< HEAD
 /* 168 */
-=======
-/* 169 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5900,11 +5524,7 @@ $export($export.S + $export.F * !($atanh && 1 / $atanh(-0) < 0), 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 169 */
-=======
-/* 170 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -5923,11 +5543,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 170 */
-=======
-/* 171 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5945,11 +5561,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 171 */
-=======
-/* 172 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -5968,11 +5580,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 172 */
-=======
-/* 173 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -5987,11 +5595,7 @@ var $export = __webpack_require__(/*! ./_export */ 0)
 $export($export.S + $export.F * ($expm1 != Math.expm1), 'Math', {expm1: $expm1});
 
 /***/ }),
-<<<<<<< HEAD
 /* 173 */
-=======
-/* 174 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -6027,11 +5631,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 174 */
-=======
-/* 175 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -6066,11 +5666,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 175 */
-=======
-/* 176 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -6097,11 +5693,7 @@ $export($export.S + $export.F * __webpack_require__(/*! ./_fails */ 3)(function(
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 176 */
-=======
-/* 177 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -6119,11 +5711,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 177 */
-=======
-/* 178 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -6137,11 +5725,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Math', {log1p: __webpack_require__(/*! ./_math-log1p */ 103)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 178 */
-=======
-/* 179 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -6159,11 +5743,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 179 */
-=======
-/* 180 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -6177,11 +5757,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Math', {sign: __webpack_require__(/*! ./_math-sign */ 73)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 180 */
-=======
-/* 181 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -6206,11 +5782,7 @@ $export($export.S + $export.F * __webpack_require__(/*! ./_fails */ 3)(function(
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 181 */
-=======
-/* 182 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -6232,11 +5804,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 182 */
-=======
-/* 183 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -6254,11 +5822,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 183 */
-=======
-/* 184 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -6338,11 +5902,7 @@ if(!$Number(' 0o1') || !$Number('0b1') || $Number('+0x1')){
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 184 */
-=======
-/* 185 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -6356,11 +5916,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Number', {EPSILON: Math.pow(2, -52)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 185 */
-=======
-/* 186 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -6379,11 +5935,7 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 186 */
-=======
-/* 187 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -6397,11 +5949,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Number', {isInteger: __webpack_require__(/*! ./_is-integer */ 100)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 187 */
-=======
-/* 188 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -6419,11 +5967,7 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 188 */
-=======
-/* 189 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************************!*\
@@ -6443,11 +5987,7 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 189 */
-=======
-/* 190 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************!*\
@@ -6461,11 +6001,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Number', {MAX_SAFE_INTEGER: 0x1fffffffffffff});
 
 /***/ }),
-<<<<<<< HEAD
 /* 190 */
-=======
-/* 191 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************!*\
@@ -6479,11 +6015,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Number', {MIN_SAFE_INTEGER: -0x1fffffffffffff});
 
 /***/ }),
-<<<<<<< HEAD
 /* 191 */
-=======
-/* 192 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -6497,11 +6029,7 @@ var $export     = __webpack_require__(/*! ./_export */ 0)
 $export($export.S + $export.F * (Number.parseFloat != $parseFloat), 'Number', {parseFloat: $parseFloat});
 
 /***/ }),
-<<<<<<< HEAD
 /* 192 */
-=======
-/* 193 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -6515,11 +6043,7 @@ var $export   = __webpack_require__(/*! ./_export */ 0)
 $export($export.S + $export.F * (Number.parseInt != $parseInt), 'Number', {parseInt: $parseInt});
 
 /***/ }),
-<<<<<<< HEAD
 /* 193 */
-=======
-/* 194 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**************************************************!*\
@@ -6643,11 +6167,7 @@ $export($export.P + $export.F * (!!$toFixed && (
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 194 */
-=======
-/* 195 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!******************************************************!*\
@@ -6676,11 +6196,7 @@ $export($export.P + $export.F * ($fails(function(){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 195 */
-=======
-/* 196 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -6694,11 +6210,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S + $export.F, 'Object', {assign: __webpack_require__(/*! ./_object-assign */ 104)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 196 */
-=======
-/* 197 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -6711,11 +6223,7 @@ var $export = __webpack_require__(/*! ./_export */ 0)
 $export($export.S, 'Object', {create: __webpack_require__(/*! ./_object-create */ 34)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 197 */
-=======
-/* 198 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************************!*\
@@ -6728,11 +6236,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S + $export.F * !__webpack_require__(/*! ./_descriptors */ 6), 'Object', {defineProperties: __webpack_require__(/*! ./_object-dps */ 105)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 198 */
-=======
-/* 199 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************************!*\
@@ -6745,11 +6249,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S + $export.F * !__webpack_require__(/*! ./_descriptors */ 6), 'Object', {defineProperty: __webpack_require__(/*! ./_object-dp */ 7).f});
 
 /***/ }),
-<<<<<<< HEAD
 /* 199 */
-=======
-/* 200 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -6768,11 +6268,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('freeze', function($freeze){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 200 */
-=======
-/* 201 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************************************!*\
@@ -6791,11 +6287,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('getOwnPropertyDescriptor', functio
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 201 */
-=======
-/* 202 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************************!*\
@@ -6809,11 +6301,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('getOwnPropertyNames', function(){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 202 */
-=======
-/* 203 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************!*\
@@ -6832,11 +6320,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('getPrototypeOf', function(){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 203 */
-=======
-/* 204 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************************!*\
@@ -6854,11 +6338,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('isExtensible', function($isExtensi
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 204 */
-=======
-/* 205 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -6876,11 +6356,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('isFrozen', function($isFrozen){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 205 */
-=======
-/* 206 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -6898,11 +6374,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('isSealed', function($isSealed){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 206 */
-=======
-/* 207 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -6915,11 +6387,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Object', {is: __webpack_require__(/*! ./_same-value */ 112)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 207 */
-=======
-/* 208 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -6938,11 +6406,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('keys', function(){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 208 */
-=======
-/* 209 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************************!*\
@@ -6961,11 +6425,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('preventExtensions', function($prev
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 209 */
-=======
-/* 210 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -6984,11 +6444,7 @@ __webpack_require__(/*! ./_object-sap */ 22)('seal', function($seal){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 210 */
-=======
-/* 211 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************!*\
@@ -7001,11 +6457,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Object', {setPrototypeOf: __webpack_require__(/*! ./_set-proto */ 75).set});
 
 /***/ }),
-<<<<<<< HEAD
 /* 211 */
-=======
-/* 212 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -7026,11 +6478,7 @@ if(test + '' != '[object z]'){
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 212 */
-=======
-/* 213 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -7044,11 +6492,7 @@ var $export     = __webpack_require__(/*! ./_export */ 0)
 $export($export.G + $export.F * (parseFloat != $parseFloat), {parseFloat: $parseFloat});
 
 /***/ }),
-<<<<<<< HEAD
 /* 213 */
-=======
-/* 214 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -7062,11 +6506,7 @@ var $export   = __webpack_require__(/*! ./_export */ 0)
 $export($export.G + $export.F * (parseInt != $parseInt), {parseInt: $parseInt});
 
 /***/ }),
-<<<<<<< HEAD
 /* 214 */
-=======
-/* 215 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!******************************************!*\
@@ -7078,7 +6518,7 @@ $export($export.G + $export.F * (parseInt != $parseInt), {parseInt: $parseInt});
 
 var LIBRARY            = __webpack_require__(/*! ./_library */ 33)
   , global             = __webpack_require__(/*! ./_global */ 2)
-  , ctx                = __webpack_require__(/*! ./_ctx */ 26)
+  , ctx                = __webpack_require__(/*! ./_ctx */ 25)
   , classof            = __webpack_require__(/*! ./_classof */ 46)
   , $export            = __webpack_require__(/*! ./_export */ 0)
   , isObject           = __webpack_require__(/*! ./_is-object */ 4)
@@ -7307,7 +6747,7 @@ if(!USE_NATIVE){
 $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
 __webpack_require__(/*! ./_set-to-string-tag */ 44)($Promise, PROMISE);
 __webpack_require__(/*! ./_set-species */ 38)(PROMISE);
-Wrapper = __webpack_require__(/*! ./_core */ 25)[PROMISE];
+Wrapper = __webpack_require__(/*! ./_core */ 24)[PROMISE];
 
 // statics
 $export($export.S + $export.F * !USE_NATIVE, PROMISE, {
@@ -7376,11 +6816,7 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(/*! ./_iter-
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 215 */
-=======
-/* 216 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -7406,11 +6842,7 @@ $export($export.S + $export.F * !__webpack_require__(/*! ./_fails */ 3)(function
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 216 */
-=======
-/* 217 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -7467,11 +6899,7 @@ $export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 217 */
-=======
-/* 218 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************!*\
@@ -7503,11 +6931,7 @@ $export($export.S + $export.F * __webpack_require__(/*! ./_fails */ 3)(function(
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 218 */
-=======
-/* 219 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************!*\
@@ -7528,11 +6952,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 219 */
-=======
-/* 220 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -7569,11 +6989,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 220 */
-=======
-/* 221 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************************!*\
@@ -7593,11 +7009,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 221 */
-=======
-/* 222 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************************!*\
@@ -7617,11 +7029,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 222 */
-=======
-/* 223 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -7652,11 +7060,7 @@ function get(target, propertyKey/*, receiver*/){
 $export($export.S, 'Reflect', {get: get});
 
 /***/ }),
-<<<<<<< HEAD
 /* 223 */
-=======
-/* 224 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -7674,11 +7078,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 224 */
-=======
-/* 225 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************************!*\
@@ -7699,11 +7099,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 225 */
-=======
-/* 226 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -7717,11 +7113,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'Reflect', {ownKeys: __webpack_require__(/*! ./_own-keys */ 109)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 226 */
-=======
-/* 227 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************************!*\
@@ -7747,11 +7139,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 227 */
-=======
-/* 228 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************************!*\
@@ -7776,11 +7164,7 @@ if(setProto)$export($export.S, 'Reflect', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 228 */
-=======
-/* 229 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -7821,11 +7205,7 @@ function set(target, propertyKey, V/*, receiver*/){
 $export($export.S, 'Reflect', {set: set});
 
 /***/ }),
-<<<<<<< HEAD
 /* 229 */
-=======
-/* 230 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -7878,11 +7258,7 @@ if(__webpack_require__(/*! ./_descriptors */ 6) && (!CORRECT_NEW || __webpack_re
 __webpack_require__(/*! ./_set-species */ 38)('RegExp');
 
 /***/ }),
-<<<<<<< HEAD
 /* 230 */
-=======
-/* 231 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -7902,11 +7278,7 @@ __webpack_require__(/*! ./_fix-re-wks */ 52)('match', 1, function(defined, MATCH
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 231 */
-=======
-/* 232 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -7928,11 +7300,7 @@ __webpack_require__(/*! ./_fix-re-wks */ 52)('replace', 2, function(defined, REP
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 232 */
-=======
-/* 233 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -7952,11 +7320,7 @@ __webpack_require__(/*! ./_fix-re-wks */ 52)('search', 1, function(defined, SEAR
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 233 */
-=======
-/* 234 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -8036,11 +7400,7 @@ __webpack_require__(/*! ./_fix-re-wks */ 52)('split', 2, function(defined, SPLIT
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 234 */
-=======
-/* 235 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -8076,11 +7436,7 @@ if(__webpack_require__(/*! ./_fails */ 3)(function(){ return $toString.call({sou
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 235 */
-=======
-/* 236 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -8098,11 +7454,7 @@ __webpack_require__(/*! ./_string-html */ 14)('anchor', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 236 */
-=======
-/* 237 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -8120,11 +7472,7 @@ __webpack_require__(/*! ./_string-html */ 14)('big', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 237 */
-=======
-/* 238 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -8142,11 +7490,7 @@ __webpack_require__(/*! ./_string-html */ 14)('blink', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 238 */
-=======
-/* 239 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -8164,11 +7508,7 @@ __webpack_require__(/*! ./_string-html */ 14)('bold', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 239 */
-=======
-/* 240 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************************!*\
@@ -8188,11 +7528,7 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 240 */
-=======
-/* 241 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -8223,11 +7559,7 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails-is-regexp */ 65
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 241 */
-=======
-/* 242 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -8245,11 +7577,7 @@ __webpack_require__(/*! ./_string-html */ 14)('fixed', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 242 */
-=======
-/* 243 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -8267,11 +7595,7 @@ __webpack_require__(/*! ./_string-html */ 14)('fontcolor', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 243 */
-=======
-/* 244 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**************************************************!*\
@@ -8289,11 +7613,7 @@ __webpack_require__(/*! ./_string-html */ 14)('fontsize', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 244 */
-=======
-/* 245 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************************!*\
@@ -8326,11 +7646,7 @@ $export($export.S + $export.F * (!!$fromCodePoint && $fromCodePoint.length != 1)
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 245 */
-=======
-/* 246 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**************************************************!*\
@@ -8353,11 +7669,7 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails-is-regexp */ 65
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 246 */
-=======
-/* 247 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -8375,11 +7687,7 @@ __webpack_require__(/*! ./_string-html */ 14)('italics', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 247 */
-=======
-/* 248 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**************************************************!*\
@@ -8407,11 +7715,7 @@ __webpack_require__(/*! ./_iter-define */ 71)(String, 'String', function(iterate
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 248 */
-=======
-/* 249 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -8429,11 +7733,7 @@ __webpack_require__(/*! ./_string-html */ 14)('link', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 249 */
-=======
-/* 250 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -8461,11 +7761,7 @@ $export($export.S, 'String', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 250 */
-=======
-/* 251 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -8481,11 +7777,7 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 251 */
-=======
-/* 252 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -8503,11 +7795,7 @@ __webpack_require__(/*! ./_string-html */ 14)('small', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 252 */
-=======
-/* 253 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -8536,11 +7824,7 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails-is-regexp */ 65
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 253 */
-=======
-/* 254 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -8558,11 +7842,7 @@ __webpack_require__(/*! ./_string-html */ 14)('strike', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 254 */
-=======
-/* 255 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -8580,11 +7860,7 @@ __webpack_require__(/*! ./_string-html */ 14)('sub', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 255 */
-=======
-/* 256 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -8602,11 +7878,7 @@ __webpack_require__(/*! ./_string-html */ 14)('sup', function(createHTML){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 256 */
-=======
-/* 257 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -8624,11 +7896,7 @@ __webpack_require__(/*! ./_string-trim */ 45)('trim', function($trim){
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 257 */
-=======
-/* 258 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************!*\
@@ -8652,13 +7920,8 @@ var global         = __webpack_require__(/*! ./_global */ 2)
   , wks            = __webpack_require__(/*! ./_wks */ 5)
   , wksExt         = __webpack_require__(/*! ./_wks-ext */ 114)
   , wksDefine      = __webpack_require__(/*! ./_wks-define */ 84)
-<<<<<<< HEAD
   , keyOf          = __webpack_require__(/*! ./_keyof */ 133)
   , enumKeys       = __webpack_require__(/*! ./_enum-keys */ 132)
-=======
-  , keyOf          = __webpack_require__(/*! ./_keyof */ 134)
-  , enumKeys       = __webpack_require__(/*! ./_enum-keys */ 133)
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
   , isArray        = __webpack_require__(/*! ./_is-array */ 69)
   , anObject       = __webpack_require__(/*! ./_an-object */ 1)
   , toIObject      = __webpack_require__(/*! ./_to-iobject */ 15)
@@ -8879,11 +8142,7 @@ setToStringTag(Math, 'Math', true);
 setToStringTag(global.JSON, 'JSON', true);
 
 /***/ }),
-<<<<<<< HEAD
 /* 258 */
-=======
-/* 259 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -8940,11 +8199,7 @@ $export($export.P + $export.U + $export.F * __webpack_require__(/*! ./_fails */ 
 __webpack_require__(/*! ./_set-species */ 38)(ARRAY_BUFFER);
 
 /***/ }),
-<<<<<<< HEAD
 /* 259 */
-=======
-/* 260 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**************************************************!*\
@@ -8958,11 +8213,7 @@ $export($export.G + $export.W + $export.F * !__webpack_require__(/*! ./_typed */
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 260 */
-=======
-/* 261 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!******************************************************!*\
@@ -8970,18 +8221,14 @@ $export($export.G + $export.W + $export.F * !__webpack_require__(/*! ./_typed */
   \******************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Float32', 4, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Float32', 4, function(init){
   return function Float32Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 261 */
-=======
-/* 262 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!******************************************************!*\
@@ -8989,18 +8236,14 @@ __webpack_require__(/*! ./_typed-array */ 28)('Float32', 4, function(init){
   \******************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Float64', 8, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Float64', 8, function(init){
   return function Float64Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 262 */
-=======
-/* 263 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -9008,18 +8251,14 @@ __webpack_require__(/*! ./_typed-array */ 28)('Float64', 8, function(init){
   \****************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Int16', 2, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Int16', 2, function(init){
   return function Int16Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 263 */
-=======
-/* 264 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -9027,18 +8266,14 @@ __webpack_require__(/*! ./_typed-array */ 28)('Int16', 2, function(init){
   \****************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Int32', 4, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Int32', 4, function(init){
   return function Int32Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 264 */
-=======
-/* 265 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -9046,18 +8281,14 @@ __webpack_require__(/*! ./_typed-array */ 28)('Int32', 4, function(init){
   \***************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Int8', 1, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Int8', 1, function(init){
   return function Int8Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 265 */
-=======
-/* 266 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -9065,18 +8296,14 @@ __webpack_require__(/*! ./_typed-array */ 28)('Int8', 1, function(init){
   \*****************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Uint16', 2, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Uint16', 2, function(init){
   return function Uint16Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 266 */
-=======
-/* 267 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************************!*\
@@ -9084,18 +8311,14 @@ __webpack_require__(/*! ./_typed-array */ 28)('Uint16', 2, function(init){
   \*****************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Uint32', 4, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Uint32', 4, function(init){
   return function Uint32Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 267 */
-=======
-/* 268 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -9103,18 +8326,14 @@ __webpack_require__(/*! ./_typed-array */ 28)('Uint32', 4, function(init){
   \****************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Uint8', 1, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Uint8', 1, function(init){
   return function Uint8Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 268 */
-=======
-/* 269 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************************!*\
@@ -9122,18 +8341,14 @@ __webpack_require__(/*! ./_typed-array */ 28)('Uint8', 1, function(init){
   \************************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./_typed-array */ 28)('Uint8', 1, function(init){
+__webpack_require__(/*! ./_typed-array */ 27)('Uint8', 1, function(init){
   return function Uint8ClampedArray(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 }, true);
 
 /***/ }),
-<<<<<<< HEAD
 /* 269 */
-=======
-/* 270 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************!*\
@@ -9156,11 +8371,7 @@ __webpack_require__(/*! ./_collection */ 51)('WeakSet', function(get){
 }, weak, false, true);
 
 /***/ }),
-<<<<<<< HEAD
 /* 270 */
-=======
-/* 271 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -9183,11 +8394,7 @@ $export($export.P, 'Array', {
 __webpack_require__(/*! ./_add-to-unscopables */ 41)('includes');
 
 /***/ }),
-<<<<<<< HEAD
 /* 271 */
-=======
-/* 272 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************!*\
@@ -9209,11 +8416,7 @@ $export($export.G, {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 272 */
-=======
-/* 273 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -9232,11 +8435,7 @@ $export($export.S, 'Error', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 273 */
-=======
-/* 274 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -9250,11 +8449,7 @@ var $export  = __webpack_require__(/*! ./_export */ 0);
 $export($export.P + $export.R, 'Map', {toJSON: __webpack_require__(/*! ./_collection-to-json */ 97)('Map')});
 
 /***/ }),
-<<<<<<< HEAD
 /* 274 */
-=======
-/* 275 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -9275,11 +8470,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 275 */
-=======
-/* 276 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -9305,11 +8496,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 276 */
-=======
-/* 277 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -9330,11 +8517,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 277 */
-=======
-/* 278 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -9360,11 +8543,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 278 */
-=======
-/* 279 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************************!*\
@@ -9387,11 +8566,7 @@ __webpack_require__(/*! ./_descriptors */ 6) && $export($export.P + __webpack_re
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 279 */
-=======
-/* 280 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************************!*\
@@ -9414,11 +8589,7 @@ __webpack_require__(/*! ./_descriptors */ 6) && $export($export.P + __webpack_re
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 280 */
-=======
-/* 281 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -9437,11 +8608,7 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 281 */
-=======
-/* 282 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************************!*\
@@ -9470,11 +8637,7 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 282 */
-=======
-/* 283 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************************!*\
@@ -9503,11 +8666,7 @@ __webpack_require__(/*! ./_descriptors */ 6) && $export($export.P + __webpack_re
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 283 */
-=======
-/* 284 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************************!*\
@@ -9536,11 +8695,7 @@ __webpack_require__(/*! ./_descriptors */ 6) && $export($export.P + __webpack_re
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 284 */
-=======
-/* 285 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -9559,11 +8714,7 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 285 */
-=======
-/* 286 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*********************************************!*\
@@ -9576,7 +8727,7 @@ $export($export.S, 'Object', {
 // https://github.com/zenparsing/es-observable
 var $export     = __webpack_require__(/*! ./_export */ 0)
   , global      = __webpack_require__(/*! ./_global */ 2)
-  , core        = __webpack_require__(/*! ./_core */ 25)
+  , core        = __webpack_require__(/*! ./_core */ 24)
   , microtask   = __webpack_require__(/*! ./_microtask */ 74)()
   , OBSERVABLE  = __webpack_require__(/*! ./_wks */ 5)('observable')
   , aFunction   = __webpack_require__(/*! ./_a-function */ 11)
@@ -9773,11 +8924,7 @@ $export($export.G, {Observable: $Observable});
 __webpack_require__(/*! ./_set-species */ 38)('Observable');
 
 /***/ }),
-<<<<<<< HEAD
 /* 286 */
-=======
-/* 287 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************!*\
@@ -9785,7 +8932,7 @@ __webpack_require__(/*! ./_set-species */ 38)('Observable');
   \**********************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata                  = __webpack_require__(/*! ./_metadata */ 27)
+var metadata                  = __webpack_require__(/*! ./_metadata */ 26)
   , anObject                  = __webpack_require__(/*! ./_an-object */ 1)
   , toMetaKey                 = metadata.key
   , ordinaryDefineOwnMetadata = metadata.set;
@@ -9795,11 +8942,7 @@ metadata.exp({defineMetadata: function defineMetadata(metadataKey, metadataValue
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 287 */
-=======
-/* 288 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************************!*\
@@ -9807,7 +8950,7 @@ metadata.exp({defineMetadata: function defineMetadata(metadataKey, metadataValue
   \**********************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(/*! ./_metadata */ 27)
+var metadata               = __webpack_require__(/*! ./_metadata */ 26)
   , anObject               = __webpack_require__(/*! ./_an-object */ 1)
   , toMetaKey              = metadata.key
   , getOrCreateMetadataMap = metadata.map
@@ -9824,11 +8967,7 @@ metadata.exp({deleteMetadata: function deleteMetadata(metadataKey, target /*, ta
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 288 */
-=======
-/* 289 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************************!*\
@@ -9838,7 +8977,7 @@ metadata.exp({deleteMetadata: function deleteMetadata(metadataKey, target /*, ta
 
 var Set                     = __webpack_require__(/*! ./es6.set */ 117)
   , from                    = __webpack_require__(/*! ./_array-from-iterable */ 93)
-  , metadata                = __webpack_require__(/*! ./_metadata */ 27)
+  , metadata                = __webpack_require__(/*! ./_metadata */ 26)
   , anObject                = __webpack_require__(/*! ./_an-object */ 1)
   , getPrototypeOf          = __webpack_require__(/*! ./_object-gpo */ 17)
   , ordinaryOwnMetadataKeys = metadata.keys
@@ -9857,11 +8996,7 @@ metadata.exp({getMetadataKeys: function getMetadataKeys(target /*, targetKey */)
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 289 */
-=======
-/* 290 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************************!*\
@@ -9869,7 +9004,7 @@ metadata.exp({getMetadataKeys: function getMetadataKeys(target /*, targetKey */)
   \*******************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(/*! ./_metadata */ 27)
+var metadata               = __webpack_require__(/*! ./_metadata */ 26)
   , anObject               = __webpack_require__(/*! ./_an-object */ 1)
   , getPrototypeOf         = __webpack_require__(/*! ./_object-gpo */ 17)
   , ordinaryHasOwnMetadata = metadata.has
@@ -9888,11 +9023,7 @@ metadata.exp({getMetadata: function getMetadata(metadataKey, target /*, targetKe
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 290 */
-=======
-/* 291 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************************!*\
@@ -9900,7 +9031,7 @@ metadata.exp({getMetadata: function getMetadata(metadataKey, target /*, targetKe
   \****************************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata                = __webpack_require__(/*! ./_metadata */ 27)
+var metadata                = __webpack_require__(/*! ./_metadata */ 26)
   , anObject                = __webpack_require__(/*! ./_an-object */ 1)
   , ordinaryOwnMetadataKeys = metadata.keys
   , toMetaKey               = metadata.key;
@@ -9910,11 +9041,7 @@ metadata.exp({getOwnMetadataKeys: function getOwnMetadataKeys(target /*, targetK
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 291 */
-=======
-/* 292 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************************!*\
@@ -9922,7 +9049,7 @@ metadata.exp({getOwnMetadataKeys: function getOwnMetadataKeys(target /*, targetK
   \***********************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(/*! ./_metadata */ 27)
+var metadata               = __webpack_require__(/*! ./_metadata */ 26)
   , anObject               = __webpack_require__(/*! ./_an-object */ 1)
   , ordinaryGetOwnMetadata = metadata.get
   , toMetaKey              = metadata.key;
@@ -9933,11 +9060,7 @@ metadata.exp({getOwnMetadata: function getOwnMetadata(metadataKey, target /*, ta
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 292 */
-=======
-/* 293 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*******************************************************!*\
@@ -9945,7 +9068,7 @@ metadata.exp({getOwnMetadata: function getOwnMetadata(metadataKey, target /*, ta
   \*******************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(/*! ./_metadata */ 27)
+var metadata               = __webpack_require__(/*! ./_metadata */ 26)
   , anObject               = __webpack_require__(/*! ./_an-object */ 1)
   , getPrototypeOf         = __webpack_require__(/*! ./_object-gpo */ 17)
   , ordinaryHasOwnMetadata = metadata.has
@@ -9963,11 +9086,7 @@ metadata.exp({hasMetadata: function hasMetadata(metadataKey, target /*, targetKe
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 293 */
-=======
-/* 294 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************************!*\
@@ -9975,7 +9094,7 @@ metadata.exp({hasMetadata: function hasMetadata(metadataKey, target /*, targetKe
   \***********************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(/*! ./_metadata */ 27)
+var metadata               = __webpack_require__(/*! ./_metadata */ 26)
   , anObject               = __webpack_require__(/*! ./_an-object */ 1)
   , ordinaryHasOwnMetadata = metadata.has
   , toMetaKey              = metadata.key;
@@ -9986,11 +9105,7 @@ metadata.exp({hasOwnMetadata: function hasOwnMetadata(metadataKey, target /*, ta
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 294 */
-=======
-/* 295 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -9998,7 +9113,7 @@ metadata.exp({hasOwnMetadata: function hasOwnMetadata(metadataKey, target /*, ta
   \***************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata                  = __webpack_require__(/*! ./_metadata */ 27)
+var metadata                  = __webpack_require__(/*! ./_metadata */ 26)
   , anObject                  = __webpack_require__(/*! ./_an-object */ 1)
   , aFunction                 = __webpack_require__(/*! ./_a-function */ 11)
   , toMetaKey                 = metadata.key
@@ -10015,11 +9130,7 @@ metadata.exp({metadata: function metadata(metadataKey, metadataValue){
 }});
 
 /***/ }),
-<<<<<<< HEAD
 /* 295 */
-=======
-/* 296 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!**********************************************!*\
@@ -10033,11 +9144,7 @@ var $export  = __webpack_require__(/*! ./_export */ 0);
 $export($export.P + $export.R, 'Set', {toJSON: __webpack_require__(/*! ./_collection-to-json */ 97)('Set')});
 
 /***/ }),
-<<<<<<< HEAD
 /* 296 */
-=======
-/* 297 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -10058,11 +9165,7 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 297 */
-=======
-/* 298 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -10103,11 +9206,7 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 298 */
-=======
-/* 299 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*************************************************!*\
@@ -10128,11 +9227,7 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 299 */
-=======
-/* 300 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -10153,11 +9248,7 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 300 */
-=======
-/* 301 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************************************!*\
@@ -10175,11 +9266,7 @@ __webpack_require__(/*! ./_string-trim */ 45)('trimLeft', function($trim){
 }, 'trimStart');
 
 /***/ }),
-<<<<<<< HEAD
 /* 301 */
-=======
-/* 302 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -10197,11 +9284,7 @@ __webpack_require__(/*! ./_string-trim */ 45)('trimRight', function($trim){
 }, 'trimEnd');
 
 /***/ }),
-<<<<<<< HEAD
 /* 302 */
-=======
-/* 303 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************************!*\
@@ -10212,11 +9295,7 @@ __webpack_require__(/*! ./_string-trim */ 45)('trimRight', function($trim){
 __webpack_require__(/*! ./_wks-define */ 84)('asyncIterator');
 
 /***/ }),
-<<<<<<< HEAD
 /* 303 */
-=======
-/* 304 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!****************************************************!*\
@@ -10227,11 +9306,7 @@ __webpack_require__(/*! ./_wks-define */ 84)('asyncIterator');
 __webpack_require__(/*! ./_wks-define */ 84)('observable');
 
 /***/ }),
-<<<<<<< HEAD
 /* 304 */
-=======
-/* 305 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!************************************************!*\
@@ -10245,11 +9320,7 @@ var $export = __webpack_require__(/*! ./_export */ 0);
 $export($export.S, 'System', {global: __webpack_require__(/*! ./_global */ 2)});
 
 /***/ }),
-<<<<<<< HEAD
 /* 305 */
-=======
-/* 306 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***********************************************!*\
@@ -10281,11 +9352,7 @@ for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList'
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 306 */
-=======
-/* 307 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!********************************************!*\
@@ -10301,11 +9368,7 @@ $export($export.G + $export.B, {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 307 */
-=======
-/* 308 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!*****************************************!*\
@@ -10317,11 +9380,7 @@ $export($export.G + $export.B, {
 var global     = __webpack_require__(/*! ./_global */ 2)
   , $export    = __webpack_require__(/*! ./_export */ 0)
   , invoke     = __webpack_require__(/*! ./_invoke */ 54)
-<<<<<<< HEAD
   , partial    = __webpack_require__(/*! ./_partial */ 134)
-=======
-  , partial    = __webpack_require__(/*! ./_partial */ 135)
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
   , navigator  = global.navigator
   , MSIE       = !!navigator && /MSIE .\./.test(navigator.userAgent); // <- dirty ie9- check
 var wrap = function(set){
@@ -10339,11 +9398,7 @@ $export($export.G + $export.B + $export.F * MSIE, {
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 308 */
-=======
-/* 309 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!***************************!*\
@@ -10351,7 +9406,6 @@ $export($export.G + $export.B + $export.F * MSIE, {
   \***************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! ./modules/es6.symbol */ 257);
 __webpack_require__(/*! ./modules/es6.object.create */ 196);
 __webpack_require__(/*! ./modules/es6.object.define-property */ 198);
@@ -10535,191 +9589,6 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 24);
 /* 311 */,
 /* 312 */,
 /* 313 */
-=======
-__webpack_require__(/*! ./modules/es6.symbol */ 258);
-__webpack_require__(/*! ./modules/es6.object.create */ 197);
-__webpack_require__(/*! ./modules/es6.object.define-property */ 199);
-__webpack_require__(/*! ./modules/es6.object.define-properties */ 198);
-__webpack_require__(/*! ./modules/es6.object.get-own-property-descriptor */ 201);
-__webpack_require__(/*! ./modules/es6.object.get-prototype-of */ 203);
-__webpack_require__(/*! ./modules/es6.object.keys */ 208);
-__webpack_require__(/*! ./modules/es6.object.get-own-property-names */ 202);
-__webpack_require__(/*! ./modules/es6.object.freeze */ 200);
-__webpack_require__(/*! ./modules/es6.object.seal */ 210);
-__webpack_require__(/*! ./modules/es6.object.prevent-extensions */ 209);
-__webpack_require__(/*! ./modules/es6.object.is-frozen */ 205);
-__webpack_require__(/*! ./modules/es6.object.is-sealed */ 206);
-__webpack_require__(/*! ./modules/es6.object.is-extensible */ 204);
-__webpack_require__(/*! ./modules/es6.object.assign */ 196);
-__webpack_require__(/*! ./modules/es6.object.is */ 207);
-__webpack_require__(/*! ./modules/es6.object.set-prototype-of */ 211);
-__webpack_require__(/*! ./modules/es6.object.to-string */ 212);
-__webpack_require__(/*! ./modules/es6.function.bind */ 164);
-__webpack_require__(/*! ./modules/es6.function.name */ 166);
-__webpack_require__(/*! ./modules/es6.function.has-instance */ 165);
-__webpack_require__(/*! ./modules/es6.parse-int */ 214);
-__webpack_require__(/*! ./modules/es6.parse-float */ 213);
-__webpack_require__(/*! ./modules/es6.number.constructor */ 184);
-__webpack_require__(/*! ./modules/es6.number.to-fixed */ 194);
-__webpack_require__(/*! ./modules/es6.number.to-precision */ 195);
-__webpack_require__(/*! ./modules/es6.number.epsilon */ 185);
-__webpack_require__(/*! ./modules/es6.number.is-finite */ 186);
-__webpack_require__(/*! ./modules/es6.number.is-integer */ 187);
-__webpack_require__(/*! ./modules/es6.number.is-nan */ 188);
-__webpack_require__(/*! ./modules/es6.number.is-safe-integer */ 189);
-__webpack_require__(/*! ./modules/es6.number.max-safe-integer */ 190);
-__webpack_require__(/*! ./modules/es6.number.min-safe-integer */ 191);
-__webpack_require__(/*! ./modules/es6.number.parse-float */ 192);
-__webpack_require__(/*! ./modules/es6.number.parse-int */ 193);
-__webpack_require__(/*! ./modules/es6.math.acosh */ 167);
-__webpack_require__(/*! ./modules/es6.math.asinh */ 168);
-__webpack_require__(/*! ./modules/es6.math.atanh */ 169);
-__webpack_require__(/*! ./modules/es6.math.cbrt */ 170);
-__webpack_require__(/*! ./modules/es6.math.clz32 */ 171);
-__webpack_require__(/*! ./modules/es6.math.cosh */ 172);
-__webpack_require__(/*! ./modules/es6.math.expm1 */ 173);
-__webpack_require__(/*! ./modules/es6.math.fround */ 174);
-__webpack_require__(/*! ./modules/es6.math.hypot */ 175);
-__webpack_require__(/*! ./modules/es6.math.imul */ 176);
-__webpack_require__(/*! ./modules/es6.math.log10 */ 177);
-__webpack_require__(/*! ./modules/es6.math.log1p */ 178);
-__webpack_require__(/*! ./modules/es6.math.log2 */ 179);
-__webpack_require__(/*! ./modules/es6.math.sign */ 180);
-__webpack_require__(/*! ./modules/es6.math.sinh */ 181);
-__webpack_require__(/*! ./modules/es6.math.tanh */ 182);
-__webpack_require__(/*! ./modules/es6.math.trunc */ 183);
-__webpack_require__(/*! ./modules/es6.string.from-code-point */ 245);
-__webpack_require__(/*! ./modules/es6.string.raw */ 250);
-__webpack_require__(/*! ./modules/es6.string.trim */ 257);
-__webpack_require__(/*! ./modules/es6.string.iterator */ 248);
-__webpack_require__(/*! ./modules/es6.string.code-point-at */ 240);
-__webpack_require__(/*! ./modules/es6.string.ends-with */ 241);
-__webpack_require__(/*! ./modules/es6.string.includes */ 246);
-__webpack_require__(/*! ./modules/es6.string.repeat */ 251);
-__webpack_require__(/*! ./modules/es6.string.starts-with */ 253);
-__webpack_require__(/*! ./modules/es6.string.anchor */ 236);
-__webpack_require__(/*! ./modules/es6.string.big */ 237);
-__webpack_require__(/*! ./modules/es6.string.blink */ 238);
-__webpack_require__(/*! ./modules/es6.string.bold */ 239);
-__webpack_require__(/*! ./modules/es6.string.fixed */ 242);
-__webpack_require__(/*! ./modules/es6.string.fontcolor */ 243);
-__webpack_require__(/*! ./modules/es6.string.fontsize */ 244);
-__webpack_require__(/*! ./modules/es6.string.italics */ 247);
-__webpack_require__(/*! ./modules/es6.string.link */ 249);
-__webpack_require__(/*! ./modules/es6.string.small */ 252);
-__webpack_require__(/*! ./modules/es6.string.strike */ 254);
-__webpack_require__(/*! ./modules/es6.string.sub */ 255);
-__webpack_require__(/*! ./modules/es6.string.sup */ 256);
-__webpack_require__(/*! ./modules/es6.date.now */ 159);
-__webpack_require__(/*! ./modules/es6.date.to-json */ 161);
-__webpack_require__(/*! ./modules/es6.date.to-iso-string */ 160);
-__webpack_require__(/*! ./modules/es6.date.to-string */ 163);
-__webpack_require__(/*! ./modules/es6.date.to-primitive */ 162);
-__webpack_require__(/*! ./modules/es6.array.is-array */ 148);
-__webpack_require__(/*! ./modules/es6.array.from */ 146);
-__webpack_require__(/*! ./modules/es6.array.of */ 152);
-__webpack_require__(/*! ./modules/es6.array.join */ 149);
-__webpack_require__(/*! ./modules/es6.array.slice */ 155);
-__webpack_require__(/*! ./modules/es6.array.sort */ 157);
-__webpack_require__(/*! ./modules/es6.array.for-each */ 145);
-__webpack_require__(/*! ./modules/es6.array.map */ 151);
-__webpack_require__(/*! ./modules/es6.array.filter */ 142);
-__webpack_require__(/*! ./modules/es6.array.some */ 156);
-__webpack_require__(/*! ./modules/es6.array.every */ 140);
-__webpack_require__(/*! ./modules/es6.array.reduce */ 154);
-__webpack_require__(/*! ./modules/es6.array.reduce-right */ 153);
-__webpack_require__(/*! ./modules/es6.array.index-of */ 147);
-__webpack_require__(/*! ./modules/es6.array.last-index-of */ 150);
-__webpack_require__(/*! ./modules/es6.array.copy-within */ 139);
-__webpack_require__(/*! ./modules/es6.array.fill */ 141);
-__webpack_require__(/*! ./modules/es6.array.find */ 144);
-__webpack_require__(/*! ./modules/es6.array.find-index */ 143);
-__webpack_require__(/*! ./modules/es6.array.species */ 158);
-__webpack_require__(/*! ./modules/es6.array.iterator */ 86);
-__webpack_require__(/*! ./modules/es6.regexp.constructor */ 230);
-__webpack_require__(/*! ./modules/es6.regexp.to-string */ 235);
-__webpack_require__(/*! ./modules/es6.regexp.flags */ 116);
-__webpack_require__(/*! ./modules/es6.regexp.match */ 231);
-__webpack_require__(/*! ./modules/es6.regexp.replace */ 232);
-__webpack_require__(/*! ./modules/es6.regexp.search */ 233);
-__webpack_require__(/*! ./modules/es6.regexp.split */ 234);
-__webpack_require__(/*! ./modules/es6.promise */ 215);
-__webpack_require__(/*! ./modules/es6.map */ 115);
-__webpack_require__(/*! ./modules/es6.set */ 117);
-__webpack_require__(/*! ./modules/es6.weak-map */ 118);
-__webpack_require__(/*! ./modules/es6.weak-set */ 270);
-__webpack_require__(/*! ./modules/es6.typed.array-buffer */ 259);
-__webpack_require__(/*! ./modules/es6.typed.data-view */ 260);
-__webpack_require__(/*! ./modules/es6.typed.int8-array */ 265);
-__webpack_require__(/*! ./modules/es6.typed.uint8-array */ 268);
-__webpack_require__(/*! ./modules/es6.typed.uint8-clamped-array */ 269);
-__webpack_require__(/*! ./modules/es6.typed.int16-array */ 263);
-__webpack_require__(/*! ./modules/es6.typed.uint16-array */ 266);
-__webpack_require__(/*! ./modules/es6.typed.int32-array */ 264);
-__webpack_require__(/*! ./modules/es6.typed.uint32-array */ 267);
-__webpack_require__(/*! ./modules/es6.typed.float32-array */ 261);
-__webpack_require__(/*! ./modules/es6.typed.float64-array */ 262);
-__webpack_require__(/*! ./modules/es6.reflect.apply */ 216);
-__webpack_require__(/*! ./modules/es6.reflect.construct */ 217);
-__webpack_require__(/*! ./modules/es6.reflect.define-property */ 218);
-__webpack_require__(/*! ./modules/es6.reflect.delete-property */ 219);
-__webpack_require__(/*! ./modules/es6.reflect.enumerate */ 220);
-__webpack_require__(/*! ./modules/es6.reflect.get */ 223);
-__webpack_require__(/*! ./modules/es6.reflect.get-own-property-descriptor */ 221);
-__webpack_require__(/*! ./modules/es6.reflect.get-prototype-of */ 222);
-__webpack_require__(/*! ./modules/es6.reflect.has */ 224);
-__webpack_require__(/*! ./modules/es6.reflect.is-extensible */ 225);
-__webpack_require__(/*! ./modules/es6.reflect.own-keys */ 226);
-__webpack_require__(/*! ./modules/es6.reflect.prevent-extensions */ 227);
-__webpack_require__(/*! ./modules/es6.reflect.set */ 229);
-__webpack_require__(/*! ./modules/es6.reflect.set-prototype-of */ 228);
-__webpack_require__(/*! ./modules/es7.array.includes */ 271);
-__webpack_require__(/*! ./modules/es7.string.at */ 297);
-__webpack_require__(/*! ./modules/es7.string.pad-start */ 300);
-__webpack_require__(/*! ./modules/es7.string.pad-end */ 299);
-__webpack_require__(/*! ./modules/es7.string.trim-left */ 301);
-__webpack_require__(/*! ./modules/es7.string.trim-right */ 302);
-__webpack_require__(/*! ./modules/es7.string.match-all */ 298);
-__webpack_require__(/*! ./modules/es7.symbol.async-iterator */ 303);
-__webpack_require__(/*! ./modules/es7.symbol.observable */ 304);
-__webpack_require__(/*! ./modules/es7.object.get-own-property-descriptors */ 282);
-__webpack_require__(/*! ./modules/es7.object.values */ 285);
-__webpack_require__(/*! ./modules/es7.object.entries */ 281);
-__webpack_require__(/*! ./modules/es7.object.define-getter */ 279);
-__webpack_require__(/*! ./modules/es7.object.define-setter */ 280);
-__webpack_require__(/*! ./modules/es7.object.lookup-getter */ 283);
-__webpack_require__(/*! ./modules/es7.object.lookup-setter */ 284);
-__webpack_require__(/*! ./modules/es7.map.to-json */ 274);
-__webpack_require__(/*! ./modules/es7.set.to-json */ 296);
-__webpack_require__(/*! ./modules/es7.system.global */ 305);
-__webpack_require__(/*! ./modules/es7.error.is-error */ 273);
-__webpack_require__(/*! ./modules/es7.math.iaddh */ 275);
-__webpack_require__(/*! ./modules/es7.math.isubh */ 277);
-__webpack_require__(/*! ./modules/es7.math.imulh */ 276);
-__webpack_require__(/*! ./modules/es7.math.umulh */ 278);
-__webpack_require__(/*! ./modules/es7.reflect.define-metadata */ 287);
-__webpack_require__(/*! ./modules/es7.reflect.delete-metadata */ 288);
-__webpack_require__(/*! ./modules/es7.reflect.get-metadata */ 290);
-__webpack_require__(/*! ./modules/es7.reflect.get-metadata-keys */ 289);
-__webpack_require__(/*! ./modules/es7.reflect.get-own-metadata */ 292);
-__webpack_require__(/*! ./modules/es7.reflect.get-own-metadata-keys */ 291);
-__webpack_require__(/*! ./modules/es7.reflect.has-metadata */ 293);
-__webpack_require__(/*! ./modules/es7.reflect.has-own-metadata */ 294);
-__webpack_require__(/*! ./modules/es7.reflect.metadata */ 295);
-__webpack_require__(/*! ./modules/es7.asap */ 272);
-__webpack_require__(/*! ./modules/es7.observable */ 286);
-__webpack_require__(/*! ./modules/web.timers */ 308);
-__webpack_require__(/*! ./modules/web.immediate */ 307);
-__webpack_require__(/*! ./modules/web.dom.iterable */ 306);
-module.exports = __webpack_require__(/*! ./modules/_core */ 25);
-
-/***/ }),
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!******************************************!*\
@@ -11467,11 +10336,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../webpack/buildin/global.js */ 49)))
 
 /***/ }),
-<<<<<<< HEAD
 /* 314 */
-=======
-/* 315 */
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 /* no static exports found */
 /* all exports used */
 /*!******************************************!*\
@@ -11480,17 +10345,9 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */120);
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\USER\Desktop\Hackatron\sud-mun-pwa-2017\src\main.js */119);
 
 
 /***/ })
 ],[314]);
-=======
-module.exports = __webpack_require__(/*! /Users/nattapat/Learning/sud-mun-pwa-2017/src/main.js */119);
-
-
-/***/ })
-],[315]);
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
 //# sourceMappingURL=bundle.js.map

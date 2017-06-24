@@ -9,10 +9,6 @@ export default class extends Phaser.State {
     this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar')
     centerGameObjects([this.loaderBg, this.loaderBar])
     this.load.spritesheet('dino', 'assets/images/dino_fix_52x58.png', 52, 58)
-<<<<<<< HEAD
-=======
-    
->>>>>>> ebcb2def8689cea32d4489cacdac4fa777ff3b8c
     this.load.setPreloadSprite(this.loaderBar)
 
     // load your assets
