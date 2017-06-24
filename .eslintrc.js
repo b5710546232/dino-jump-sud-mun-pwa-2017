@@ -5,6 +5,7 @@ module.exports = {
         "promise"
     ],
     "env": {
-        "serviceworker": true
+        "serviceworker": true,
+        "browser": true
     }
 };
