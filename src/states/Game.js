@@ -6,45 +6,32 @@ import Phaser from 'phaser'
 import Dino from '../prefabs/dino'
 import Obstracle from '../prefabs/obstracle'
 import Cloud from '../prefabs/cloud'
+import Ground from '../prefabs/ground'
 import Config from '../config'// eslint-disable-line
+
 
 export default class extends Phaser.State {
   init () {}
   preload () {}
 
   create () {
-    const bannerText = 'Phaser + ES6 + Webpack'
-    let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText)
-    banner.font = 'Bangers'
-    banner.padding.set(10, 16)
-    banner.fontSize = 40
-    banner.fill = '#77BFA3'
-    banner.smoothed = false
-    banner.anchor.setTo(0.5)
-    this.game.physics.arcade.gravity.y = 300
-    // this.mushroom = new Mushroom({
-    //   game: this,
-    //   x: this.world.centerX,
-    //   y: this.world.centerY,
-    //   asset: 'mushroom'
-    // })
+    // bg set up.
+    this.bg = this.game.add.image(0, 0, 'bg')
+    this.ground = new Ground({
+      game: this.game,
+      x: this.game.width / 2,
+      y: this.game.height - this.game.cache.getImage('ground').height / 2,
+      asset: 'ground'
+    })
 
-    // this.game.add.existing(this.mushroom)
-    if (!this.game.device.desktop) {
-      this.game.scale.startFullScreen(false)
-    }
+    this.game.physics.arcade.gravity.y = 1000
     // this.fontsReady = false
     // this.fontsLoaded = this.fontsLoaded.bind(this)
-    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
-    this.scale.pageAlignHorizontally = true
-    this.game.scale.setScreenSize = true
-    this.game.scale.refresh()
-    // this.scale.refresh();
 
     this.dino = new Dino({
       game: this.game,
       x: 40,
-      y: 300,
+      y: this.game.height / 2 - this.game.cache.getImage('ground').height,
       asset: 'dino'
     })
     this.score = 0
@@ -88,8 +75,12 @@ export default class extends Phaser.State {
   }
 
   update () {
+    this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this)
     this.game.physics.arcade.collide(this.dino, this.obstracles, this.collistionHandler, null, this)
     this.updateScore()
+  }
+  groundCollisionHandler (dino, ground) {
+    dino.isOnGround = true
   }
   updateScore () {
     this.score = parseInt(this.game.time.totalElapsedSeconds())
@@ -103,5 +94,7 @@ export default class extends Phaser.State {
     for (let i in this.obstracles) {
       this.game.debug.body(this.obstracles[i])
     }
+    this.game.debug.body(this.dino)
+    this.game.debug.body(this.ground)
   }
 }
