@@ -46,6 +46,13 @@ export default class extends Phaser.State {
     this.clouds = []
     this.initializeObstracle()
     this.initializeClouds()
+    this.respawnButton = this.add.button(this.game.width / 2 - 50, this.game.height / 2 - 90, 'respawn_button', () => { })
+    this.respawnButton.onInputDown.add(() => {
+      this.score = 0
+      this.game.paused = false
+      this.state.start('Game')
+    })
+    this.closeDeadScene()
   }
 
   initializeClouds () {
@@ -88,9 +95,23 @@ export default class extends Phaser.State {
     this.scoreText.setText('Score : ' + this.score)
   }
   collistionHandler () {
+    this.highscore = `High Score : ` + this.score
+    this.highscoreTxt = this.game.add.text(this.game.width / 2 - 90, this.game.height / 2 - 130, this.highscore)
+    this.highscoreTxt.fill = '#FFFFFF'
+    this.highscoreTxt.align = 'center'
+    this.highscoreTxt.font = '10px Barrio'
+    this.highscoreTxt.stroke = '#000000'
+    this.highscoreTxt.strokeThickness = 2
+    this.showDeadScene()
     this.dino.isDead = true
+    this.game.paused = true
   }
-
+  showDeadScene () {
+    this.respawnButton.visible = true
+  }
+  closeDeadScene () {
+    this.respawnButton.visible = false
+  }
   render () {
     for (let i in this.obstracles) {
       this.game.debug.body(this.obstracles[i])

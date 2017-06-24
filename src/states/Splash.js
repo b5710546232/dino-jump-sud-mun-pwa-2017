@@ -23,6 +23,7 @@ export default class extends Phaser.State {
     this.load.image('bg', 'assets/images/bg.png')
     this.load.image('ground', 'assets/images/ground.png')
     this.load.audio('jump_sfx', ('assets/sfx/jump.wav'))
+    this.load.image('respawn_button', 'assets/images/playAgainButton.png')
   }
 
   create () {
