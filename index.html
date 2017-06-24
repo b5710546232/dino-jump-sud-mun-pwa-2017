@@ -34,8 +34,20 @@
     </style>
 </head>
 <body>
+    <noscript>
+        You need to enable JavaScript to run this app.
+    </noscript>
     <div id="content"></div>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('./service-worker.js')
+            .then(() => {
+            console.log('Service Worker Registered')
+            })
+        }
+    </script>
 </body>
 </html>
