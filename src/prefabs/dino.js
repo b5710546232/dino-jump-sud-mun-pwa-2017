@@ -24,5 +24,4 @@ export default class Dino extends Phaser.Sprite {
   update () {
     this.jump()
   }
-
 }

@@ -1,9 +1,11 @@
-/* globals __DEV__ */
+/**
+ * globals __DEV__ // eslint-disable-line no-use-before-define
+ */
 import Phaser from 'phaser'
 
 import Dino from '../prefabs/dino'
 import Obstracle from '../prefabs/obstracle'
-import Config from '../config'
+import Config from '../config'// eslint-disable-line 
 
 export default class extends Phaser.State {
   init () {}
