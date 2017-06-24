@@ -8,11 +8,25 @@ const filesToCache = [
   '/dist/vendor.bundle.js',
   '/dist/vendor.bundle.js.map',
   '/assets/css/style.css',
+  '/assets/images/bg.png',
+  '/assets/images/cactus01.png',
+  '/assets/images/cactus02.png',
+  '/assets/images/cactus03.png',
+  '/assets/images/cloud01.png',
+  '/assets/images/cloud02.png',
+  '/assets/images/cloud03.png',
+  '/assets/images/dino.png',
+  '/assets/images/dino_52x58.png',
+  '/assets/images/ground.png',
   '/assets/images/loader-bar.png',
   '/assets/images/loader-bg.png',
   '/assets/images/mushroom2.png',
   '/assets/images/obstacle.png',
-  '/assets/sprites/dino_52x58.png'
+  '/assets/images/phaser-es6-webpack.png',
+  '/assets/images/playAgainButton.png',
+  '/assets/sfx/jump.wav',
+  '/assets/sprites/dino_52x58.png',
+  '/assets/sprites/player_sheet.png'
 ]
 
 self.addEventListener('install', e => {
