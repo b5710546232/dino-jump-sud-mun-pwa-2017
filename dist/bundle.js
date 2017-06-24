@@ -4249,13 +4249,24 @@ var Obstracle = function (_Phaser$Sprite) {
       this.body.allowGravity = false;
       this.anchor.y = 1;
       this.smoothed = false;
+      this.dead = false;
+    }
+  }, {
+    key: 'getX',
+    value: function getX() {
+      return this.position;
+    }
+  }, {
+    key: 'setX',
+    value: function setX(xValue) {
+      this.x = xValue;
     }
   }, {
     key: 'update',
     value: function update() {
       this.x -= 3;
       if (this.x < -100) {
-        this.x = 700 + Math.random() * 600;
+        this.dead = true;
       }
     }
   }]);
@@ -4518,12 +4529,12 @@ var _class = function (_Phaser$State) {
     key: 'initializeObstracle',
     value: function initializeObstracle() {
       var obsracles = ['cactus01', 'cactus02', 'cactus03'];
-      for (var i = 0; i < 6; i++) {
+      for (var i = 0; i < 5; i++) {
         var random = Math.floor(Math.random() * obsracles.length);
         console.log('random', random);
         var newObstracle = new _obstracle2.default({
           game: this,
-          x: 500 + i * 300 * Math.random() + i * 300,
+          x: 500 + 300 * Math.random() + i * 400,
           y: 250,
           asset: obsracles[random]
         });
@@ -4531,8 +4542,36 @@ var _class = function (_Phaser$State) {
       }
     }
   }, {
+    key: 'handleObstracle',
+    value: function handleObstracle() {
+      for (var i in this.obstracles) {
+        if (this.obstracles[i].dead === true) {
+          var modeGenerator = Math.floor(Math.random() * 3) + 1;
+          var randomNumber = 0;
+          if (modeGenerator >= 3) {
+            randomNumber = 300 + Math.floor(Math.random() * 100);
+          } else if (modeGenerator >= 2) {
+            randomNumber = 200 + Math.floor(Math.random() * 100);
+          } else if (modeGenerator >= 1) {
+            randomNumber = Math.floor(Math.random() * 100) + 400;
+          }
+          var maximumX = 0;
+          for (var j = 0; j < this.obstracles.length - 1; j++) {
+            var newMax = Math.max(this.obstracles[j].x, this.obstracles[j + 1].x);
+            if (newMax > maximumX) {
+              maximumX = newMax;
+            }
+          }
+          console.log('Respawn At' + maximumX);
+          this.obstracles[i].setX(maximumX + randomNumber);
+          this.obstracles[i].dead = false;
+        }
+      }
+    }
+  }, {
     key: 'update',
     value: function update() {
+      this.handleObstracle();
       this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this);
       this.game.physics.arcade.collide(this.dino, this.ground2, this.groundCollisionHandler, null, this);
       this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this);
