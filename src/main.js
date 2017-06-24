@@ -18,6 +18,16 @@ class Game extends Phaser.Game {
     this.state.add('Game', GameState, false)
     this.state.start('Boot')
   }
+
+  addServiceWorker () {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('./config/service-worker.js')
+        .then(() => {
+          console.log('Service Worker Registered')
+        })
+    }
+  }
 }
 
 window.game = new Game()
