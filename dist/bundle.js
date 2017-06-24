@@ -3970,6 +3970,7 @@ var Cloud = function (_Phaser$Sprite) {
       this.scale.x = 1;
       this.scale.y = 1;
       this.randomSpriteGenerator();
+      this.smoothed = false;
     }
   }, {
     key: 'reposition',
@@ -4070,10 +4071,11 @@ var Dino = function (_Phaser$Sprite) {
       this.animations.play('idle');
       this.jumpSound = this.game.add.audio('jump_sfx');
 
-      var width = 32;
+      var width = 28;
       var height = 58;
       var offSetY = 0;
-      var offSetX = 8;
+      var offSetX = 4;
+      this.smoothed = false;
       this.body.setSize(width, height, offSetX, offSetY);
       // this.character.animations.add('idle', [0], 10, true)
     }
@@ -4173,6 +4175,7 @@ var Ground = function (_Phaser$Sprite) {
       this.body.allowGravity = false;
       this.scale.x = 1;
       this.scale.y = 1;
+      this.smoothed = false;
     }
   }, {
     key: 'update',
@@ -4239,21 +4242,7 @@ var Obstracle = function (_Phaser$Sprite) {
       this.game.physics.enable(this, _phaser2.default.Physics.ARCADE);
       this.body.allowGravity = false;
       this.anchor.y = 1;
-      // this.scale.x = 1
-      // this.scale.y = 1
-      // this.randomSpriteGenerator()
-    }
-  }, {
-    key: 'randomSpriteGenerator',
-    value: function randomSpriteGenerator() {
-      var randomNumber = Math.floor(Math.random() * 3) + 1;
-      if (randomNumber > 2) {
-        this.loadTexture('cactus01');
-      } else if (randomNumber > 1) {
-        this.loadTexture('cactus02');
-      } else {
-        this.loadTexture('cactus03');
-      }
+      this.smoothed = false;
     }
   }, {
     key: 'update',
@@ -4517,6 +4506,9 @@ var _class = function (_Phaser$State) {
       this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this);
       this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this);
       this.updateScore();
+      if (this.game.input.activePointer.isDown) {
+        this.game.paused = false;
+      }
     }
   }, {
     key: 'groundCollisionHandler',

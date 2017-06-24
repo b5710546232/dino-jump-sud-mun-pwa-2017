@@ -86,6 +86,9 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this)
     this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this)
     this.updateScore()
+    if (this.game.input.activePointer.isDown) {
+      this.game.paused = false
+    }
   }
   groundCollisionHandler (dino, ground) {
     dino.isOnGround = true
