@@ -27,6 +27,7 @@ export default class Dino extends Phaser.Sprite {
     let offSetX = 4
     this.smoothed = false
     this.body.setSize(width, height, offSetX, offSetY)
+    this.play('jump')
     // this.character.animations.add('idle', [0], 10, true)
   }
 
@@ -36,7 +37,7 @@ export default class Dino extends Phaser.Sprite {
     } else if (this.game.input.activePointer.isDown && this.onFloor() && this.game.time.now > this.jumpTimer) {
       this.play('jump')
       this.jumpSound.play()
-      this.body.velocity.y = JUMP_VALUE
+      this.onJump()
       this.jumpTimer = this.game.time.now + 750
     } else if (this.onFloor()) {
       this.play('run')
@@ -44,7 +45,9 @@ export default class Dino extends Phaser.Sprite {
       this.play('idle')
     }
   }
-
+  onJump () {
+    this.body.velocity.y = JUMP_VALUE
+  }
   onFloor () {
     return this.body.velocity.y === 0
   }

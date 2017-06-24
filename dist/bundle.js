@@ -3970,6 +3970,7 @@ var Cloud = function (_Phaser$Sprite) {
       this.scale.x = 1;
       this.scale.y = 1;
       this.randomSpriteGenerator();
+      this.smoothed = false;
     }
   }, {
     key: 'reposition',
@@ -3995,6 +3996,9 @@ var Cloud = function (_Phaser$Sprite) {
   }, {
     key: 'update',
     value: function update() {
+      if (!this.game.isStart) {
+        return;
+      }
       this.x -= 2;
       this.reposition();
     }
@@ -4070,11 +4074,13 @@ var Dino = function (_Phaser$Sprite) {
       this.animations.play('idle');
       this.jumpSound = this.game.add.audio('jump_sfx');
 
-      var width = 32;
+      var width = 28;
       var height = 58;
       var offSetY = 0;
-      var offSetX = 8;
+      var offSetX = 4;
+      this.smoothed = false;
       this.body.setSize(width, height, offSetX, offSetY);
+      this.play('jump');
       // this.character.animations.add('idle', [0], 10, true)
     }
   }, {
@@ -4085,13 +4091,18 @@ var Dino = function (_Phaser$Sprite) {
       } else if (this.game.input.activePointer.isDown && this.onFloor() && this.game.time.now > this.jumpTimer) {
         this.play('jump');
         this.jumpSound.play();
-        this.body.velocity.y = JUMP_VALUE;
+        this.onJump();
         this.jumpTimer = this.game.time.now + 750;
       } else if (this.onFloor()) {
         this.play('run');
       } else {
         this.play('idle');
       }
+    }
+  }, {
+    key: 'onJump',
+    value: function onJump() {
+      this.body.velocity.y = JUMP_VALUE;
     }
   }, {
     key: 'onFloor',
@@ -4173,6 +4184,7 @@ var Ground = function (_Phaser$Sprite) {
       this.body.allowGravity = false;
       this.scale.x = 1;
       this.scale.y = 1;
+      this.smoothed = false;
     }
   }, {
     key: 'update',
@@ -4237,25 +4249,9 @@ var Obstracle = function (_Phaser$Sprite) {
     key: 'setup',
     value: function setup() {
       this.game.physics.enable(this, _phaser2.default.Physics.ARCADE);
-      // this.body.collideWorldBounds = true
-      // this.body.setCircle(16)
-      // this.body.setSize(30, 40)
       this.body.allowGravity = false;
-      this.scale.x = 1;
-      this.scale.y = 1;
-      this.randomSpriteGenerator();
-    }
-  }, {
-    key: 'randomSpriteGenerator',
-    value: function randomSpriteGenerator() {
-      var randomNumber = Math.floor(Math.random() * 3) + 1;
-      if (randomNumber > 2) {
-        this.loadTexture('cactus01');
-      } else if (randomNumber > 1) {
-        this.loadTexture('cactus02');
-      } else {
-        this.loadTexture('cactus03');
-      }
+      this.anchor.y = 1;
+      this.smoothed = false;
     }
   }, {
     key: 'update',
@@ -4263,11 +4259,7 @@ var Obstracle = function (_Phaser$Sprite) {
       this.x -= 3;
       if (this.x < -100) {
         this.x = 700 + Math.random() * 600;
-        this.randomSpriteGenerator();
-        // console.log(this.game.height)
       }
-      // console.log(this.x)
-      // this.game.physics.arcade.moveToXY(this, 0, this.game.width, 50)
     }
   }]);
 
@@ -4332,6 +4324,8 @@ var _class = function (_Phaser$State) {
       this.game.scale.setScreenSize = true;
       this.game.scale.refresh();
       // this.scale.refresh();
+
+      this.game.firebase = firebase.database(); //  eslint-disable-line
     }
   }, {
     key: 'preload',
@@ -4426,6 +4420,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 // eslint-disable-line
+
 var _class = function (_Phaser$State) {
   _inherits(_class, _Phaser$State);
 
@@ -4455,6 +4450,7 @@ var _class = function (_Phaser$State) {
         asset: 'ground'
       });
 
+      this.timeStart = 0;
       this.game.physics.arcade.gravity.y = 1000;
       // this.fontsReady = false
       // this.fontsLoaded = this.fontsLoaded.bind(this)
@@ -4462,7 +4458,7 @@ var _class = function (_Phaser$State) {
       this.dino = new _dino2.default({
         game: this.game,
         x: 40,
-        y: this.game.height / 2 - this.game.cache.getImage('ground').height,
+        y: 216,
         asset: 'dino'
       });
       this.score = 0;
@@ -4476,8 +4472,8 @@ var _class = function (_Phaser$State) {
       // this.scoreText.anchor.setTo(0.5)
       this.scoreText.fixedToCamera = true;
       this.obstracles = [];
-      this.initializeObstracle();
       this.clouds = [];
+      this.initializeObstracle();
       this.initializeClouds();
       this.respawnButton = this.add.button(this.game.width / 2 - 50, this.game.height / 2 - 90, 'respawn_button', function () {});
       this.respawnButton.onInputDown.add(function () {
@@ -4486,6 +4482,13 @@ var _class = function (_Phaser$State) {
         _this2.state.start('Game');
       });
       this.closeDeadScene();
+      this.game.paused = true;
+      this.game.input.onDown.add(function () {
+        if (!_this2.dino.isDead) {
+          _this2.game.paused = false;
+          _this2.dino.onJump();
+        }
+      }, this);
     }
   }, {
     key: 'initializeClouds',
@@ -4503,12 +4506,15 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'initializeObstracle',
     value: function initializeObstracle() {
+      var obsracles = ['cactus01', 'cactus02', 'cactus03'];
       for (var i = 0; i < 6; i++) {
+        var random = Math.floor(Math.random() * obsracles.length);
+        console.log('random', random);
         var newObstracle = new _obstracle2.default({
           game: this,
           x: 500 + i * 300 * Math.random() + i * 300,
-          y: 270,
-          asset: 'cactus01'
+          y: 250,
+          asset: obsracles[random]
         });
         this.obstracles.push(newObstracle);
       }
@@ -4516,8 +4522,12 @@ var _class = function (_Phaser$State) {
   }, {
     key: 'update',
     value: function update() {
+      if (this.game.input.activePointer.isDown) {
+        this.game.paused = false;
+      }
+
       this.game.physics.arcade.collide(this.dino, this.ground, this.groundCollisionHandler, null, this);
-      this.game.physics.arcade.collide(this.dino, this.obstracles, this.collistionHandler, null, this);
+      this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this);
       this.updateScore();
     }
   }, {
@@ -10434,7 +10444,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */120);
-module.exports = __webpack_require__(/*! C:\Users\USER\Desktop\Hackatron\sud-mun-pwa-2017\src\main.js */119);
+module.exports = __webpack_require__(/*! /Users/nattapat/Learning/sud-mun-pwa-2017/src/main.js */119);
 
 
 /***/ })

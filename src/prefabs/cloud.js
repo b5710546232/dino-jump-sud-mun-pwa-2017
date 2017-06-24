@@ -37,6 +37,9 @@ export default class Cloud extends Phaser.Sprite {
   }
 
   update () {
+    if (!this.game.isStart) {
+      return
+    }
     this.x -= 2
     this.reposition()
   }

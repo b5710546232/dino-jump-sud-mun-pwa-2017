@@ -13,6 +13,8 @@ export default class extends Phaser.State {
     this.game.scale.setScreenSize = true
     this.game.scale.refresh()
     // this.scale.refresh();
+
+    this.game.firebase = firebase.database(); //  eslint-disable-line
   }
 
   preload () {
