@@ -1,5 +1,6 @@
-# Firebie the T-Rex Runner
 ![Screenshot](https://i.imgur.com/MXhuZLd.gif)
+
+# Firebie the T-Rex Runner
 This game is basically *PWA* based version of the **T-Rex Runner Game** - the game that you get to play on Google Chrome when your connection is not working.
 
 ## About Firebie
