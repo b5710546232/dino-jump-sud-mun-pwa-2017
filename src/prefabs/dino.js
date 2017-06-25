@@ -28,13 +28,15 @@ export default class Dino extends Phaser.Sprite {
     this.smoothed = false
     this.body.setSize(width, height, offSetX, offSetY)
     this.play('jump')
+
+    this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     // this.character.animations.add('idle', [0], 10, true)
   }
 
   jump () {
     if (this.isDead === true) {
       this.play('dead')
-    } else if (this.game.input.activePointer.isDown && this.onFloor() && this.game.time.now > this.jumpTimer) {
+    } else if ((this.spaceKey.isDown || this.game.input.activePointer.isDown) && this.onFloor() && this.game.time.now > this.jumpTimer) {
       this.onJump()
     } else if (this.onFloor()) {
       this.play('run')

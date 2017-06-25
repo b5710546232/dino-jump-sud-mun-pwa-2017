@@ -72,7 +72,17 @@ export default class extends Phaser.State {
     this.game.paused = true
     this.timeStart = this.getTimenow()
     this.firstLanuch = true
-
+    this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
+    this.spaceKey.onDown.add(() => {
+      if (!this.dino.isDead && this.firstLanuch) {
+        for (let i in this.clouds) {
+          this.clouds[i].move = true
+        }
+        this.game.paused = false
+        this.dino.onJump()
+        this.firstLanuch = false
+      }
+    }, this)
     this.game.input.onDown.add(() => {
       if (!this.dino.isDead && this.firstLanuch) {
         for (let i in this.clouds) {
@@ -148,7 +158,7 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.dino, this.ground2, this.groundCollisionHandler, null, this)
     this.game.physics.arcade.overlap(this.dino, this.obstracles, this.collistionHandler, null, this)
     this.updateScore()
-    if (this.game.input.activePointer.isDown) {
+    if ((this.game.input.activePointer.isDown)) {
       this.game.paused = false
     }
   }
