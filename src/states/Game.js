@@ -227,7 +227,7 @@ export default class extends Phaser.State {
             this.top3Score += '\n' + `RANK ${rank}: ${item}`
             rank++
           })
-          this.top3Score += '\n' + `YOUR HIGH SCORE RANK IS ${yourRank}`
+          this.top3Score += '\n' + `YOUR HIGH SCORE RANK: ${yourRank}`
           this.topScoreText = this.game.add.text(300, 40, this.top3Score, {fontSize: '14px'})
           this.topScoreText.fill = '#FFFFFF'
           this.topScoreText.align = 'center'
