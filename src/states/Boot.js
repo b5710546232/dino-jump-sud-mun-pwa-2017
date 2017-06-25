@@ -10,6 +10,7 @@ export default class extends Phaser.State {
     this.scale.pageAlignVertically = true
     this.game.scale.setScreenSize = true
     this.game.scale.refresh()
+    this.game.stage.disableVisibilityChange = true
 
     this.game.firebase = db
 
