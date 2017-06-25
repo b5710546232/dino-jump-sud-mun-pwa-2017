@@ -35,24 +35,9 @@ self.addEventListener('install', e => {
   e.waitUntil(preCache())
 })
 
-self.addEventListener('activate', e => {
-  console.log('[ServiceWorker] Activate')
-  e.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== cachedName && key !== dataCachedName) {
-          console.log('[ServiceWorker] Removing old cache', key)
-          return caches.delete(key)
-        }
-      }))
-    })
-  )
-  return self.clients.claim()
-})
-
 self.addEventListener('fetch', e => {
   console.log('[ServiceWorker] Serving the asset.')
-  e.respondWith(fromNetwork(e.request, 400).catch(() => {
+  e.respondWith(fromNetwork(e.request, 1000).catch(() => {
     return fromCache(e.request)
   }))
 })
