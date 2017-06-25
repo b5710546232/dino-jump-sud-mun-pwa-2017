@@ -15,3 +15,4 @@ We are, well, friends. And as usual we work in the **DDD** (Deadline Driven Deve
 * Pipatpol Tanavongchinda - [@PNNutkung](https://github.com/PNNutkung)
 * Kasidit Phoncharoen - [@kasiditp](https://github.com/kasiditp)
 * Benjapol Worakan - [@benwrk](https://github.com/benwrk)
+![Member](https://github.com/b5710546232/sud-mun-pwa-2017/blob/safe/members/member.png?raw=true)
