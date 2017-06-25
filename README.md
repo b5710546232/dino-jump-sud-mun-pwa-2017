@@ -1,17 +1,15 @@
-# sud-mun-pwa-2017
-## Application name [ unofficial ]
-*  FIREBIE THE TREX RUNNER. 
+# Firebie the T-Rex Runner 
+This game is basically *PWA* based version of the **T-Rex Runner Game**. The game that you get to play on Google Chrome when your connection is not working.
 
-## ABOUT TEAM
-* SUD-MUN อ่านได้ว่า สุดมันส์
-### TEAM MEMBER
-* [@Nattapat Sukpootanan](https://github.com/b5710546232)
-* [carymono](https://github.com/carymono)
-* [@PNNutkung](https://github.com/PNNutkung)
-* [@Jub Warata](https://github.com/kasiditp)
-* [@benwrk](https://github.com/benwrk)
+## About Firebie
+**Firebie** is a rare kind of *Tyrannosaurus Rex* that is pink, and he loves to *run*.
 
+# The team
+We are, well, friends. And as usual we work in the **DDD** (Deadline Driven Development). We build stuffs (including this project) with ❤ and ♨.
 
-## BUILD WITH ❤️ and 🔥
-
-## FIREBIE is the pink trex who love <3 to run.
+## Collaborators
+* Nattapat Sukpootanan - [@b5710546232](https://github.com/b5710546232)
+* Thanawit Gerdprasert - [@carymono](https://github.com/carymono)
+* Pipatpol Tanavongchinda - [@PNNutkung](https://github.com/PNNutkung)
+* Kasidit Phoncharoen - [@kasiditp](https://github.com/kasiditp)
+* Benjapol Worakan - [@benwrk](https://github.com/benwrk)
