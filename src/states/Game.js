@@ -219,7 +219,7 @@ export default class extends Phaser.State {
           this.top3Score = 'TOP 3 HIGH SCORE'
           let rank = 1
           scores.splice(0, 3).forEach((item) => {
-            this.top3Score += '\n' + `RANK ${rank}: ${item} score`
+            this.top3Score += '\n' + `RANK ${rank}: ${item}`
             rank++
           })
           this.top3Score += '\n' + `YOUR HIGH SCORE RANK IS ${yourRank}`
