@@ -3,6 +3,7 @@
   "name": "Sudmun PWA 2017",
   "background_color": "#57546f",
   "description": "A SUD-MUN GAME FIREBIE ENDLESS RUNING app.",
+  "orientation": "landscape",
   "icons": [
     {
       "src": "icons/icon-128x128.png",
