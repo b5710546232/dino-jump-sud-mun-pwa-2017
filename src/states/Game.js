@@ -17,6 +17,7 @@ export default class extends Phaser.State {
     return s
   }
   create () {
+    this.deltaTime = 0
     // bg set up.
     this.bg = this.game.add.image(0, 0, 'bg')
     this.ground = new Ground({
@@ -176,7 +177,11 @@ export default class extends Phaser.State {
     return Math.floor(parseInt(this.game.time.now)) / 1000
   }
   updateScore () {
-    this.score = parseInt(this.getTimenow() - this.timeStart)
+    this.deltaTime += this.game.time.elapsed / 1000
+    if (this.deltaTime > 1) {
+      this.score++
+      this.deltaTime = 0
+    }
     this.scoreText.setText(this.pad(this.score, 5))
   }
 
