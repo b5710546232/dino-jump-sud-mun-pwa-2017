@@ -16,7 +16,7 @@ const filesToCache = [
   '/assets/images/cloud02.png',
   '/assets/images/cloud03.png',
   '/assets/images/dino.png',
-  '/assets/images/dino_fix_52x58.png',
+  '/assets/images/dino_52x58.png',
   '/assets/images/ground.png',
   '/assets/images/loader-bar.png',
   '/assets/images/loader-bg.png',
