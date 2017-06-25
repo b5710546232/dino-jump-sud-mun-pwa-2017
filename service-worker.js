@@ -25,6 +25,7 @@ const filesToCache = [
   '/assets/images/phaser-es6-webpack.png',
   '/assets/images/playAgainButton.png',
   '/assets/sfx/jump.wav',
+  '/assets/sfx/hit.wav',
   '/assets/sprites/dino_52x58.png',
   '/assets/sprites/player_sheet.png'
 ]

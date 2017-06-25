@@ -83,6 +83,8 @@ export default class extends Phaser.State {
         this.firstLanuch = false
       }
     }, this)
+
+    this.hitSound = this.game.add.audio('hit_sfx')
   }
 
   initializeClouds () {
@@ -160,7 +162,9 @@ export default class extends Phaser.State {
     this.score = parseInt(this.getTimenow() - this.timeStart)
     this.scoreText.setText(this.pad(this.score, 5))
   }
+
   collistionHandler () {
+    this.hitSound.play()
     if (this.score > this.highscore) {
       this.highscore = this.score
       localStorage.setItem('hightScore', this.highscore)
