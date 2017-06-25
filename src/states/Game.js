@@ -89,7 +89,6 @@ export default class extends Phaser.State {
         this.game.paused = false
         this.state.start('Game')
       }
-
     }, this)
     this.game.input.onDown.add(() => {
       if (!this.dino.isDead && this.firstLanuch) {
