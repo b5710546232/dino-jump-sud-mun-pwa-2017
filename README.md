@@ -3,6 +3,8 @@
 # Firebie the T-Rex Runner
 This game is basically *PWA* based version of the **T-Rex Runner Game** - the game that you get to play on Google Chrome when your connection is not working.
 
+⚡ Click [here](https://sud-mun-pwa-2017.firebaseapp.com) to play. ⚡
+
 ## About Firebie
 **Firebie** is a rare kind of *Tyrannosaurus Rex* that is pink (well, is that thing even pink?), and he loves to *run*.
 
