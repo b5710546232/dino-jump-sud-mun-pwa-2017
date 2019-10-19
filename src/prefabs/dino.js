@@ -1,4 +1,3 @@
-'use strict'
 import Phaser from 'phaser'
 const JUMP_VALUE = -400
 export default class Dino extends Phaser.Sprite {
@@ -30,7 +29,6 @@ export default class Dino extends Phaser.Sprite {
     this.play('jump')
 
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
-    // this.character.animations.add('idle', [0], 10, true)
   }
 
   jump () {
